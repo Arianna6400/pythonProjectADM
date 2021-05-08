@@ -1,8 +1,9 @@
-
-def print_hi(name):
-
-    print(f'Hi, {name}')
+import sys
+from PyQt5.QtWidgets import QApplication
 
 if __name__ == '__main__':
-    print_hi('PyCharm')
+
+    app= QApplication(sys.argv)
+    sys.exit(app.exec())
+
 
