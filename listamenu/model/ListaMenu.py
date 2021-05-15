@@ -22,6 +22,9 @@ class ListaMenu:
 	def aggiungi_menu(self, Menu):
 		self.lista_menu.append(Menu)
 
+	def elimina_menu(self, index):
+		self.lista_menu.remove(index)
+
 	def get_Menu_by_index(self, index):
 		return self.lista_menu[index]
 
