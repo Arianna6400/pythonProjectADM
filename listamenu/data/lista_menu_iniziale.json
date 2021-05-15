@@ -1,0 +1,9 @@
+[
+  {
+    "prodotto": "Acqua",
+    "prezzo": 2,
+    "ingredienti": {
+      "acqua": 1
+    }
+  }
+]

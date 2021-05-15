@@ -1,7 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
 from homecliente.views.VistaHomeCliente import VistaHomeCliente
-from homeamministratore.views.VistaHomeAmministratore import VistaHomeAmministatore
+from homeamministratore.views.VistaHomeAmministratore import VistaHomeAmministratore
+
 
 class VistaHome(QWidget):
     def __init__(self):
@@ -16,8 +17,6 @@ class VistaHome(QWidget):
         self.resize(400, 300)
         self.setWindowTitle("Donegal Irish Pub")
 
-
-
     def get_generic_button(self, titolo, on_click):
         button = QPushButton(titolo)
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -29,5 +28,5 @@ class VistaHome(QWidget):
         self.vista_cliente.show()
 
     def go_vista_amministratore(self):
-        self.vista_amministratore() = VistaHomeAmministratore()
+        self.vista_amministratore = VistaHomeAmministratore()
         self.vista_amministratore.show()

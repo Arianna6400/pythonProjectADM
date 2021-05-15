@@ -1,15 +1,17 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QSizePolicy, QGridLayout
 
+from listamenu.views.VistaListaMenuAmministratore import VistaListaMenuAmministratore
 
-class VistaHomeAmministatore(QWidget):
+
+class VistaHomeAmministratore(QWidget):
 
     def __init__(self):
 
-        super(VistaHomeAmministatore, self).__init__()
+        super(VistaHomeAmministratore, self).__init__()
         grid_layout = QGridLayout()
 
         grid_layout.addWidget(self.get_generic_button("Lista Prenotazioni", self.go_vista_prenotazioni), 0, 0)
-        grid_layout.addWidget(self.get_generic_button("Magazzino", self.go_vista_magazzino), 0, 1)
+        grid_layout.addWidget(self.get_generic_button("Menu", self.go_vista_menu), 0, 1)
         grid_layout.addWidget(self.get_generic_button("Stipendi", self.go_vista_stipendi), 1, 0)
         grid_layout.addWidget(self.get_generic_button("Lista Dipendenti", self.go_vista_dipendenti), 1, 1)
 
@@ -27,9 +29,9 @@ class VistaHomeAmministatore(QWidget):
         self.vista_prenotazioni = VistaPrenotazioni()
         self.vista_prenotazioni.show()
 
-    def go_vista_magazzino(self):
-        self.vista_magazzino = VistaMagazzino()
-        self.vista_magazzino.show()
+    def go_vista_menu(self):
+        self.vista_menu = VistaListaMenuAmministratore()
+        self.vista_menu.show()
 
     def go_vista_stipendi(self):
         self.vista_stipendi = VistaStipendi()
