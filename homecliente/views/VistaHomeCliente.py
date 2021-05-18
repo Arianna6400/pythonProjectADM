@@ -1,5 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
+from listamenu.views.VistaListaMenuCliente import VistaListaMenuCliente
+
 
 class VistaHomeCliente(QWidget):
 
@@ -17,5 +19,5 @@ class VistaHomeCliente(QWidget):
         self.setWindowTitle("Vista Cliente")
 
     def go_vista_menu(self):
-        self.vista_menu = VistaListaMenu()
+        self.vista_menu = VistaListaMenuCliente()
         self.vista_menu.show()

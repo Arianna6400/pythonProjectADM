@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
+from homeamministratore.views.LoginAmministratore import LoginForm
 from homecliente.views.VistaHomeCliente import VistaHomeCliente
 from homeamministratore.views.VistaHomeAmministratore import VistaHomeAmministratore
 
@@ -10,11 +11,11 @@ class VistaHome(QWidget):
         super(VistaHome, self).__init__()
         grid_layout = QGridLayout()
 
-        grid_layout.addWidget(self.get_generic_button("Amministratore", self.go_vista_amministratore), 0, 0)
+        grid_layout.addWidget(self.get_generic_button("Amministratore", self.go_login), 0, 0)
         grid_layout.addWidget(self.get_generic_button("Cliente", self.go_vista_cliente), 0, 1)
 
         self.setLayout(grid_layout)
-        self.resize(400, 300)
+        self.resize(600, 300)
         self.setWindowTitle("Donegal Irish Pub")
 
     def get_generic_button(self, titolo, on_click):
@@ -30,3 +31,8 @@ class VistaHome(QWidget):
     def go_vista_amministratore(self):
         self.vista_amministratore = VistaHomeAmministratore()
         self.vista_amministratore.show()
+
+    def go_login(self):
+        self.login = LoginForm()
+        self.login.show()
+        self.go_vista_amministratore

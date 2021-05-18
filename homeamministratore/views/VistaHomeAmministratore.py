@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QSizePolicy, QGridLayout
 
 from listamenu.views.VistaListaMenuAmministratore import VistaListaMenuAmministratore
 
-
 class VistaHomeAmministratore(QWidget):
 
     def __init__(self):
