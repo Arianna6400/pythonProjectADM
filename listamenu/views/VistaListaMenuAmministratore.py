@@ -53,8 +53,9 @@ class VistaListaMenuAmministratore(QWidget):
 		event.accept()
 
 	def show_selected_info(self):
-		selected = self.list_view.selectedIndexes()[0].row()
-		prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-		self.vista_prodotto = VistaProdotto(prodotto_selezionato)
-		self.vista_prodotto.show()
+		if (len(self.list_view.selectedIndexes()) > 0):
+			selected = self.list_view.selectedIndexes()[0].row()
+			prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
+			self.vista_prodotto = VistaProdotto(prodotto_selezionato)
+			self.vista_prodotto.show()
 
