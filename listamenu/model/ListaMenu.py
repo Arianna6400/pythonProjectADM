@@ -2,7 +2,7 @@ import json
 import pickle
 import os.path
 
-from menu.model.Menu import Menu
+from prodotto.model.ProdottoSingolo import ProdottoSingolo
 
 
 class ListaMenu:
@@ -17,10 +17,10 @@ class ListaMenu:
 			with open('listamenu/data/lista_menu_iniziale.json') as f:
 				lista_menu_iniziale = json.load(f)
 			for menu_iniziale in lista_menu_iniziale:
-				self.aggiungi_menu(Menu(menu_iniziale["prodotto"], menu_iniziale["prezzo"], menu_iniziale["ingredienti"]))
+				self.aggiungi_prodotto(ProdottoSingolo(menu_iniziale["prodotto"], menu_iniziale["prezzo"], menu_iniziale["ingredienti"]))
 
-	def aggiungi_menu(self, Menu):
-		self.lista_menu.append(Menu)
+	def aggiungi_prodotto(self, prodotto_singolo):
+		self.lista_menu.append(prodotto_singolo)
 
 	def elimina_menu(self, index):
 		self.lista_menu.remove(index)

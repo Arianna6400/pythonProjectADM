@@ -1,7 +1,7 @@
-class ControlloreMenu():
+class ControlloreProdotto():
 
-    def __init__(self, menu):
-        self.model = menu
+    def __init__(self, prodotto):
+        self.model = prodotto
 
     def get_prodotto(self):
         return self.model.prodotto

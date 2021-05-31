@@ -2,7 +2,8 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
 
 from listamenu.controller.ControlloreListaMenu import ControlloreListaMenu
-from menu.views.VistaMenuCliente import VistaMenu
+from prodotto.model import ProdottoSingolo
+from prodotto.views.VistaProdotto import VistaProdotto
 
 
 class VistaListaMenuAmministratore(QWidget):
@@ -14,9 +15,9 @@ class VistaListaMenuAmministratore(QWidget):
 		h_layout = QHBoxLayout()
 		self.list_view = QListView()
 		self.listview_model = QStandardItemModel(self.list_view)
-		for Menu in self.controller.get_lista_menu():
+		for ProdottoSingolo in self.controller.get_lista_menu():
 			item = QStandardItem()
-			item.setText("{} ".format(Menu.prodotto) + "{}€".format(Menu.prezzo))
+			item.setText("{} ".format(ProdottoSingolo.prodotto) + "{}€".format(ProdottoSingolo.prezzo))
 			item.setEditable(False)
 			font = item.font()
 			font.setPointSize(18)
@@ -28,15 +29,15 @@ class VistaListaMenuAmministratore(QWidget):
 		buttons_layout = QVBoxLayout()
 
 		open_button = QPushButton("Apri")
-		# open_button.clicked.connect(self.show_selected_info())
+		open_button.clicked.connect(self.show_selected_info)
 		buttons_layout.addWidget(open_button)
 
 		add_button = QPushButton("Inserisci")
-		# add_button.clicked.connect(self.add_info())
+		# add_button.clicked.connect(self.add_info)
 		buttons_layout.addWidget(add_button)
 
 		delete_button = QPushButton("Elimina")
-		# delete_button.clicked.connect(self.delete_selected_info())
+		# delete_button.clicked.connect(self.delete_selected_info)
 		buttons_layout.addWidget(delete_button)
 
 		buttons_layout.addStretch()
@@ -53,7 +54,7 @@ class VistaListaMenuAmministratore(QWidget):
 
 	def show_selected_info(self):
 		selected = self.list_view.selectedIndexes()[0].row()
-		Menu_selezionato = self.controller.get_menu_by_index(selected)
-		self.vista_Menu = VistaMenu(Menu_selezionato)
-		# self.
+		prodotto_selezionato = self.controller.get_menu_by_index(selected)
+		self.vista_prodotto = VistaProdotto(prodotto_selezionato)
+		self.vista_prodotto.show()
 
