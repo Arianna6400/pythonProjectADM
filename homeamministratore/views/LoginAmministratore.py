@@ -14,6 +14,7 @@ class LoginForm(QWidget):
 		label_name = QLabel('<font size="4"> Username </font>')
 		self.lineEdit_username = QLineEdit()
 		self.lineEdit_username.setPlaceholderText('Please enter your username')
+		self.lineEdit_username.returnPressed.connect(self.check_password)
 		layout.addWidget(label_name, 0, 0)
 		layout.addWidget(self.lineEdit_username, 0, 1)
 
@@ -21,6 +22,7 @@ class LoginForm(QWidget):
 		self.lineEdit_password = QLineEdit()
 		self.lineEdit_password.setEchoMode(QLineEdit.Password)
 		self.lineEdit_password.setPlaceholderText('Please enter your password')
+		self.lineEdit_password.returnPressed.connect(self.check_password)
 		layout.addWidget(label_password, 1, 0)
 		layout.addWidget(self.lineEdit_password, 1, 1)
 
