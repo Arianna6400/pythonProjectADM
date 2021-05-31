@@ -19,6 +19,7 @@ class LoginForm(QWidget):
 
 		label_password = QLabel('<font size="4"> Password </font>')
 		self.lineEdit_password = QLineEdit()
+		self.lineEdit_password.setEchoMode(QLineEdit.Password)
 		self.lineEdit_password.setPlaceholderText('Please enter your password')
 		layout.addWidget(label_password, 1, 0)
 		layout.addWidget(self.lineEdit_password, 1, 1)
