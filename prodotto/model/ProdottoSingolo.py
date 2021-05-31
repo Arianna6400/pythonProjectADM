@@ -8,4 +8,3 @@ class ProdottoSingolo:
         self.disponibile = True
 
 
-

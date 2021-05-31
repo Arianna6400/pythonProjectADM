@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from listamenu.controller.ControlloreListaMenu import ControlloreListaMenu
 from prodotto.model import ProdottoSingolo
+from prodotto.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
 
 
@@ -33,11 +34,11 @@ class VistaListaMenuAmministratore(QWidget):
 		buttons_layout.addWidget(open_button)
 
 		add_button = QPushButton("Inserisci")
-		# add_button.clicked.connect(self.add_info)
+		add_button.clicked.connect(self.add_info)
 		buttons_layout.addWidget(add_button)
 
 		delete_button = QPushButton("Elimina")
-		# delete_button.clicked.connect(self.delete_selected_info)
+		delete_button.clicked.connect(self.delete_selected_info)
 		buttons_layout.addWidget(delete_button)
 
 		buttons_layout.addStretch()
@@ -59,3 +60,24 @@ class VistaListaMenuAmministratore(QWidget):
 			self.vista_prodotto = VistaProdotto(prodotto_selezionato)
 			self.vista_prodotto.show()
 
+	def delete_selected_info(self):
+		if len(self.list_view.selectedIndexes()) > 0:
+			selected = self.list_view.selectedIndexes()[0].row()
+			prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
+			self.controller.elimina_prodotto(prodotto_selezionato)
+
+	def add_info(self):
+		self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
+		self.vista_inserisci_prodotto.show()
+
+	def update_ui(self):
+		self.listview_model = QStandardItemModel(self.list_view)
+		for prodotto in self.controller.get_lista_menu():
+			item = QStandardItem()
+			item.setText(prodotto.prodotto)
+			item.setEditable(False)
+			font = item.font()
+			font.setPointSize(18)
+			item.setFont(font)
+			self.listview_model.appendRow(item)
+		self.list_view.setModel(self.listview_model)
