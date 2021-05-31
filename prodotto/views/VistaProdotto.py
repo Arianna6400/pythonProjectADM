@@ -19,14 +19,16 @@ class VistaProdotto(QWidget):
         v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         v_layout.addWidget(self.get_info("Prodotto: {}".format(self.controller.get_prodotto())))
-        v_layout.addWidget(self.get_info("Prezzo: {}".format(self.controller.get_prezzo())))
-        v_layout.addWidget(self.get_info("Ingredienti: {}".format(self.controller.get_ingredienti())))
-        v_layout.addWidget(self.get_info("Disponibile: {}".format(self.controller.get_isDisponibile())))
+        v_layout.addWidget(self.get_info("Prezzo: {}€\n".format(self.controller.get_prezzo())))
+        v_layout.addWidget(self.get_info("Ingredienti:"))
+        for a in self.controller.get_ingredienti():
+            v_layout.addWidget(self.get_info("{}".format(a) + ": {}".format(self.controller.get_ingredienti()[a])))
+        v_layout.addWidget(self.get_info("\n{}".format(self.controller.get_isDisponibile())))
 
         self.setLayout(v_layout)
-        self.setWindowTitle(self.controller.get_prezzo())
+        self.setWindowTitle(self.controller.get_prodotto())
 
-
+    @staticmethod
     def get_info(text):
         label = QLabel(text)
         font = label.font()
