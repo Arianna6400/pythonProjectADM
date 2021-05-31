@@ -22,10 +22,10 @@ class ListaMenu:
 	def aggiungi_prodotto(self, prodotto_singolo):
 		self.lista_menu.append(prodotto_singolo)
 
-	def elimina_menu(self, index):
+	def elimina_prodotto(self, index):
 		self.lista_menu.remove(index)
 
-	def get_Menu_by_index(self, index):
+	def get_prodotto_by_index(self, index):
 		return self.lista_menu[index]
 
 	def get_lista_menu(self):

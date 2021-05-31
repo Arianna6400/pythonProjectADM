@@ -23,7 +23,6 @@ class VistaProdotto(QWidget):
         v_layout.addWidget(self.get_info("Ingredienti: {}".format(self.controller.get_ingredienti())))
         v_layout.addWidget(self.get_info("Disponibile: {}".format(self.controller.get_isDisponibile())))
 
-    @staticmethod
     def get_info(text):
         label = QLabel(text)
         font = label.font()

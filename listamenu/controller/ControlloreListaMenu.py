@@ -9,8 +9,8 @@ class ControlloreListaMenu:
 	def get_lista_menu(self):
 		return self.model.get_lista_menu()
 
-	def get_menu_by_index(self, index):
-		return self.model.get_menu_by_index(index)
+	def get_prodotto_by_index(self, index):
+		return self.model.get_prodotto_by_index(index)
 
 	def save_data(self):
 		self.model.save_data()
