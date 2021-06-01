@@ -36,7 +36,7 @@ class LoginForm(QWidget):
 	def check_password(self):
 		msg = QMessageBox()
 
-		if self.lineEdit_username.text() == 'Amministratore' and self.lineEdit_password.text() == '666':
+		if self.lineEdit_username.text() == 'a' and self.lineEdit_password.text() == '666':	# da rimettere l'username corretto
 			self.run_home_amministratore()
 			self.close()
 		else:
