@@ -13,7 +13,7 @@ class VistaListaMenuAmministratore(QWidget):
 
 		self.controller = ControlloreListaMenu()
 
-		h_layout = QHBoxLayout()
+		self.h_layout = QHBoxLayout()
 		self.list_view = QListView()
 		self.listview_model = QStandardItemModel(self.list_view)
 		for ProdottoSingolo in self.controller.get_lista_menu():
@@ -25,7 +25,7 @@ class VistaListaMenuAmministratore(QWidget):
 			item.setFont(font)
 			self.listview_model.appendRow(item)
 		self.list_view.setModel(self.listview_model)
-		h_layout.addWidget(self.list_view)
+		self.h_layout.addWidget(self.list_view)
 
 		buttons_layout = QVBoxLayout()
 
@@ -42,9 +42,9 @@ class VistaListaMenuAmministratore(QWidget):
 		buttons_layout.addWidget(delete_button)
 
 		buttons_layout.addStretch()
-		h_layout.addLayout(buttons_layout)
+		self.h_layout.addLayout(buttons_layout)
 
-		self.setLayout(h_layout)
+		self.setLayout(self.h_layout)
 		self.resize(600, 300)
 		self.setWindowTitle("Lista Menu")
 
@@ -65,6 +65,9 @@ class VistaListaMenuAmministratore(QWidget):
 			selected = self.list_view.selectedIndexes()[0].row()
 			prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
 			self.controller.elimina_prodotto(prodotto_selezionato)
+			self.update_ui()
+			self.h_layout.replaceWidget(self.list_view, self.list_view)
+
 
 	def add_info(self):
 		self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
@@ -74,7 +77,7 @@ class VistaListaMenuAmministratore(QWidget):
 		self.listview_model = QStandardItemModel(self.list_view)
 		for prodotto in self.controller.get_lista_menu():
 			item = QStandardItem()
-			item.setText(prodotto.prodotto)
+			item.setText(prodotto.prodotto + " " + prodotto.prezzo + "€")
 			item.setEditable(False)
 			font = item.font()
 			font.setPointSize(18)
