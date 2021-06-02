@@ -2,7 +2,6 @@ from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
 
 from listamenu.controller.ControlloreListaMenu import ControlloreListaMenu
-from prodotto.model import ProdottoSingolo
 from prodotto.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
 

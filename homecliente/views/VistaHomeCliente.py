@@ -12,7 +12,7 @@ class VistaHomeCliente(QWidget):
         button = QPushButton("Visualizza Menu")
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         button.clicked.connect(self.go_vista_menu)
-        grid_layout.addWidget(self.button, 0, 0)
+        grid_layout.addWidget(button, 0, 0)
 
         self.setLayout(grid_layout)
         self.resize(400, 300)
