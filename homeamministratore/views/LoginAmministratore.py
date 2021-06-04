@@ -3,10 +3,10 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton
 from homeamministratore.views.VistaHomeAmministratore import VistaHomeAmministratore
 
 
-class LoginForm(QWidget):
+class LoginAmministratore(QWidget):
 	def __init__(self):
-		super().__init__()
-		self.setWindowTitle('Login Form')
+		super(LoginAmministratore, self).__init__()
+		self.setWindowTitle('Login Amministratore')
 		self.resize(500, 120)
 
 		layout = QGridLayout()

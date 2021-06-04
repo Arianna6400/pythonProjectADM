@@ -1,6 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QGridLayout, QPushButton, QSizePolicy
 
-from homeamministratore.views.LoginAmministratore import LoginForm
+from homeamministratore.views.LoginAmministratore import LoginAmministratore
+from homecliente.views.LoginCliente import LoginCliente
 from homecliente.views.VistaHomeCliente import VistaHomeCliente
 from homeamministratore.views.VistaHomeAmministratore import VistaHomeAmministratore
 
@@ -11,8 +12,8 @@ class VistaHome(QWidget):
         super(VistaHome, self).__init__()
         grid_layout = QGridLayout()
 
-        grid_layout.addWidget(self.get_generic_button("Amministratore", self.go_login), 0, 0)
-        grid_layout.addWidget(self.get_generic_button("Cliente", self.go_vista_cliente), 0, 1)
+        grid_layout.addWidget(self.get_generic_button("Amministratore", self.go_login_amministratore), 0, 0)
+        grid_layout.addWidget(self.get_generic_button("Cliente", self.go_login_cliente), 0, 1)
 
         self.setLayout(grid_layout)
         self.resize(600, 300)
@@ -32,7 +33,13 @@ class VistaHome(QWidget):
         self.vista_amministratore = VistaHomeAmministratore()
         self.vista_amministratore.show()
 
-    def go_login(self):
-        self.login = LoginForm()
-        self.login.show()
+    def go_login_amministratore(self):
+        self.login_amministratore = LoginAmministratore()
+        self.login_amministratore.show()
         self.go_vista_amministratore
+
+    def go_login_cliente(self):
+        self.login_cliente = LoginCliente()
+        self.login_cliente.show()
+        self.go_login_cliente
+
