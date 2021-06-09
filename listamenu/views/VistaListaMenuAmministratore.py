@@ -76,7 +76,7 @@ class VistaListaMenuAmministratore(QWidget):
 		self.listview_model = QStandardItemModel(self.list_view)
 		for prodotto in self.controller.get_lista_menu():
 			item = QStandardItem()
-			item.setText(prodotto.prodotto + " " + prodotto.prezzo + "€")
+			item.setText(prodotto.prodotto + " {}".format(prodotto.prezzo) + "€")
 			item.setEditable(False)
 			font = item.font()
 			font.setPointSize(18)
