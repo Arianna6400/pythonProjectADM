@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QMessageBox
 
 from listamenu.controller.ControlloreListaMenu import ControlloreListaMenu
 from ordinazione.controller.ControlloreOrdinazione import ControlloreOrdinazione
@@ -10,11 +10,11 @@ from prodotto.views.VistaProdotto import VistaProdotto
 
 class VistaListaMenuCliente(QWidget):
     
-    def __init__(self):
+    def __init__(self, nome, tavolo):
         
         super(VistaListaMenuCliente, self).__init__()
 
-        self.ordinazione = ControlloreOrdinazione(Ordinazione(1, "bb"))
+        self.ordinazione = ControlloreOrdinazione(Ordinazione(nome.text(), tavolo.text()))
         self.controller = ControlloreListaMenu()
 
         self.h_layout = QHBoxLayout()
@@ -37,7 +37,7 @@ class VistaListaMenuCliente(QWidget):
         open_button.clicked.connect(self.show_selected_info)
         buttons_layout.addWidget(open_button)
 
-        order_button = QPushButton("Ordina")
+        order_button = QPushButton("Aggiungi ordine")
         #order_button.clicked.connect(self.show_selected_info)
         buttons_layout.addWidget(order_button)
 
@@ -69,8 +69,16 @@ class VistaListaMenuCliente(QWidget):
             self.vista_prodotto.show()
 
     def view_ordinazione(self):
-        vista_ordinazione = VistaOrdinazione(self.ordinazione)
-        vista_ordinazione.show()
+
+        msg = QMessageBox()
+
+        if self.ordinazione.get_ordinazione():
+           vista_ordinazione = VistaOrdinazione(self.ordinazione)
+           vista_ordinazione.show()
+        else:
+            msg.setText('Ordine vuoto')
+            msg.setWindowTitle("Attenzione!")
+            msg.exec_()
 
 
     

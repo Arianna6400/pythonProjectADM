@@ -4,7 +4,7 @@ class ControlloreOrdinazione:
         self.model = ordinazione
 
     def get_ordinazione(self):
-        return self.model
+        return self.model.ordinazione
 
     def inserisci_ordinazione(self, prodotto):
         if prodotto.prodotto in self.model.ordinazione:

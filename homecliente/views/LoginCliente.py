@@ -11,16 +11,16 @@ class LoginCliente(QWidget):
 
         layout = QGridLayout()
 
-        label_name = QLabel('<font size="4"> Nome </font>')
+        self.label_name = QLabel('<font size="4"> Nome </font>')
         self.lineEdit_name = QLineEdit()
         self.lineEdit_name.setPlaceholderText('Please enter your name')
-        layout.addWidget(label_name, 0, 0)
+        layout.addWidget(self.label_name, 0, 0)
         layout.addWidget(self.lineEdit_name, 0, 1)
 
-        label_number = QLabel('<font size="4"> Numero </font>')
+        self.label_number = QLabel('<font size="4"> Numero </font>')
         self.lineEdit_number = QLineEdit()
         self.lineEdit_number.setPlaceholderText('Please enter your table number')
-        layout.addWidget(label_number, 1, 0)
+        layout.addWidget(self.label_number, 1, 0)
         layout.addWidget(self.lineEdit_number, 1, 1)
 
         button_login = QPushButton('Login')
@@ -31,6 +31,6 @@ class LoginCliente(QWidget):
         self.setLayout(layout)
 
     def run_home_cliente(self):
-        self.home_cliente= VistaHomeCliente()
+        self.home_cliente= VistaHomeCliente(self.label_name, self.label_number)
         self.home_cliente.show()
         self.close()

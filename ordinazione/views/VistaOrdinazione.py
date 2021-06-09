@@ -8,13 +8,10 @@ class VistaOrdinazione(QWidget):
 
     def __init__(self, ordinazione):
         super(VistaOrdinazione, self).__init__()
-
-        self.controller = ControlloreOrdinazione()
-
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
         self.listview_model = QStandardItemModel(self.list_view)
-        for Prodotto in ordinazione:
+        for Prodotto in ordinazione.get_ordinazione():
             item = QStandardItem()
             item.setText("{} ".format(Prodotto) + "{} ".format(ordinazione.get_ordinazione[Prodotto]))
             item.setEditable(False)
@@ -26,4 +23,4 @@ class VistaOrdinazione(QWidget):
         self.h_layout.addWidget(self.list_view)
         self.setLayout(self.h_layout)
         self.resize(600, 300)
-        self.setWindowTitle("Lista Menu")
+        self.setWindowTitle("Ordinazione")

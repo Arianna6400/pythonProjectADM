@@ -1,6 +1,6 @@
 class Ordinazione:
 
-    def __init__(self, tavolo, nome):
+    def __init__(self, nome, tavolo):
         super(Ordinazione, self).__init__()
         self.tavolo = tavolo
         self.nome = nome
