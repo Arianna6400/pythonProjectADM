@@ -9,14 +9,14 @@ class VistaOrdinazione(QWidget):
     def __init__(self, ordinazione):
         super(VistaOrdinazione, self).__init__()
 
-        self.controller = ControlloreOrdinazione(ordinazione)
+        self.controller = ordinazione
 
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
         self.listview_model = QStandardItemModel(self.list_view)
-        for Prodotto in ordinazione.get_ordinazione():
+        for Prodotto in self.controller.get_ordinazione():
             item = QStandardItem()
-            item.setText("{} ".format(Prodotto) + "{} ".format(ordinazione.get_ordinazione()[Prodotto]))
+            item.setText("{}, ".format(Prodotto) + "{} ".format(ordinazione.get_ordinazione()[Prodotto]))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)

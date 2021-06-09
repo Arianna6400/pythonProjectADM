@@ -9,9 +9,9 @@ from prodotto.views.VistaProdotto import VistaProdotto
 
 
 class VistaListaMenuCliente(QWidget):
-    
+
     def __init__(self, nome, tavolo):
-        
+
         super(VistaListaMenuCliente, self).__init__()
 
         self.ordinazione = ControlloreOrdinazione(Ordinazione(nome.text(), tavolo.text()))
@@ -46,7 +46,7 @@ class VistaListaMenuCliente(QWidget):
         buttons_layout.addWidget(view_button)
 
         check_button = QPushButton("Conferma ordine")
-        #check_button.clicked.connect(self.show_selected_info)
+        # check_button.clicked.connect(self.show_selected_info)
         buttons_layout.addWidget(check_button)
 
         buttons_layout.addStretch()
@@ -62,7 +62,7 @@ class VistaListaMenuCliente(QWidget):
         event.accept()
 
     def show_selected_info(self):
-        if (len(self.list_view.selectedIndexes()) > 0):
+        if len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
             self.vista_prodotto = VistaProdotto(prodotto_selezionato)
@@ -73,18 +73,15 @@ class VistaListaMenuCliente(QWidget):
         msg = QMessageBox()
 
         if self.ordinazione.get_ordinazione():
-           vista_ordinazione = VistaOrdinazione(self.ordinazione)
-           vista_ordinazione.show()
+            self.vista_ordinazione = VistaOrdinazione(self.ordinazione)
+            self.vista_ordinazione.show()
         else:
             msg.setText('Ordine vuoto')
             msg.setWindowTitle("Attenzione!")
             msg.exec_()
 
     def add_ordinazione(self):
-        if (len(self.list_view.selectedIndexes()) > 0):
+        if len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
             self.ordinazione.inserisci_ordinazione(prodotto_selezionato)
-
-
-    
