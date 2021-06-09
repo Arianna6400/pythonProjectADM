@@ -38,7 +38,7 @@ class VistaListaMenuCliente(QWidget):
         buttons_layout.addWidget(open_button)
 
         order_button = QPushButton("Aggiungi ordine")
-        #order_button.clicked.connect(self.show_selected_info)
+        order_button.clicked.connect(self.add_ordinazione)
         buttons_layout.addWidget(order_button)
 
         view_button = QPushButton("Visualizza ordine")
@@ -79,6 +79,12 @@ class VistaListaMenuCliente(QWidget):
             msg.setText('Ordine vuoto')
             msg.setWindowTitle("Attenzione!")
             msg.exec_()
+
+    def add_ordinazione(self):
+        if (len(self.list_view.selectedIndexes()) > 0):
+            selected = self.list_view.selectedIndexes()[0].row()
+            prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
+            self.ordinazione.inserisci_ordinazione(prodotto_selezionato)
 
 
     
