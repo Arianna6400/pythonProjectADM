@@ -41,6 +41,10 @@ class VistaListaMenuCliente(QWidget):
         order_button.clicked.connect(self.add_ordinazione)
         buttons_layout.addWidget(order_button)
 
+        delete_button = QPushButton("Elimina ordine")
+        delete_button.clicked.connect(self.delete_ordinazione)
+        buttons_layout.addWidget(delete_button)
+
         view_button = QPushButton("Visualizza ordine")
         view_button.clicked.connect(self.view_ordinazione)
         buttons_layout.addWidget(view_button)
@@ -85,3 +89,10 @@ class VistaListaMenuCliente(QWidget):
             selected = self.list_view.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
             self.ordinazione.inserisci_ordinazione(prodotto_selezionato)
+
+    def delete_ordinazione(self):
+        reply = QMessageBox.question(self, 'Quit', 'Vuoi cancelllare l\'ordine?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            self.ordinazione.elimina_ordinazione()
+
+
