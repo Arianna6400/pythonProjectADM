@@ -1,9 +1,5 @@
-import json
 import pickle
 import os.path
-
-from ordinazione.model.Ordinazione import Ordinazione
-
 
 class ListaOrdinazione:
 
@@ -13,11 +9,6 @@ class ListaOrdinazione:
         if os.path.isfile('listaordinazione/data/lista_ordinazione.pickle'):
             with open('listaordinazione/data/lista_ordinazione.pickle', 'rb') as f:
                 self.lista_ordinazione = pickle.load(f)
-        else:
-            with open('listaordinazione/data/lista_ordinazione_iniziale.json') as f:
-                lista_ordinazione_iniziale = json.load(f)
-            for ordinazione_iniziale in lista_ordinazione_iniziale:
-                self.aggiungi_ordinazione(Ordinazione(ordinazione_iniziale["tavolo"], ordinazione_iniziale["nome"]))
 
     def aggiungi_ordinazione(self, ordinazione):
         self.lista_ordinazione.append(ordinazione)

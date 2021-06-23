@@ -23,3 +23,4 @@ class VistaHomeCliente(QWidget):
     def go_vista_menu(self):
         self.vista_menu = VistaListaMenuCliente(self.nome, self.tavolo)
         self.vista_menu.show()
+        self.close()

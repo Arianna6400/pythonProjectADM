@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QSizePolicy, QGridLayout
 
 from listamenu.views.VistaListaMenuAmministratore import VistaListaMenuAmministratore
+from listaordinazione.views.VistaListaOrdinazione import VistaListaOrdinazione
+
 
 class VistaHomeAmministratore(QWidget):
 
@@ -13,6 +15,7 @@ class VistaHomeAmministratore(QWidget):
         grid_layout.addWidget(self.get_generic_button("Menu", self.go_vista_menu), 0, 1)
         grid_layout.addWidget(self.get_generic_button("Stipendi", self.go_vista_stipendi), 1, 0)
         grid_layout.addWidget(self.get_generic_button("Lista Dipendenti", self.go_vista_dipendenti), 1, 1)
+        grid_layout.addWidget(self.get_generic_button("Lista Ordinazioni", self.go_vista_ordinazione), 2, 0)
 
         self.setLayout(grid_layout)
         self.resize(400, 300)
@@ -27,15 +30,24 @@ class VistaHomeAmministratore(QWidget):
     def go_vista_prenotazioni(self):
         self.vista_prenotazioni = VistaPrenotazioni()
         self.vista_prenotazioni.show()
+        self.close()
 
     def go_vista_menu(self):
         self.vista_menu = VistaListaMenuAmministratore()
         self.vista_menu.show()
+        self.close()
+
+    def go_vista_ordinazione(self):
+        self.vista_ordinazione = VistaListaOrdinazione()
+        self.vista_ordinazione.show()
+        self.close()
 
     def go_vista_stipendi(self):
         self.vista_stipendi = VistaStipendi()
         self.vista_stipendi.show()
+        self.close()
 
     def go_vista_dipendenti(self):
         self.vista_dipendenti = VistaDipendenti()
         self.vista_dipendenti.show()
+        self.close()

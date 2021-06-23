@@ -24,11 +24,22 @@ class LoginCliente(QWidget):
         layout.addWidget(self.lineEdit_number, 1, 1)
 
         button_login = QPushButton('Login')
-        button_login.clicked.connect(self.run_home_cliente)
+        button_login.clicked.connect(self.check)
         layout.addWidget(button_login, 2, 0, 1, 2)
         layout.setRowMinimumHeight(2, 75)
 
         self.setLayout(layout)
+
+    def check(self):
+        msg = QMessageBox()
+
+        if self.lineEdit_name.text() == "" or self.lineEdit_number.text() == "" :
+            msg.setText('Non hai inserito nome e/o numero!')
+            msg.setWindowTitle("Attenzione!")
+            msg.exec_()
+        else:
+            self.run_home_cliente()
+            self.close()
 
     def run_home_cliente(self):
         self.home_cliente= VistaHomeCliente(self.label_name, self.label_number)

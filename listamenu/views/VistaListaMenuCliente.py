@@ -50,7 +50,7 @@ class VistaListaMenuCliente(QWidget):
         buttons_layout.addWidget(view_button)
 
         check_button = QPushButton("Conferma ordine")
-        # check_button.clicked.connect(self.show_selected_info)
+        check_button.clicked.connect(self.check_ordinazione)
         buttons_layout.addWidget(check_button)
 
         buttons_layout.addStretch()
@@ -94,5 +94,14 @@ class VistaListaMenuCliente(QWidget):
         reply = QMessageBox.question(self, 'Quit', 'Vuoi cancelllare l\'ordine?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.ordinazione.elimina_ordinazione()
+
+    def check_ordinazione(self):
+
+        self.ordinazione.conferma_ordinazione()
+        msg =QMessageBox()
+        msg.setText('Ordine confermato!')
+        msg.setWindowTitle("Avviso")
+        msg.exec_()
+        self.close()
 
 

@@ -1,9 +1,6 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView
 
-from ordinazione.controller.ControlloreOrdinazione import ControlloreOrdinazione
-
-
 class VistaOrdinazione(QWidget):
 
     def __init__(self, ordinazione):
