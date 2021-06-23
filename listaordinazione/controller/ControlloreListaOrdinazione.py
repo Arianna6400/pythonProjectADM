@@ -11,7 +11,8 @@ class ControlloreListaOrdinazione:
         if os.path.isfile('listaordinazione/data/lista_ordinazione.pickle'):
             with open('listaordinazione/data/lista_ordinazione.pickle', 'rb') as f:
                 self.model = pickle.load(f)
-
+        for a in self.model.get_lista_ordinazione():
+            print(a.get_nome())
     def get_lista_ordinazione(self):
         return self.model.get_lista_ordinazione()
 
@@ -25,4 +26,5 @@ class ControlloreListaOrdinazione:
         return self.model.aggiungi_ordinazione(ordinazione)
 
     def save_data(self):
-        self.model.save_data()
+        with open('listaordinazione/data/lista_ordinazione.pickle', 'wb') as handle:
+            pickle.dump(self.model, handle, pickle.HIGHEST_PROTOCOL)

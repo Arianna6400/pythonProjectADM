@@ -16,11 +16,9 @@ class VistaListaOrdinazione(QWidget):
         self.list_view = QListView()
         self.listview_model = QStandardItemModel(self.list_view)
 
-        print(self.controller.get_lista_ordinazione())
-
         for ordinazione in self.controller.get_lista_ordinazione():
             item = QStandardItem()
-            item.setText("{} ".format(ordinazione.get_nome) + "{} ".format(ordinazione.get_tavolo))
+            item.setText("nome:{} ".format(ordinazione.get_nome()) + "       tavolo:{} ".format(ordinazione.get_tavolo()))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)
@@ -63,5 +61,5 @@ class VistaListaOrdinazione(QWidget):
                                      QMessageBox.No)
         if reply == QMessageBox.Yes and len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
-            self.ordinazione.elimina_ordinazine(selected)
+            self.controller.elimina_ordinazione(selected)
 

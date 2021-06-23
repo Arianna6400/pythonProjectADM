@@ -18,7 +18,3 @@ class ListaOrdinazione:
 
     def get_lista_ordinazione(self):
         return self.lista_ordinazione
-
-    def save_data(self):
-        with open('listaordinazione/data/lista_ordinazione.pickle', 'wb') as handle:
-            pickle.dump(self.lista_ordinazione, handle, pickle.HIGHEST_PROTOCOL)
