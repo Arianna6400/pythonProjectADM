@@ -15,9 +15,12 @@ class VistaListaOrdinazione(QWidget):
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
         self.listview_model = QStandardItemModel(self.list_view)
-        for Ordinazione in self.controller.get_lista_ordinazione():
+
+        print(self.controller.get_lista_ordinazione())
+
+        for ordinazione in self.controller.get_lista_ordinazione():
             item = QStandardItem()
-            item.setText("{} ".format(Ordinazione.get_nome) + "{} ".format(Ordinazione.get_tavolo))
+            item.setText("{} ".format(ordinazione.get_nome) + "{} ".format(ordinazione.get_tavolo))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)

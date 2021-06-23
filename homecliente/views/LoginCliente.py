@@ -42,6 +42,6 @@ class LoginCliente(QWidget):
             self.close()
 
     def run_home_cliente(self):
-        self.home_cliente= VistaHomeCliente(self.label_name, self.label_number)
+        self.home_cliente= VistaHomeCliente(self.lineEdit_name.text(), self.lineEdit_number.text())
         self.home_cliente.show()
         self.close()

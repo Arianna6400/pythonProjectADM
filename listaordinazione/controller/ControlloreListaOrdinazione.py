@@ -1,3 +1,6 @@
+import os
+import pickle
+
 from listaordinazione.model.ListaOrdinazione import ListaOrdinazione
 
 
@@ -5,6 +8,9 @@ class ControlloreListaOrdinazione:
     def __init__(self):
         super(ControlloreListaOrdinazione, self).__init__()
         self.model = ListaOrdinazione()
+        if os.path.isfile('listaordinazione/data/lista_ordinazione.pickle'):
+            with open('listaordinazione/data/lista_ordinazione.pickle', 'rb') as f:
+                self.model = pickle.load(f)
 
     def get_lista_ordinazione(self):
         return self.model.get_lista_ordinazione()

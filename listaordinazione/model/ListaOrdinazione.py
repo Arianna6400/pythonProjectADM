@@ -6,9 +6,6 @@ class ListaOrdinazione:
     def __init__(self):
         super(ListaOrdinazione, self).__init__()
         self.lista_ordinazione = []
-        if os.path.isfile('listaordinazione/data/lista_ordinazione.pickle'):
-            with open('listaordinazione/data/lista_ordinazione.pickle', 'rb') as f:
-                self.lista_ordinazione = pickle.load(f)
 
     def aggiungi_ordinazione(self, ordinazione):
         self.lista_ordinazione.append(ordinazione)

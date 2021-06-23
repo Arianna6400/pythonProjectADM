@@ -14,7 +14,7 @@ class VistaListaMenuCliente(QWidget):
 
         super(VistaListaMenuCliente, self).__init__()
 
-        self.ordinazione = ControlloreOrdinazione(Ordinazione(nome.text(), tavolo.text()))
+        self.ordinazione = ControlloreOrdinazione(Ordinazione(nome, tavolo))
         self.controller = ControlloreListaMenu()
 
         self.h_layout = QHBoxLayout()
