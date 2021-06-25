@@ -16,6 +16,7 @@ class VistaHomeAmministratore(QWidget):
         grid_layout.addWidget(self.get_generic_button("Stipendi", self.go_vista_stipendi), 1, 0)
         grid_layout.addWidget(self.get_generic_button("Lista Dipendenti", self.go_vista_dipendenti), 1, 1)
         grid_layout.addWidget(self.get_generic_button("Lista Ordinazioni", self.go_vista_ordinazione), 2, 0)
+        grid_layout.addWidget(self.get_generic_button("Quit", self.go_close), 2, 1)
 
         self.setLayout(grid_layout)
         self.resize(400, 300)
@@ -46,3 +47,6 @@ class VistaHomeAmministratore(QWidget):
     def go_vista_dipendenti(self):
         self.vista_dipendenti = VistaDipendenti()
         self.vista_dipendenti.show()
+
+    def go_close(self):
+        self.close()
