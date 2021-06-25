@@ -5,6 +5,7 @@ from listamenu.controller.ControlloreListaMenu import ControlloreListaMenu
 from ordinazione.controller.ControlloreOrdinazione import ControlloreOrdinazione
 from ordinazione.model.Ordinazione import Ordinazione
 from ordinazione.views.VistaOrdinazione import VistaOrdinazione
+from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
 
 
@@ -88,7 +89,12 @@ class VistaListaMenuCliente(QWidget):
         if len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-            self.ordinazione.inserisci_ordinazione(prodotto_selezionato)
+            if not self.ordinazione.inserisci_ordinazione(ControlloreProdotto(prodotto_selezionato)):
+                msg = QMessageBox()
+                msg.setText('Prodotto non disponibile!')
+                msg.setWindowTitle("Avviso")
+                msg.exec_()
+
 
     def delete_ordinazione(self):
         reply = QMessageBox.question(self, 'Quit', 'Vuoi cancelllare l\'ordine?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -98,7 +104,7 @@ class VistaListaMenuCliente(QWidget):
     def check_ordinazione(self):
 
         self.ordinazione.conferma_ordinazione()
-        msg =QMessageBox()
+        msg = QMessageBox()
         msg.setText('Ordine confermato!')
         msg.setWindowTitle("Avviso")
         msg.exec_()

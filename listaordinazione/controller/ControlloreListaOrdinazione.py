@@ -11,8 +11,7 @@ class ControlloreListaOrdinazione:
         if os.path.isfile('listaordinazione/data/lista_ordinazione.pickle'):
             with open('listaordinazione/data/lista_ordinazione.pickle', 'rb') as f:
                 self.model = pickle.load(f)
-        for a in self.model.get_lista_ordinazione():
-            print(a.get_nome())
+
     def get_lista_ordinazione(self):
         return self.model.get_lista_ordinazione()
 

@@ -41,8 +41,8 @@ class VistaHomeAmministratore(QWidget):
         self.vista_ordinazione.show()
 
     def go_vista_magazzino(self):
-        self.vista_stipendi = VistaStipendi()
-        self.vista_stipendi.show()
+        self.vista_magazzino = VistaMagazzino()
+        self.vista_magazzino.show()
 
     def go_vista_dipendenti(self):
         self.vista_dipendenti = VistaDipendenti()
