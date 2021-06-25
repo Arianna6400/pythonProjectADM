@@ -13,7 +13,7 @@ class VistaHomeAmministratore(QWidget):
 
         grid_layout.addWidget(self.get_generic_button("Lista Prenotazioni", self.go_vista_prenotazioni), 0, 0)
         grid_layout.addWidget(self.get_generic_button("Menu", self.go_vista_menu), 0, 1)
-        grid_layout.addWidget(self.get_generic_button("Stipendi", self.go_vista_stipendi), 1, 0)
+        grid_layout.addWidget(self.get_generic_button("Magazzino", self.go_vista_magazzino), 1, 0)
         grid_layout.addWidget(self.get_generic_button("Lista Dipendenti", self.go_vista_dipendenti), 1, 1)
         grid_layout.addWidget(self.get_generic_button("Lista Ordinazioni", self.go_vista_ordinazione), 2, 0)
         grid_layout.addWidget(self.get_generic_button("Quit", self.go_close), 2, 1)
@@ -40,7 +40,7 @@ class VistaHomeAmministratore(QWidget):
         self.vista_ordinazione = VistaListaOrdinazione()
         self.vista_ordinazione.show()
 
-    def go_vista_stipendi(self):
+    def go_vista_magazzino(self):
         self.vista_stipendi = VistaStipendi()
         self.vista_stipendi.show()
 
