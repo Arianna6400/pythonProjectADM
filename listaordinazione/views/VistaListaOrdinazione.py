@@ -18,7 +18,7 @@ class VistaListaOrdinazione(QWidget):
 
         for ordinazione in self.controller.get_lista_ordinazione():
             item = QStandardItem()
-            item.setText("nome:{} ".format(ordinazione.get_nome()) + "       tavolo:{} ".format(ordinazione.get_tavolo()))
+            item.setText("nome:{} ".format(ordinazione.get_nome()) + "          tavolo:{} ".format(ordinazione.get_tavolo()))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)
