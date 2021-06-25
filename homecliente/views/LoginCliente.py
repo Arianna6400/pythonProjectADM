@@ -14,12 +14,14 @@ class LoginCliente(QWidget):
         self.label_name = QLabel('<font size="4"> Nome </font>')
         self.lineEdit_name = QLineEdit()
         self.lineEdit_name.setPlaceholderText('Please enter your name')
+        self.lineEdit_name.returnPressed.connect(self.check)
         layout.addWidget(self.label_name, 0, 0)
         layout.addWidget(self.lineEdit_name, 0, 1)
 
         self.label_number = QLabel('<font size="4"> Numero </font>')
         self.lineEdit_number = QLineEdit()
         self.lineEdit_number.setPlaceholderText('Please enter your table number')
+        self.lineEdit_number.returnPressed.connect(self.check)
         layout.addWidget(self.label_number, 1, 0)
         layout.addWidget(self.lineEdit_number, 1, 1)
 
