@@ -1,7 +1,9 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit
+from PyQt5.QtGui import QFont
 
 from magazzino.controller.ControlloreMagazzino import ControlloreMagazzino
+
 
 class VistaMagazzino(QWidget):
 
@@ -16,7 +18,8 @@ class VistaMagazzino(QWidget):
 
         for ingrediente, qt in self.controller.get_magazzino().items():
             item = QStandardItem()
-            item.setText("ingrediente:{} ".format(ingrediente) + "          quantità:{} ".format(qt))
+            item.setFont(QFont('DejaVu Sans Mono', 10))
+            item.setText("ingrediente:{0:<15}{1:>20} ".format(ingrediente, qt))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(12)
@@ -52,7 +55,7 @@ class VistaMagazzino(QWidget):
         self.h_layout.addLayout(buttons_layout)
 
         self.setLayout(self.h_layout)
-        self.resize(600, 300)
+        self.resize(1000, 400)
         self.setWindowTitle("Magazzino")
 
     def closeEvent(self, event):
@@ -73,7 +76,8 @@ class VistaMagazzino(QWidget):
         self.listview_model = QStandardItemModel(self.list_view)
         for ingrediente, qt in self.controller.get_magazzino().items():
             item = QStandardItem()
-            item.setText("ingrediente:{} ".format(ingrediente) + "          quantità:{} ".format(qt))
+            item.setFont(QFont('DejaVu Sans Mono', 10))
+            item.setText("ingrediente:{0:<15}{1:>20} ".format(ingrediente, qt))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(12)
