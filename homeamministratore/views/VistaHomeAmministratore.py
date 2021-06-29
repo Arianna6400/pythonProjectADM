@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QSizePolicy, QGridLayout
 
 from listamenu.views.VistaListaMenuAmministratore import VistaListaMenuAmministratore
 from listaordinazione.views.VistaListaOrdinazione import VistaListaOrdinazione
-
+from magazzino.views.VistaMagazzino import VistaMagazzino
 
 class VistaHomeAmministratore(QWidget):
 
