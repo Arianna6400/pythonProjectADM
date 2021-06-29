@@ -61,10 +61,22 @@ class VistaMagazzino(QWidget):
 
     def add_ingrediente(self):
         if not self.ingrediente.text() == "" or self.quantita.text() == "":
-            self.controller.add_ingrediente(self.ingrediente.text(), self.quantita.text())
-            self.h_layout.update()
+            self.controller.add_ingrediente(self.ingrediente.text(), float(self.quantita.text()))
+            self.update_ui()
 
     def edit_ingrediente(self):
         if not self.ingrediente.text() == "" or self.quantita.text() == "":
             self.controller.edit_ingrediente(self.ingrediente.text(), self.quantita.text())
+
+    def update_ui(self):
+        self.listview_model = QStandardItemModel(self.list_view)
+        for ingrediente, qt in self.controller.get_magazzino().items():
+            item = QStandardItem()
+            item.setText("ingrediente:{} ".format(ingrediente) + "          quantità:{} ".format(qt))
+            item.setEditable(False)
+            font = item.font()
+            font.setPointSize(12)
+            item.setFont(font)
+            self.listview_model.appendRow(item)
+        self.list_view.setModel(self.listview_model)
 

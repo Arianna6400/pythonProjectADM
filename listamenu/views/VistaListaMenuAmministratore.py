@@ -67,7 +67,6 @@ class VistaListaMenuAmministratore(QWidget):
 			self.update_ui()
 			self.h_layout.replaceWidget(self.list_view, self.list_view)
 
-
 	def add_info(self):
 		self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
 		self.vista_inserisci_prodotto.show()
