@@ -66,7 +66,7 @@ class VistaMagazzino(QWidget):
 
     def edit_ingrediente(self):
         if not self.ingrediente.text() == "" or self.quantita.text() == "":
-            self.controller.edit_ingrediente(self.ingrediente.text(), self.quantita.text())
+            self.controller.edit_ingrediente(self.ingrediente.text(), float(self.quantita.text()))
             self.update_ui()
 
     def update_ui(self):
