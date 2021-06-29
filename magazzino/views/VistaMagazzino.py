@@ -1,5 +1,5 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QMessageBox, QGridLayout, QLabel, QLineEdit
+from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QGridLayout, QLabel, QLineEdit
 
 from magazzino.controller.ControlloreMagazzino import ControlloreMagazzino
 
@@ -19,7 +19,7 @@ class VistaMagazzino(QWidget):
             item.setText("ingrediente:{} ".format(ingrediente) + "          quantità:{} ".format(qt))
             item.setEditable(False)
             font = item.font()
-            font.setPointSize(18)
+            font.setPointSize(12)
             item.setFont(font)
             self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
@@ -30,22 +30,22 @@ class VistaMagazzino(QWidget):
 
         self.label_ingrediente = QLabel('<font size="4"> Ingrediente </font>')
         self.ingrediente = QLineEdit()
-        add_layout.addWidget(label_ingrediente, 0, 0)
+        add_layout.addWidget(self.label_ingrediente, 0, 0)
         add_layout.addWidget(self.ingrediente, 0, 1)
 
         self.label_quantita = QLabel('<font size="4"> Quantità </font>')
         self.quantita = QLineEdit()
-        add_layout.addWidget(label_quantita, 1, 0)
+        add_layout.addWidget(self.label_quantita, 1, 0)
         add_layout.addWidget(self.quantita, 1, 1)
 
         buttons_layout.addLayout(add_layout)
 
         add_button = QPushButton("Aggiungi ingrediente")
-        add_button.clicked.connect(self.show_selected_info)
+        add_button.clicked.connect(self.add_ingrediente)
         buttons_layout.addWidget(add_button)
 
         edit_button = QPushButton("Modifica ingrediente")
-        edit_button.clicked.connect(self.edit_button)
+        edit_button.clicked.connect(self.edit_ingrediente)
         buttons_layout.addWidget(edit_button)
 
         buttons_layout.addStretch()
@@ -60,20 +60,11 @@ class VistaMagazzino(QWidget):
         event.accept()
 
     def add_ingrediente(self):
-        self.vista_inserisci_ingrediente = VistaInserisciIngrediente(self.controller, self.update_ui)
-        self.vista_inserisci_ingrediente.show()
+        if not self.ingrediente.text() == "" or self.quantita.text() == "":
+            self.controller.add_ingrediente(self.ingrediente.text(), self.quantita.text())
+            self.h_layout.update()
 
-    def show_selected_info(self):
-        if len(self.list_view.selectedIndexes()) > 0:
-            selected = self.list_view.selectedIndexes()[0].row()
-            ordinazione = self.controller.get_ordinazione_by_index(selected)
-            self.vista_ordinazione = VistaOrdinazione(ordinazione)
-            self.vista_ordinazione.show()
-
-    def delete_ordinazione(self):
-        reply = QMessageBox.question(self, 'Quit', 'Vuoi cancellare l\'ordine?', QMessageBox.Yes | QMessageBox.No,
-                                     QMessageBox.No)
-        if reply == QMessageBox.Yes and len(self.list_view.selectedIndexes()) > 0:
-            selected = self.list_view.selectedIndexes()[0].row()
-            self.controller.elimina_ordinazione(selected)
+    def edit_ingrediente(self):
+        if not self.ingrediente.text() == "" or self.quantita.text() == "":
+            self.controller.edit_ingrediente(self.ingrediente.text(), self.quantita.text())
 

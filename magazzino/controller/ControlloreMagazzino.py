@@ -20,7 +20,7 @@ class ControlloreMagazzino:
             self.model.magazzino[ingrediente] = qt
 
     def edit_ingrediente(self, ingrediente, qt):
-        self.model.model.magazzino[ingrediente] = qt
+        self.model.magazzino[ingrediente] = qt
 
     def get_magazzino(self):
         return self.model.magazzino
