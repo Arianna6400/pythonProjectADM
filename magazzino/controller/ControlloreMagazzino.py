@@ -6,6 +6,7 @@ from magazzino.model.Magazzino import Magazzino
 
 
 class ControlloreMagazzino:
+
     def __init__(self):
         super(ControlloreMagazzino, self).__init__()
         self.model = Magazzino()
@@ -25,8 +26,22 @@ class ControlloreMagazzino:
     def get_magazzino(self):
         return self.model.magazzino
 
+    def delete_ingrediente(self, index):
+        keys = list(self.model.magazzino)
+        return self.model.magazzino.pop(keys[index])
+
     def get_qt(self, ingrediente):
         return self.model.magazzino[ingrediente]
+
+    def sort(self):
+        sorted_dict = {}
+        keys = sorted(self.model.magazzino.keys(), key=lambda x: x.lower())
+
+        for i in keys:
+            values = self.model.magazzino[i]
+            sorted_dict[i] = float(values)
+
+        self.model.magazzino = sorted_dict
 
     def save_data(self):
         with open('magazzino/data/magazzino.pickle', 'wb') as handle:

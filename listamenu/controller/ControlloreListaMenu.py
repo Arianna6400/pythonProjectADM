@@ -7,7 +7,6 @@ class ControlloreListaMenu:
 	def __init__(self):
 		super(ControlloreListaMenu, self).__init__()
 		self.model = ListaMenu()
-		self.magazzino = ControlloreMagazzino()
 
 	def get_lista_menu(self):
 		return self.model.get_lista_menu()
@@ -22,7 +21,7 @@ class ControlloreListaMenu:
 		return self.model.aggiungi_prodotto(prodotto_singolo)
 
 	def change_disponibilita(self, prodotto, b):
-		for i in range(self.model.get_lista_menu()):
+		for i in range(len(self.model.get_lista_menu())):
 			if self.model.get_lista_menu()[i] == prodotto:
 				self.model.get_lista_menu()[i].change_disp(b)
 
@@ -36,8 +35,10 @@ class ControlloreListaMenu:
 			else:
 				self.change_disponibilita(prodotto, False)
 
-	def check_prodotto_disponibile(self, prodotto):
+	@staticmethod
+	def check_prodotto_disponibile(prodotto):
+		magazzino = ControlloreMagazzino()
 		for ingrediente, qt in prodotto.get_ingredienti().items():
-			if self.magazzino.get_qt(ingrediente) < float(qt):
+			if magazzino.get_qt(ingrediente) <= float(qt):
 				return False
 		return True

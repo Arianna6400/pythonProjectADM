@@ -6,14 +6,14 @@ from listaordinazione.controller.ControlloreListaOrdinazione import ControlloreL
 from listaordinazione.model.ListaOrdinazione import ListaOrdinazione
 from magazzino.controller.ControlloreMagazzino import ControlloreMagazzino
 from magazzino.model.Magazzino import Magazzino
+from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 
 
 class ControlloreOrdinazione:
 
-    def __init__(self, ordinazione):
+    def __init__(self, ordinazione, menu):
         self.model = ordinazione
-        self.magazzino = ControlloreMagazzino()
-        self.menu = ControlloreListaMenu()
+        self.menu = menu
 
     def get_nome(self):
         return self.model.nome
@@ -25,28 +25,33 @@ class ControlloreOrdinazione:
         return self.model.ordinazione
 
     def inserisci_ordinazione(self, prodotto):
+        magazzino = ControlloreMagazzino()
         if prodotto.get_isDisponibile() == "Disponibile":
-            if prodotto.get_prodotto in self.model.ordinazione:
-                self.model.ordinazione[prodotto.get_prodotto] += 1
+            if prodotto.get_prodotto() in self.model.ordinazione:
+                self.model.ordinazione[prodotto.get_prodotto()] += 1
             else:
-                self.model.ordinazione[prodotto.get_prodotto] = 1
+                self.model.ordinazione[prodotto.get_prodotto()] = 1
 
             for ingrediente, qt in prodotto.get_ingredienti().items():
-                self.magazzino.add_ingrediente(ingrediente, -float(qt))
+                magazzino.add_ingrediente(ingrediente, -float(qt))
 
             self.menu.update()
+            magazzino.save_data()
 
             return True
         return False
 
     def elimina_ordinazione(self):
-        for prodotto, qt in self.model.ordinazione:
-            for ingredienti in prodotto.get_ingredienti:
-                for ingrediente_singolo, qt2 in ingredienti:
-                    self.magazzino.add_ingrediente(ingrediente_singolo, qt2 * qt)
+        magazzino = ControlloreMagazzino()
+        for prodotto, qt in self.model.ordinazione.items():
+            for alimento in self.menu.get_lista_menu():
+                controllore_alimento = ControlloreProdotto(alimento)
+                if controllore_alimento.get_prodotto() == prodotto:
+                    for ingrediente, qt2 in controllore_alimento.get_ingredienti().items():
+                        magazzino.add_ingrediente(ingrediente, float(qt2 * qt))
 
-        ControlloreListaMenu.update()
-
+        magazzino.save_data()
+        self.menu.update()
         self.model.ordinazione = {}
 
     def conferma_ordinazione(self):
@@ -59,3 +64,4 @@ class ControlloreOrdinazione:
 
         with open('listaordinazione/data/lista_ordinazione.pickle', 'wb') as handle:
             pickle.dump(lista_ordinazione, handle, pickle.HIGHEST_PROTOCOL)
+

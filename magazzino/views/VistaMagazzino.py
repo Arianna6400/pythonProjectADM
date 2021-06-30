@@ -14,18 +14,9 @@ class VistaMagazzino(QWidget):
 
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
-        self.listview_model = QStandardItemModel(self.list_view)
 
-        for ingrediente, qt in self.controller.get_magazzino().items():
-            item = QStandardItem()
-            item.setFont(QFont('DejaVu Sans Mono', 10))
-            item.setText("ingrediente:{0:<15}{1:>20} ".format(ingrediente, qt))
-            item.setEditable(False)
-            font = item.font()
-            font.setPointSize(12)
-            item.setFont(font)
-            self.listview_model.appendRow(item)
-        self.list_view.setModel(self.listview_model)
+        self.update_ui()
+
         self.h_layout.addWidget(self.list_view)
 
         buttons_layout = QVBoxLayout()
@@ -51,11 +42,15 @@ class VistaMagazzino(QWidget):
         edit_button.clicked.connect(self.edit_ingrediente)
         buttons_layout.addWidget(edit_button)
 
+        delete_button = QPushButton("Elimina ingrediente")
+        delete_button.clicked.connect(self.delete_ingrediente)
+        buttons_layout.addWidget(delete_button)
+
         buttons_layout.addStretch()
         self.h_layout.addLayout(buttons_layout)
 
         self.setLayout(self.h_layout)
-        self.resize(1000, 400)
+        self.resize(1200, 400)
         self.setWindowTitle("Magazzino")
 
     def closeEvent(self, event):
@@ -72,16 +67,24 @@ class VistaMagazzino(QWidget):
             self.controller.edit_ingrediente(self.ingrediente.text(), float(self.quantita.text()))
             self.update_ui()
 
+    def delete_ingrediente(self):
+        if len(self.list_view.selectedIndexes()) > 0:
+            selected = self.list_view.selectedIndexes()[0].row()
+            self.controller.delete_ingrediente(selected)
+        self.update_ui()
+
     def update_ui(self):
+        self.controller.sort()
         self.listview_model = QStandardItemModel(self.list_view)
         for ingrediente, qt in self.controller.get_magazzino().items():
             item = QStandardItem()
             item.setFont(QFont('DejaVu Sans Mono', 10))
-            item.setText("ingrediente:{0:<15}{1:>20} ".format(ingrediente, qt))
+            item.setText("ingrediente:{0:<20}{1:>20} ".format(ingrediente, qt))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(12)
             item.setFont(font)
             self.listview_model.appendRow(item)
         self.list_view.setModel(self.listview_model)
+
 

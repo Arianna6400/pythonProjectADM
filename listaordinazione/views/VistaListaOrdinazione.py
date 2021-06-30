@@ -14,17 +14,9 @@ class VistaListaOrdinazione(QWidget):
 
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
-        self.listview_model = QStandardItemModel(self.list_view)
 
-        for ordinazione in self.controller.get_lista_ordinazione():
-            item = QStandardItem()
-            item.setText("nome:{} ".format(ordinazione.get_nome()) + "          tavolo:{} ".format(ordinazione.get_tavolo()))
-            item.setEditable(False)
-            font = item.font()
-            font.setPointSize(18)
-            item.setFont(font)
-            self.listview_model.appendRow(item)
-        self.list_view.setModel(self.listview_model)
+        self.update_ui()
+
         self.h_layout.addWidget(self.list_view)
 
         buttons_layout = QVBoxLayout()
@@ -62,4 +54,17 @@ class VistaListaOrdinazione(QWidget):
         if reply == QMessageBox.Yes and len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
             self.controller.elimina_ordinazione(selected)
+        self.update_ui()
 
+    def update_ui(self):
+        self.listview_model = QStandardItemModel(self.list_view)
+
+        for ordinazione in self.controller.get_lista_ordinazione():
+            item = QStandardItem()
+            item.setText("nome:{} ".format(ordinazione.get_nome()) + "          tavolo:{} ".format(ordinazione.get_tavolo()))
+            item.setEditable(False)
+            font = item.font()
+            font.setPointSize(18)
+            item.setFont(font)
+            self.listview_model.appendRow(item)
+        self.list_view.setModel(self.listview_model)

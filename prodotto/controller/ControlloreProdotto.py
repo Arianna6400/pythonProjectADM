@@ -13,7 +13,7 @@ class ControlloreProdotto():
         return self.model.ingredienti
 
     def change_disp(self, b):
-        self.model.disponibile = b
+        self.model.change_disp(b)
 
     def get_isDisponibile(self):
         if self.model.disponibile:

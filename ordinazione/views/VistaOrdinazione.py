@@ -1,6 +1,7 @@
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView
 
+
 class VistaOrdinazione(QWidget):
 
     def __init__(self, ordinazione):
@@ -11,9 +12,9 @@ class VistaOrdinazione(QWidget):
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
         self.listview_model = QStandardItemModel(self.list_view)
-        for Prodotto in self.controller.get_ordinazione():
+        for Prodotto, qt in self.controller.get_ordinazione().items():
             item = QStandardItem()
-            item.setText("{}, ".format(Prodotto) + "{} ".format(ordinazione.get_ordinazione()[Prodotto]))
+            item.setText("{}, ".format(Prodotto) + "{} ".format(qt))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)

@@ -15,8 +15,9 @@ class VistaListaMenuCliente(QWidget):
 
         super(VistaListaMenuCliente, self).__init__()
 
-        self.ordinazione = ControlloreOrdinazione(Ordinazione(nome, tavolo))
         self.controller = ControlloreListaMenu()
+        self.ordinazione = ControlloreOrdinazione(Ordinazione(nome, tavolo), self.controller)
+        self.controller.update()
 
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
@@ -94,7 +95,6 @@ class VistaListaMenuCliente(QWidget):
                 msg.setText('Prodotto non disponibile!')
                 msg.setWindowTitle("Avviso")
                 msg.exec_()
-
 
     def delete_ordinazione(self):
         reply = QMessageBox.question(self, 'Quit', 'Vuoi cancelllare l\'ordine?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)

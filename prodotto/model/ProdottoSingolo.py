@@ -7,4 +7,6 @@ class ProdottoSingolo:
         self.ingredienti = ingredienti
         self.disponibile = True
 
+    def change_disp(self, b):
+        self.disponibile = b
 
