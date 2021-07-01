@@ -78,7 +78,10 @@ class VistaMagazzino(QWidget):
         self.listview_model = QStandardItemModel(self.list_view)
         for ingrediente, qt in self.controller.get_magazzino().items():
             item = QStandardItem()
-            item.setFont(QFont('DejaVu Sans Mono', 10))
+            fontstd = QFont("DejaVu Sans Mono", 10)
+            fontstd.setFamily('Monospace')
+            fontstd.setFixedPitch(True)
+            item.setFont(fontstd)
             item.setText("ingrediente:{0:<20}{1:>20} ".format(ingrediente, qt))
             item.setEditable(False)
             font = item.font()
