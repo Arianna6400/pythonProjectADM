@@ -36,10 +36,8 @@ class VistaHome(QWidget):
     def go_login_amministratore(self):
         self.login_amministratore = LoginAmministratore()
         self.login_amministratore.show()
-        self.go_vista_amministratore
 
     def go_login_cliente(self):
         self.login_cliente = LoginCliente()
         self.login_cliente.show()
-        self.go_login_cliente
 

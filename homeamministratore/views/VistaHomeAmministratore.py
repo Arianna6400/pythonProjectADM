@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QPushButton, QSizePolicy, QGridLayout
 
+from listadipendenti.views.VistaListaDipendente import VistaListaDipendenti
 from listamenu.views.VistaListaMenuAmministratore import VistaListaMenuAmministratore
 from listaordinazione.views.VistaListaOrdinazione import VistaListaOrdinazione
 from listaprenotazioni.views.VistaListaPrenotazioni import VistaListaPrenotazioni
@@ -47,7 +48,7 @@ class VistaHomeAmministratore(QWidget):
         self.vista_magazzino.show()
 
     def go_vista_dipendenti(self):
-        self.vista_dipendenti = VistaDipendenti()
+        self.vista_dipendenti = VistaListaDipendenti()
         self.vista_dipendenti.show()
 
     def go_close(self):
