@@ -53,7 +53,10 @@ class VistaListaPrenotazioni(QWidget):
 
 		self.listview_model = QStandardItemModel(self.list_view)
 		item = QStandardItem()
-		item.setFont(QFont('DejaVu Sans Mono', 10))
+		fontstd = QFont("DejaVu Sans Mono", 10)
+		fontstd.setFamily('Monospace')
+		fontstd.setFixedPitch(True)
+		item.setFont(fontstd)
 		item.setText("{0:<15}{1:<12}{2:<10}{3}".format("Nome: ", "Telefono:", "Persone:", "Orario:"))
 		item.setEditable(False)
 		font = item.font()
@@ -63,7 +66,10 @@ class VistaListaPrenotazioni(QWidget):
 
 		for prenotazione in self.controller.get_prenotazioni_by_data(datetime(qDate.year(), qDate.month(), qDate.day())):
 			item = QStandardItem()
-			item.setFont(QFont('DejaVu Sans Mono', 10))
+			fontstd = QFont("DejaVu Sans Mono", 10)
+			fontstd.setFamily('Monospace')
+			fontstd.setFixedPitch(True)
+			item.setFont(fontstd)
 			item.setText("{0:<15}{1:<12}{2:<10}{3}".format(prenotazione.nome, prenotazione.telefono, prenotazione.num_persone, prenotazione.data.hour))
 			item.setEditable(False)
 			font = item.font()
