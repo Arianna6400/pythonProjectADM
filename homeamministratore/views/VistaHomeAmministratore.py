@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QSizePolicy, QGridLayout
 
 from listamenu.views.VistaListaMenuAmministratore import VistaListaMenuAmministratore
 from listaordinazione.views.VistaListaOrdinazione import VistaListaOrdinazione
+from listaprenotazioni.views.VistaListaPrenotazioni import VistaListaPrenotazioni
 from magazzino.views.VistaMagazzino import VistaMagazzino
 
 
@@ -30,7 +31,7 @@ class VistaHomeAmministratore(QWidget):
         return button
 
     def go_vista_prenotazioni(self):
-        self.vista_prenotazioni = VistaPrenotazioni()
+        self.vista_prenotazioni = VistaListaPrenotazioni()
         self.vista_prenotazioni.show()
 
     def go_vista_menu(self):

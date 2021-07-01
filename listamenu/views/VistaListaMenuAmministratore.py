@@ -48,12 +48,11 @@ class VistaListaMenuAmministratore(QWidget):
 		self.setWindowTitle("Lista Menu")
 
 	def closeEvent(self, event):
-		print("ON CLOSE")
 		self.controller.save_data()
 		event.accept()
 
 	def show_selected_info(self):
-		if (len(self.list_view.selectedIndexes()) > 0):
+		if len(self.list_view.selectedIndexes()) > 0:
 			selected = self.list_view.selectedIndexes()[0].row()
 			prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
 			self.vista_prodotto = VistaProdotto(prodotto_selezionato)
@@ -66,7 +65,6 @@ class VistaListaMenuAmministratore(QWidget):
 			self.controller.elimina_prodotto(prodotto_selezionato)
 			self.update_ui()
 			self.h_layout.replaceWidget(self.list_view, self.list_view)
-
 
 	def add_info(self):
 		self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)

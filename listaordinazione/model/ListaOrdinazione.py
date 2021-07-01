@@ -1,5 +1,3 @@
-import pickle
-import os.path
 
 class ListaOrdinazione:
 

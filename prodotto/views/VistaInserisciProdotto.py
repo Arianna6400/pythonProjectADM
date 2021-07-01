@@ -68,7 +68,6 @@ class VistaInserisciProdotto(QWidget):
         for i in range(len(self.key)):
             self.alimenti[self.key[i].text()] = self.ingredienti[self.key[i]].text()
         self.controller.aggiungi_prodotto(ProdottoSingolo(self.qlines["prodotto"].text(), self.qlines["prezzo"].text(), self.alimenti))
-        print(self.ingredienti)
         self.callback()
         self.close()
 

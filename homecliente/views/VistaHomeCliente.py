@@ -6,8 +6,8 @@ from listamenu.views.VistaListaMenuCliente import VistaListaMenuCliente
 class VistaHomeCliente(QWidget):
 
     def __init__(self, nome, tavolo):
-        self.nome= nome
-        self.tavolo= tavolo
+        self.nome = nome
+        self.tavolo = tavolo
         super(VistaHomeCliente, self).__init__()
         grid_layout = QGridLayout()
 
