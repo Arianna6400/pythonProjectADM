@@ -27,30 +27,27 @@ class VistaListaPrenotazioni(QWidget):
 		self.calendar.setGridVisible(True)
 		self.calendar.setMinimumDate(QDate(currentYear, currentMonth - 1, 1))
 		self.calendar.setMaximumDate(QDate(currentYear, currentMonth + 1, calendar.monthrange(currentYear, currentMonth)[1]))
+		self.calendar.setSelectedDate(QDate(currentYear, currentMonth, 1))
+		self.calendar.clicked.connect(self.printInfo)
 
 		buttons_layout = QVBoxLayout()
 		add_button = QPushButton("Aggiungi prenotazione")
 		add_button.clicked.connect(self.aggiungi_prenotazione)
 		buttons_layout.addWidget(add_button)
 
-
+		delete_button = QPushButton("Elimina prenotazione")
+		delete_button.clicked.connect(self.elimina_prenotazione)
+		buttons_layout.addWidget(delete_button)
 
 		grid_layout.addWidget(self.calendar, 0, 0)
 		grid_layout.addLayout(buttons_layout, 0, 1)
 		grid_layout.addWidget(self.list_view, 1, 0)
 
-		self.calendar.setSelectedDate(QDate(currentYear, currentMonth, 1))
-
-		self.calendar.clicked.connect(self.printInfo)
 		self.resize(600, 400)
 		self.setWindowTitle('Lista Prenotazioni')
 		self.setLayout(grid_layout)
 
 	def printInfo(self, qDate):
-		print('{0}/{1}/{2}'.format(qDate.month(), qDate.day(), qDate.year()))
-		print(f'Day Number of the year: {qDate.dayOfYear()}')
-		print(f'Day Number of the week: {qDate.dayOfWeek()}')
-
 		self.listview_model = QStandardItemModel(self.list_view)
 		item = QStandardItem()
 		fontstd = QFont("DejaVu Sans Mono", 10)
@@ -82,5 +79,5 @@ class VistaListaPrenotazioni(QWidget):
 		self.vista_aggiungi_prenotazione = VistaPrenotazione(self.controller)
 		self.vista_aggiungi_prenotazione.show()
 
-
-
+	def elimina_prenotazione(self):
+		pass
