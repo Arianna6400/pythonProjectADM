@@ -16,14 +16,18 @@ class ControlloreListaPrenotazioni:
     def aggiungi_prenotazione(self, prenotazione):
         self.model.lista_prenotazioni.append(prenotazione)
 
-    def elimina_prenotazione(self, index):
-        self.model.lista_prenotazioni.remove(self.model.lista_prenotazioni[index])
+    def elimina_prenotazione(self, prenotazione):
+        for i in range(len(self.model.lista_prenotazioni)):
+            if i == len(self.model.lista_prenotazioni) + 1:
+                break
+            if prenotazione.telefono == self.model.lista_prenotazioni[i].telefono:
+                del self.model.lista_prenotazioni[i]
+        self.save_data()
 
     def get_prenotazioni_by_data(self, data):
         lista = []
         for i in range(len(self.model.lista_prenotazioni)):
             if data.date() == self.model.lista_prenotazioni[i].data.date():
-                print(self.model.lista_prenotazioni[i].nome)
                 lista.append(self.model.lista_prenotazioni[i])
         return lista
 

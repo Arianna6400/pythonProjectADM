@@ -9,7 +9,7 @@ class ListaDipendenti():
     def __init__(self):
         super(ListaDipendenti, self).__init__()
         self.lista_dipendenti = []
-        if os.path.isfile('listadipendenti/data/lista_dipenti.pickle'):
+        if os.path.isfile('listadipendenti/data/lista_dipendenti.pickle'):
             with open('listadipendenti/data/lista_dipendenti.pickle', 'rb') as f:
                 self.lista_dipendenti = pickle.load(f)
         else:

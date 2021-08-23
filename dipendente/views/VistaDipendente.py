@@ -4,11 +4,11 @@ from dipendente.controller.ControlloreDipendente import ControlloreDipendente
 
 
 class VistaDipendente(QWidget):
-    def __init__(self, dipendente, elimina_dipendente, elimina_callback, parent=None):
+    def __init__(self, dipendente, controllore, callback, parent=None):
         super(VistaDipendente, self).__init__(parent)
         self.controller = ControlloreDipendente(dipendente)
-        self.elimina_dipendente = elimina_dipendente
-        self.elimina_callback = elimina_callback
+        self.controllore = controllore
+        self.callback = callback
 
         v_layout = QVBoxLayout()
 
@@ -43,6 +43,6 @@ class VistaDipendente(QWidget):
         return label
 
     def elimina_dipendente(self):
-        self.elimina_dipendente(self.controller.get_id_dipendente())
-        self.elimina_callback()
+        self.controllore.elimina_dipendente_by_id(self.controller.get_id_dipendente())
+        self.callback()
         self.close()

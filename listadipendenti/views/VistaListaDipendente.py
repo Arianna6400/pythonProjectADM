@@ -44,10 +44,10 @@ class VistaListaDipendenti(QWidget):
         self.list_view.setModel(self.listview_model)
 
     def show_selected_info(self):
-        if(len(self.list_view.selectedIndexes()) > 0):
+        if len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
             dipendente_selezionato = self.controller.get_dipendente_by_index(selected)
-            self.vista_dipendente = VistaDipendente(dipendente_selezionato, self.controller.elimina_dipendente_by_id, self.update_ui)
+            self.vista_dipendente = VistaDipendente(dipendente_selezionato, self.controller, self.update_ui)
             self.vista_dipendente.show()
 
     def show_new_dipendente(self):

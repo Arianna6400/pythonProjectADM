@@ -48,6 +48,7 @@ class VistaListaPrenotazioni(QWidget):
 		self.setLayout(grid_layout)
 
 	def printInfo(self, qDate):
+		self.data_selezionata = qDate
 		self.listview_model = QStandardItemModel(self.list_view)
 		item = QStandardItem()
 		fontstd = QFont("DejaVu Sans Mono", 10)
@@ -80,4 +81,6 @@ class VistaListaPrenotazioni(QWidget):
 		self.vista_aggiungi_prenotazione.show()
 
 	def elimina_prenotazione(self):
-		pass
+		selected = self.list_view.selectedIndexes()[0].row() - 1
+		prenotazione_da_eliminare = self.controller.get_prenotazioni_by_data(datetime(self.data_selezionata.year(), self.data_selezionata.month(), self.data_selezionata.day()))[selected]
+		self.controller.elimina_prenotazione(prenotazione_da_eliminare)
