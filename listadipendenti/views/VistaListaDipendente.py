@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushB
 
 from dipendente.views.VistaDipendente import VistaDipendente
 from listadipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
-from listadipendenti.views.VistaInserisciDipendente import VistaInserisciDipendente
+from dipendente.views.VistaInserisciDipendente import VistaInserisciDipendente
 
 
 class VistaListaDipendenti(QWidget):
