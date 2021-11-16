@@ -1,51 +1,79 @@
+from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt5.QtCore import QRect, QCoreApplication
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton
 
 from dipendente.controller.ControlloreDipendente import ControlloreDipendente
 
 
 class VistaDipendente(QWidget):
-    def __init__(self, dipendente, controllore, callback, parent=None):
-        super(VistaDipendente, self).__init__(parent)
-        self.controller = dipendente  # controllore del dipendente singolo
-        self.controllore_lista_dipendenti = controllore  # controllore della lista dei dipendenti
-        self.callback = callback  # callback per aggiornare la vista in caso si elimini un dipendente
+    def __init__(self, dipendente, controllore, callback):
+        super(VistaDipendente, self).__init__()
+        self.controller = ControlloreDipendente(dipendente)
+        self.controllore = controllore
+        self.callback = callback
 
-        v_layout = QVBoxLayout()
+        self.setWindowTitle('Vista Dipendente')
+        self.resize(600, 600)
+        self.setStyleSheet("background-color: rgb(235, 255, 219);")
 
-        # parte del codice per visualizzare i dati del dipendente selezionato
-        label_nome = QLabel(self.controller.get_nome_dipendente() + " " + self.controller.get_cognome_dipendente())
-        font_nome = label_nome.font()
-        font_nome.setPointSize(30)
-        label_nome.setFont(font_nome)
-        v_layout.addWidget(label_nome)
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.setWindowIcon(icon)
 
-        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.verticalLayoutWidget = QtWidgets.QWidget(self)
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(10, 10, 581, 581))
+        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.label_name = QLabel(self.verticalLayoutWidget)
+        self.label_name.setObjectName("label_name")
+        self.label_name.setStyleSheet("font: 24pt \"Eras Demi ITC\";")
 
-        v_layout.addWidget(self.get_info("ID: {}".format(self.controller.get_id_dipendente())))
-        v_layout.addWidget(self.get_info("Codice Fiscale: {}".format(self.controller.get_cf_dipendente())))
-        v_layout.addWidget(self.get_info("Data Nascita: {}".format(self.controller.get_data_nascita_dipendente())))
-        v_layout.addWidget(self.get_info("Luogo Nascita: {}".format(self.controller.get_luogo_nascita_dipendente())))
-        v_layout.addWidget(self.get_info("Telefono: {}".format(self.controller.get_telefono_dipendente())))
-        v_layout.addWidget(self.get_info("Ruolo: {}".format(self.controller.get_ruolo_dipendente())))
+        self.verticalLayout.addWidget(self.label_name)
 
-        v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Minimum)
+        self.verticalLayout.addItem(self.verticalSpacer)
 
-        delete_button = QPushButton("Elimina")  # bottone nel caso si voglia eliminare un dipendente
-        delete_button.clicked.connect(self.elimina_dipendente)
-        v_layout.addWidget(delete_button)
+        self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Codice Fiscale: {}</span></p></body></html>".format(self.controller.get_cf_dipendente())))
+        self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Data Nascita: {}</span></p></body></html>".format(self.controller.get_data_nascita_dipendente())))
+        self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Luogo Nascita: {}</span></p></body></html>".format(self.controller.get_luogo_nascita_dipendente())))
+        self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Telefono: {}</span></p></body></html>".format(self.controller.get_telefono_dipendente())))
+        self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Ruolo: {}</span></p></body></html>".format(self.controller.get_ruolo_dipendente())))
 
-        self.setLayout(v_layout)
-        self.setWindowTitle(self.controller.get_nome_dipendente())
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Minimum)
+        self.verticalLayout.addItem(self.verticalSpacer_2)
 
-    @staticmethod
-    def get_info(text):  # metodo statico che dato una stringa crea una label per tale stringa
+        self.pushButton_delete = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_delete.setObjectName("pushButton_delete")
+        self.pushButton_delete.setStyleSheet("border-radius:22px;\n"
+                                             "background-color: rgb(197, 255, 134);\n"
+                                             "color:black;\n"
+                                             "border-style: outset;\n"
+                                             "border-width: 2px;\n"
+                                             "border-color: black;\n"
+                                             "font: 12pt \"Eras Demi ITC\";")
+
+        self.verticalLayout.addWidget(self.pushButton_delete)
+
+        self.retranslateUi()
+
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.label_name.setText(QCoreApplication.translate("Form", self.controller.get_nome_dipendente() + " " + self.controller.get_cognome_dipendente()))
+        self.pushButton_delete.setText(QCoreApplication.translate("Form", "Elimina"))
+        self.pushButton_delete.clicked.connect(self.elimina_dipendente)
+
+    def get_info(self, text):
         label = QLabel(text)
         font = label.font()
         font.setPointSize(17)
         label.setFont(font)
         return label
 
-    def elimina_dipendente(self):  # metodo per eliminare un dipendente dalla lista dei dipendenti
-        self.controllore_lista_dipendenti.elimina_dipendente_by_id(self.controller.get_id_dipendente())
+    def elimina_dipendente(self):
+        self.controllore.elimina_dipendente_by_id(self.controller.get_id_dipendente())
         self.callback()
         self.close()

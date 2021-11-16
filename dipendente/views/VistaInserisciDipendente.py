@@ -1,7 +1,6 @@
-from datetime import datetime
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox
-
-from dipendente.controller.ControlloreDipendente import ControlloreDipendente
+from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt5.QtCore import QRect, QCoreApplication
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QLineEdit, QMessageBox
 from dipendente.model.Dipendente import Dipendente
 
 
@@ -10,77 +9,87 @@ class VistaInserisciDipendente(QWidget):
         super(VistaInserisciDipendente, self).__init__()
         self.controller = controller
         self.callback = callback
+        self.qlines = {}
 
-        self.v_layout = QVBoxLayout()
-        self.info_dipendente = {}  # dizionario in cui andranno tutte le informazioni riguardanti un dipendente
-        self.add_info_text("id", "ID")
-        self.add_info_text("nome", "Nome")
-        self.add_info_text("cognome", "Cognome")
-        self.add_info_text("cf", "Codice Fiscale")
-        self.add_info_text("data_n", "Data di nascita (dd/MM/yyyy)")
-        self.add_info_text("luogo_n", "Luogo di nascita")
-        self.add_info_text("telefono", "Telefono")
-        self.add_info_text("ruolo", "Ruolo")
+        self.setWindowTitle('Nuovo Dipendente')
+        self.resize(600, 700)
+        self.setStyleSheet("background-color: rgb(235, 255, 219);")
 
-        self.v_layout.addItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.setWindowIcon(icon)
 
-        btn_ok = QPushButton("OK")  # bottone per confermare i dati inseriti
-        btn_ok.clicked.connect(self.add_dipendente)
-        self.v_layout.addWidget(btn_ok)
+        self.verticalLayoutWidget = QtWidgets.QWidget(self)
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(10, 10, 581, 681))
+        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.add_info_text("nome", '<font face="Eras Demi ITC"> <font size="10"> Nome: </font>')
+        self.add_info_text("cognome", '<font face="Eras Demi ITC"> <font size="10"> Cognome: </font>')
+        self.add_info_text("cf", '<font face="Eras Demi ITC"> <font size="10"> Codice fiscale: </font>')
+        self.add_info_text("datan", '<font face="Eras Demi ITC"> <font size="10"> Data di nascita(dd/mm/yyyy): </font>')
+        self.add_info_text("luogon", '<font face="Eras Demi ITC"> <font size="10"> Luogo di nascita: </font>')
+        self.add_info_text("telefono", '<font face="Eras Demi ITC"> <font size="10"> Telefono: </font>')
+        self.add_info_text("ruolo", '<font face="Eras Demi ITC"> <font size="10"> Ruolo: </font>')
 
-        self.setLayout(self.v_layout)
-        self.setWindowTitle("Nuovo Dipendente")
+        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Fixed)
 
-    # metodo che genera le caselle di testo dove inserire le informazioni del dipendente
+        self.verticalLayout.addItem(self.verticalSpacer)
+
+        self.pushButton_ok = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_ok.setObjectName("pushButton_ok")
+        self.pushButton_ok.setStyleSheet("border-radius:22px;\n"
+                                         "background-color: rgb(197, 255, 134);\n"
+                                         "color:black;\n"
+                                         "border-style: outset;\n"
+                                         "border-width: 2px;\n"
+                                         "border-color: black;\n"
+                                         "font: 12pt \"Eras Demi ITC\";")
+
+        self.verticalLayout.addWidget(self.pushButton_ok)
+
+        self.retranslateUi()
+
+        QtCore.QMetaObject.connectSlotsByName(self)
+
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
+        self.pushButton_ok.setText(QCoreApplication.translate("InserisciDipendente", "Ok"))
+        self.pushButton_ok.clicked.connect(self.add_dipendente)
+
     def add_info_text(self, nome, label):
-        self.v_layout.addWidget(QLabel(label))
+        self.verticalLayout.addWidget(QLabel(label))
         current_text = QLineEdit(self)
-        current_text.returnPressed.connect(self.add_dipendente)
-        self.info_dipendente[nome] = current_text
-        self.v_layout.addWidget(current_text)
+        current_text.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.qlines[nome] = current_text
+        self.verticalLayout.addWidget(current_text)
 
-    # metodo collegato alla conferma dei dati del dipendente
     def add_dipendente(self):
-        for value in self.info_dipendente.values():
+        for value in self.qlines.values():
             if value.text() == "":
-                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste.',
-                                     QMessageBox.Ok, QMessageBox.Ok)
+                msg = QMessageBox()
+                msg.setWindowTitle("Attenzione!")
+                msg.setText(
+                    "Per favore, inserisci tutte le informazioni richieste.")
+                icon = QtGui.QIcon()
+                icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal,
+                               QtGui.QIcon.On)
+                msg.setWindowIcon(icon)
+                msg.setIcon(QMessageBox.Warning)
+                msg.setStandardButtons(QMessageBox.Ok)
+                msg.setDefaultButton(QMessageBox.Ok)
+                msg.exec_()
                 return
-
-        try:
-            datetime.strptime(self.info_dipendente["data_n"].text(), '%d/%m/%Y')
-        except ValueError:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci una data valida nel formato dd/MM/yyyy.',
-                                 QMessageBox.Ok, QMessageBox.Ok)
-            return
-
-        if not len(self.info_dipendente["cf"].text()) == 16:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci un codice fiscale valido.',
-                                 QMessageBox.Ok, QMessageBox.Ok)
-            return
-
-        for dipendente in self.controller.get_lista_dipendenti():
-            if dipendente.cf == self.info_dipendente["cf"].text():
-                QMessageBox.critical(self, 'Errore', 'Il dipendente che si vuole inserire è gia presente nella '
-                                                     'lista dei dipendenti.',
-                                     QMessageBox.Ok, QMessageBox.Ok)
-                return
-
-        if not len(self.info_dipendente["telefono"].text()) == 10:
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci un numero di telefono valido!',
-                                 QMessageBox.Ok, QMessageBox.Ok)
-            return
-
-        # aggiunta del nuovo dipendente nella lista dei dipendente dopo un controllo dei dati inseriti
-        self.controller.aggiungi_dipendente(ControlloreDipendente(
-            self.info_dipendente["id"].text(),
-            self.info_dipendente["nome"].text(),
-            self.info_dipendente["cognome"].text(),
-            self.info_dipendente["data_n"].text(),
-            self.info_dipendente["luogo_n"].text(),
-            self.info_dipendente["cf"].text(),
-            self.info_dipendente["telefono"].text(),
-            self.info_dipendente["ruolo"].text())
+        self.controller.aggiungi_dipendente(Dipendente(
+            (self.qlines["nome"].text()+self.qlines["cognome"].text()).lower(),
+            self.qlines["nome"].text(),
+            self.qlines["cognome"].text(),
+            self.qlines["datan"].text(),
+            self.qlines["luogon"].text(),
+            self.qlines["cf"].text(),
+            self.qlines["telefono"].text(),
+            self.qlines["ruolo"].text())
         )
         self.callback()
         self.close()

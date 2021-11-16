@@ -1,5 +1,7 @@
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton
+from PyQt5 import QtGui, QtWidgets, QtCore
+from PyQt5.QtCore import QRect, QCoreApplication
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
+from PyQt5.QtWidgets import QWidget, QApplication, QListView, QVBoxLayout, QPushButton, QLabel
 
 from listamenu.controller.ControlloreListaMenu import ControlloreListaMenu
 from prodotto.views.VistaInserisciProdotto import VistaInserisciProdotto
@@ -7,79 +9,160 @@ from prodotto.views.VistaProdotto import VistaProdotto
 
 
 class VistaListaMenuAmministratore(QWidget):
-	def __init__(self):
-		super(VistaListaMenuAmministratore, self).__init__()
 
-		self.controller = ControlloreListaMenu()
+    def __init__(self):
+        super(VistaListaMenuAmministratore, self).__init__()
 
-		self.h_layout = QHBoxLayout()
-		self.list_view = QListView()
-		self.listview_model = QStandardItemModel(self.list_view)
+        self.controller = ControlloreListaMenu()
 
-		for ProdottoSingolo in self.controller.get_lista_menu():
-			item = QStandardItem()
-			item.setText("{} ".format(ProdottoSingolo.prodotto) + "{}€".format(ProdottoSingolo.prezzo))
-			item.setEditable(False)
-			font = item.font()
-			font.setPointSize(18)
-			item.setFont(font)
-			self.listview_model.appendRow(item)
+        font = QtGui.QFont()
+        font.setPointSize(25)
+        self.desktop = QApplication.desktop()
+        self.screenRect = self.desktop.screenGeometry()
+        self.width = self.screenRect.width()
+        self.height = self.screenRect.height()
 
-		self.list_view.setModel(self.listview_model)
-		self.h_layout.addWidget(self.list_view)
+        self.centralwidget = QtWidgets.QWidget(self)
+        self.centralwidget.setObjectName("VistaListaMenuAmministratore")
+        self.centralwidget.setGeometry(QRect(130, 0, 1600, 1000))
+        self.centralwidget.setStyleSheet("background-color: rgb(85, 170, 0);\n"
+                                         "border-style: outset;\n"
+                                         "border-width: 4px;\n"
+                                         "border-color: black;\n")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        self.setWindowIcon(icon)
 
-		buttons_layout = QVBoxLayout()
+        self.verticalLayoutWidget = QtWidgets.QWidget(self)
+        self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
+        self.verticalLayoutWidget.setGeometry(QRect(250, 150, 900, 750))
+        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
 
-		open_button = QPushButton("Apri")
-		open_button.clicked.connect(self.show_selected_info)
-		buttons_layout.addWidget(open_button)
+        self.label = QLabel(self.verticalLayoutWidget)
+        self.label.setObjectName("label")
+        self.label.setStyleSheet("font: 16pt \"Eras Demi ITC\";")
+        self.verticalLayout.addWidget(self.label)
 
-		add_button = QPushButton("Inserisci")
-		add_button.clicked.connect(self.add_info)
-		buttons_layout.addWidget(add_button)
+        self.listView = QListView(self.verticalLayoutWidget)
+        self.listView.setObjectName("listView")
+        self.listView.setStyleSheet("background-color: rgb(235, 255, 219);")
+        self.update_ui()
+        self.verticalLayout.addWidget(self.listView)
 
-		delete_button = QPushButton("Elimina")
-		delete_button.clicked.connect(self.delete_selected_info)
-		buttons_layout.addWidget(delete_button)
+        self.verticalLayoutWidget_2 = QtWidgets.QWidget(self)
+        self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
+        self.verticalLayoutWidget_2.setGeometry(QRect(1230, 220, 281, 431))
+        self.verticalLayout_2 = QVBoxLayout(self.verticalLayoutWidget_2)
+        self.verticalLayout_2.setObjectName("verticalLayout_2")
+        self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
 
-		buttons_layout.addStretch()
-		self.h_layout.addLayout(buttons_layout)
+        self.pushButton_open = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_open.setObjectName("pushButton_open")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_open.sizePolicy().hasHeightForWidth())
+        self.pushButton_open.setSizePolicy(sizePolicy)
+        self.pushButton_open.setMinimumSize(QtCore.QSize(8, 8))
+        self.pushButton_open.setMinimumHeight(self.height / 10)
+        self.pushButton_open.setMaximumHeight(self.height / 10)
+        self.pushButton_open.setStyleSheet("border-radius:22px;\n"
+                                           "background-color: rgb(197, 255, 134);\n"
+                                           "color:black;\n"
+                                           "border-style: outset;\n"
+                                           "border-width: 2px;\n"
+                                           "border-color: black;\n"
+                                           "font: 16pt \"Eras Demi ITC\";")
+        self.verticalLayout_2.addWidget(self.pushButton_open)
 
-		self.setLayout(self.h_layout)
-		self.resize(600, 300)
-		self.setWindowTitle("Lista Menu")
+        self.pushButton_new = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_new.setObjectName("pushButton_new")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_new.sizePolicy().hasHeightForWidth())
+        self.pushButton_new.setSizePolicy(sizePolicy)
+        self.pushButton_new.setMinimumSize(QtCore.QSize(8, 8))
+        self.pushButton_new.setMinimumHeight(self.height / 10)
+        self.pushButton_new.setMaximumHeight(self.height / 10)
+        self.pushButton_new.setStyleSheet("border-radius:22px;\n"
+                                          "background-color: rgb(197, 255, 134);\n"
+                                          "color:black;\n"
+                                          "border-style: outset;\n"
+                                          "border-width: 2px;\n"
+                                          "border-color: black;\n"
+                                          "font: 16pt \"Eras Demi ITC\";")
+        self.verticalLayout_2.addWidget(self.pushButton_new)
 
-	def closeEvent(self, event):
-		self.controller.save_data()
-		event.accept()
+        self.pushButton_delete = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_delete.setObjectName("pushButton_delete")
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(self.pushButton_delete.sizePolicy().hasHeightForWidth())
+        self.pushButton_delete.setSizePolicy(sizePolicy)
+        self.pushButton_delete.setMinimumSize(QtCore.QSize(8, 8))
+        self.pushButton_delete.setMinimumHeight(self.height / 10)
+        self.pushButton_delete.setMaximumHeight(self.height / 10)
+        self.pushButton_delete.setStyleSheet("border-radius:22px;\n"
+                                          "background-color: rgb(197, 255, 134);\n"
+                                          "color:black;\n"
+                                          "border-style: outset;\n"
+                                          "border-width: 2px;\n"
+                                          "border-color: black;\n"
+                                          "font: 16pt \"Eras Demi ITC\";")
+        self.verticalLayout_2.addWidget(self.pushButton_delete)
 
-	def show_selected_info(self):  # metodo per visualizzare le informazioni del prodotto selezionato
-		if len(self.list_view.selectedIndexes()) > 0:
-			selected = self.list_view.selectedIndexes()[0].row()
-			prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-			self.vista_prodotto = VistaProdotto(prodotto_selezionato)
-			self.vista_prodotto.show()
+        self.setWindowTitle("Menù Amministratore")
+        self.retranslateUi()
 
-	def delete_selected_info(self):  # metodo per rimuove un prodotto dal menu
-		if len(self.list_view.selectedIndexes()) > 0:
-			selected = self.list_view.selectedIndexes()[0].row()
-			prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-			self.controller.elimina_prodotto(prodotto_selezionato)
-			self.update_ui()
-			self.h_layout.replaceWidget(self.list_view, self.list_view)
+        QtCore.QMetaObject.connectSlotsByName(self)
 
-	def add_info(self):  # metodo per inserire un nuovo prodotto nel menu
-		self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
-		self.vista_inserisci_prodotto.show()
+    def retranslateUi(self):
+        _translate = QtCore.QCoreApplication.translate
 
-	def update_ui(self):  # metodo per aggiornare la lista del menu in caso venga effettuata una modifica
-		self.listview_model = QStandardItemModel(self.list_view)
-		for prodotto in self.controller.get_lista_menu():
-			item = QStandardItem()
-			item.setText(prodotto.prodotto + " {}".format(prodotto.prezzo) + "€")
-			item.setEditable(False)
-			font = item.font()
-			font.setPointSize(18)
-			item.setFont(font)
-			self.listview_model.appendRow(item)
-		self.list_view.setModel(self.listview_model)
+        self.label.setText(QCoreApplication.translate("VistaListaMenuAmministratore",
+                                                          "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Seleziona il prodotto:</span></p></body></html>"))
+
+        self.pushButton_open.setText(QCoreApplication.translate("VistaListaMenuAmministratore", "Apri"))
+        self.pushButton_open.clicked.connect(self.show_selected_info)
+
+        self.pushButton_new.setText(QCoreApplication.translate("VistaListaMenuAmministratore", "Nuovo"))
+        self.pushButton_new.clicked.connect(self.add_info)
+
+        self.pushButton_delete.setText(QCoreApplication.translate("VistaListaMenuAmministratore", "Elimina"))
+        self.pushButton_delete.clicked.connect(self.delete_selected_info)
+
+    def show_selected_info(self):
+        if len(self.listView.selectedIndexes()) > 0:
+            selected = self.listView.selectedIndexes()[0].row()
+            prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
+            self.vista_prodotto = VistaProdotto(prodotto_selezionato)
+            self.vista_prodotto.show()
+
+    def delete_selected_info(self):
+        if len(self.listView.selectedIndexes()) > 0:
+            selected = self.listView.selectedIndexes()[0].row()
+            prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
+            self.controller.elimina_prodotto(prodotto_selezionato)
+            self.update_ui()
+            self.verticalLayout.replaceWidget(self.listView, self.listView)
+
+    def add_info(self):
+        self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
+        self.vista_inserisci_prodotto.show()
+
+    def update_ui(self):
+        self.listview_model = QStandardItemModel(self.listView)
+        for prodotto in self.controller.get_lista_menu():
+            item = QStandardItem()
+            item.setFont(QFont('Eras Demi ITC'))
+            item.setText(prodotto.prodotto + " {}".format(prodotto.prezzo) + "€")
+            item.setEditable(False)
+            font = item.font()
+            font.setPointSize(18)
+            item.setFont(font)
+            self.listview_model.appendRow(item)
+        self.listView.setModel(self.listview_model)
