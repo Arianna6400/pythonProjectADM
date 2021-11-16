@@ -1,9 +1,9 @@
 from datetime import datetime, timedelta
 
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, QGridLayout
+from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QSpacerItem, QSizePolicy, QPushButton, QMessageBox, QGridLayout
 
+from prenotazione.controller.ControllorePrenotazione import ControllorePrenotazione
 from prenotazione.model.Prenotazione import Prenotazione
-from prodotto.model.ProdottoSingolo import ProdottoSingolo
 
 
 class VistaPrenotazione(QWidget):
@@ -29,15 +29,16 @@ class VistaPrenotazione(QWidget):
         self.setLayout(self.layout)
         self.setWindowTitle("Aggiungi Prenotazione")
 
-    def add_info_text(self, label, gridX, gridY):
+    def add_info_text(self, label, gridx, gridy):
         etichetta = QLabel(label)
-        lineEdit = QLineEdit()
+        line = QLineEdit()
+        line.returnPressed.connect(self.add_prenotazione)
         layout2 = QGridLayout()
         layout2.addWidget(etichetta, 0, 0)
-        layout2.addWidget(lineEdit, 1, 0)
+        layout2.addWidget(line, 1, 0)
 
-        self.layout.addLayout(layout2, gridX, gridY)
-        self.qlines.append(lineEdit)
+        self.layout.addLayout(layout2, gridx, gridy)
+        self.qlines.append(line)
 
     @staticmethod
     def validate(date_text):
@@ -50,14 +51,40 @@ class VistaPrenotazione(QWidget):
     def add_prenotazione(self):
         for value in self.qlines:
             if value.text() == "":
-                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste.', QMessageBox.Ok, QMessageBox.Ok)
+                QMessageBox.critical(self, 'Errore', 'Per favore, inserisci tutte le informazioni richieste.',
+                                     QMessageBox.Ok, QMessageBox.Ok)
                 return
+
         if not self.validate(self.qlines[3].text()):
-            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci la data nel formato richiesto!', QMessageBox.Ok, QMessageBox.Ok)
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci la data nel formato richiesto!',
+                                 QMessageBox.Ok, QMessageBox.Ok)
             return
+
+        if not len(self.qlines[1].text()) == 10:
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci un numero di telefono valido!',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+            return
+
+        if not self.qlines[2].text().isdigit():
+            QMessageBox.critical(self, 'Errore', 'Per favore inserire un numero di persone valido!',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+            return
+
+        if int(self.qlines[4].text()) < 18 or int(self.qlines[4].text()) > 24:
+            QMessageBox.critical(self, 'Errore', 'Per favore inserire un orario nella quale il locale è aperto!',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+            return
+
         data = datetime.strptime(self.qlines[3].text(), '%d/%m/%Y')
         new_data = data + timedelta(hours=int(self.qlines[4].text()))
-        self.controller.aggiungi_prenotazione(Prenotazione(self.qlines[0].text(), self.qlines[1].text(), self.qlines[2].text(), new_data))
+
+        if new_data < datetime.now():
+            QMessageBox.critical(self, 'Errore', 'Per favore, inserisci una data futura!',
+                                 QMessageBox.Ok, QMessageBox.Ok)
+            return
+
+        self.controller.aggiungi_prenotazione(ControllorePrenotazione(self.qlines[0].text(), self.qlines[1].text(),
+                                                                      self.qlines[2].text(), new_data))
         self.close()
 
     def closeEvent(self, event):

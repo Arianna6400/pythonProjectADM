@@ -1,7 +1,7 @@
 from listadipendenti.model.ListaDipendenti import ListaDipendenti
 
 
-class ControlloreListaDipendenti():
+class ControlloreListaDipendenti:
     def __init__(self):
         super(ControlloreListaDipendenti, self).__init__()
         self.model = ListaDipendenti()
@@ -15,8 +15,8 @@ class ControlloreListaDipendenti():
     def get_dipendente_by_index(self, index):
         return self.model.get_dipendente_by_index(index)
 
-    def elimina_dipendente_by_id(self, id):
-        self.model.rimuovi_dipendente_by_id(id)
+    def elimina_dipendente_by_id(self, codice_identificativo):
+        self.model.rimuovi_dipendente_by_id(codice_identificativo)
 
     def save_data(self):
         self.model.save_data()

@@ -15,6 +15,7 @@ class VistaListaMenuAmministratore(QWidget):
 		self.h_layout = QHBoxLayout()
 		self.list_view = QListView()
 		self.listview_model = QStandardItemModel(self.list_view)
+
 		for ProdottoSingolo in self.controller.get_lista_menu():
 			item = QStandardItem()
 			item.setText("{} ".format(ProdottoSingolo.prodotto) + "{}€".format(ProdottoSingolo.prezzo))
@@ -23,6 +24,7 @@ class VistaListaMenuAmministratore(QWidget):
 			font.setPointSize(18)
 			item.setFont(font)
 			self.listview_model.appendRow(item)
+
 		self.list_view.setModel(self.listview_model)
 		self.h_layout.addWidget(self.list_view)
 
@@ -51,14 +53,14 @@ class VistaListaMenuAmministratore(QWidget):
 		self.controller.save_data()
 		event.accept()
 
-	def show_selected_info(self):
+	def show_selected_info(self):  # metodo per visualizzare le informazioni del prodotto selezionato
 		if len(self.list_view.selectedIndexes()) > 0:
 			selected = self.list_view.selectedIndexes()[0].row()
 			prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
 			self.vista_prodotto = VistaProdotto(prodotto_selezionato)
 			self.vista_prodotto.show()
 
-	def delete_selected_info(self):
+	def delete_selected_info(self):  # metodo per rimuove un prodotto dal menu
 		if len(self.list_view.selectedIndexes()) > 0:
 			selected = self.list_view.selectedIndexes()[0].row()
 			prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
@@ -66,11 +68,11 @@ class VistaListaMenuAmministratore(QWidget):
 			self.update_ui()
 			self.h_layout.replaceWidget(self.list_view, self.list_view)
 
-	def add_info(self):
+	def add_info(self):  # metodo per inserire un nuovo prodotto nel menu
 		self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
 		self.vista_inserisci_prodotto.show()
 
-	def update_ui(self):
+	def update_ui(self):  # metodo per aggiornare la lista del menu in caso venga effettuata una modifica
 		self.listview_model = QStandardItemModel(self.list_view)
 		for prodotto in self.controller.get_lista_menu():
 			item = QStandardItem()

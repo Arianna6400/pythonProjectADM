@@ -22,6 +22,7 @@ class VistaListaMenuCliente(QWidget):
         self.h_layout = QHBoxLayout()
         self.list_view = QListView()
         self.listview_model = QStandardItemModel(self.list_view)
+
         for ProdottoSingolo in self.controller.get_lista_menu():
             item = QStandardItem()
             item.setText("{} ".format(ProdottoSingolo.prodotto) + "{}€".format(ProdottoSingolo.prezzo))
@@ -30,6 +31,7 @@ class VistaListaMenuCliente(QWidget):
             font.setPointSize(18)
             item.setFont(font)
             self.listview_model.appendRow(item)
+
         self.list_view.setModel(self.listview_model)
         self.h_layout.addWidget(self.list_view)
 
@@ -76,12 +78,11 @@ class VistaListaMenuCliente(QWidget):
 
     def view_ordinazione(self):
 
-        msg = QMessageBox()
-
         if self.ordinazione.get_ordinazione():
             self.vista_ordinazione = VistaOrdinazione(self.ordinazione)
             self.vista_ordinazione.show()
         else:
+            msg = QMessageBox()
             msg.setText('Ordine vuoto')
             msg.setWindowTitle("Attenzione!")
             msg.exec_()
@@ -90,19 +91,19 @@ class VistaListaMenuCliente(QWidget):
         if len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-            if not self.ordinazione.inserisci_ordinazione(ControlloreProdotto(prodotto_selezionato)):
+            if not self.ordinazione.inserisci_prodotto(ControlloreProdotto(prodotto_selezionato)):
                 msg = QMessageBox()
                 msg.setText('Prodotto non disponibile!')
                 msg.setWindowTitle("Avviso")
                 msg.exec_()
 
     def delete_ordinazione(self):
-        reply = QMessageBox.question(self, 'Quit', 'Vuoi cancelllare l\'ordine?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        reply = QMessageBox.question(self, 'Quit', 'Vuoi cancelllare l\'ordine?', QMessageBox.Yes | QMessageBox.No,
+                                     QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.ordinazione.elimina_ordinazione()
 
     def check_ordinazione(self):
-
         self.ordinazione.conferma_ordinazione()
         msg = QMessageBox()
         msg.setText('Ordine confermato!')

@@ -4,4 +4,5 @@ class Ordinazione:
         super(Ordinazione, self).__init__()
         self.tavolo = tavolo
         self.nome = nome
+        self.orario = 00
         self.ordinazione = {}

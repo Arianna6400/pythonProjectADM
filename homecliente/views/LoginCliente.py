@@ -34,16 +34,23 @@ class LoginCliente(QWidget):
 
     def check(self):
         msg = QMessageBox()
+        tavolo = self.lineEdit_number.text()
 
-        if self.lineEdit_name.text() == "" or self.lineEdit_number.text() == "" :
+        # controllo che il numero del tavolo esista
+        if self.lineEdit_name.text() == "" or tavolo == "":
             msg.setText('Non hai inserito nome e/o numero!')
             msg.setWindowTitle("Attenzione!")
             msg.exec_()
         else:
-            self.run_home_cliente()
-            self.close()
+            if not tavolo.isnumeric() or int(tavolo) > 10:
+                msg.setText('Per favore inserire un numero del tavolo valido')
+                msg.setWindowTitle("Attenzione!")
+                msg.exec_()
+            else:
+                self.run_home_cliente()
+                self.close()
 
     def run_home_cliente(self):
-        self.home_cliente= VistaHomeCliente(self.lineEdit_name.text(), self.lineEdit_number.text())
+        self.home_cliente = VistaHomeCliente(self.lineEdit_name.text(), self.lineEdit_number.text())
         self.home_cliente.show()
         self.close()

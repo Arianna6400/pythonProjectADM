@@ -1,11 +1,9 @@
 import os
 import pickle
+from datetime import datetime
 
-from listamenu.controller.ControlloreListaMenu import ControlloreListaMenu
 from listaordinazione.controller.ControlloreListaOrdinazione import ControlloreListaOrdinazione
-from listaordinazione.model.ListaOrdinazione import ListaOrdinazione
 from magazzino.controller.ControlloreMagazzino import ControlloreMagazzino
-from magazzino.model.Magazzino import Magazzino
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 
 
@@ -21,10 +19,13 @@ class ControlloreOrdinazione:
     def get_tavolo(self):
         return self.model.tavolo
 
+    def get_orario(self):
+        return self.model.orario
+
     def get_ordinazione(self):
         return self.model.ordinazione
 
-    def inserisci_ordinazione(self, prodotto):
+    def inserisci_prodotto(self, prodotto):
         magazzino = ControlloreMagazzino()
         if prodotto.get_isDisponibile() == "Disponibile":
             if prodotto.get_prodotto() in self.model.ordinazione:
@@ -55,13 +56,8 @@ class ControlloreOrdinazione:
         self.model.ordinazione = {}
 
     def conferma_ordinazione(self):
-        lista_ordinazione = ListaOrdinazione()
-        if os.path.isfile('listaordinazione/data/lista_ordinazione.pickle'):
-            with open('listaordinazione/data/lista_ordinazione.pickle', 'rb') as f:
-                lista_ordinazione = pickle.load(f)
+        self.model.orario = datetime.now().strftime("%H:%M:%S")
+        lista_ordinazione = ControlloreListaOrdinazione()
 
         lista_ordinazione.aggiungi_ordinazione(self)
-
-        with open('listaordinazione/data/lista_ordinazione.pickle', 'wb') as handle:
-            pickle.dump(lista_ordinazione, handle, pickle.HIGHEST_PROTOCOL)
-
+        lista_ordinazione.save_data()

@@ -1,4 +1,4 @@
-from PyQt5.QtGui import QStandardItemModel, QStandardItem
+from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView, QVBoxLayout, QPushButton, QMessageBox
 
 from listaordinazione.controller.ControlloreListaOrdinazione import ControlloreListaOrdinazione
@@ -33,7 +33,7 @@ class VistaListaOrdinazione(QWidget):
         self.h_layout.addLayout(buttons_layout)
 
         self.setLayout(self.h_layout)
-        self.resize(600, 300)
+        self.resize(800, 400)
         self.setWindowTitle("Lista Ordinazione")
 
     def closeEvent(self, event):
@@ -51,9 +51,11 @@ class VistaListaOrdinazione(QWidget):
     def delete_ordinazione(self):
         reply = QMessageBox.question(self, 'Quit', 'Vuoi cancellare l\'ordine?', QMessageBox.Yes | QMessageBox.No,
                                      QMessageBox.No)
+
         if reply == QMessageBox.Yes and len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
             self.controller.elimina_ordinazione(selected)
+
         self.update_ui()
 
     def update_ui(self):
@@ -61,10 +63,13 @@ class VistaListaOrdinazione(QWidget):
 
         for ordinazione in self.controller.get_lista_ordinazione():
             item = QStandardItem()
-            item.setText("nome:{} ".format(ordinazione.get_nome()) + "          tavolo:{} ".format(ordinazione.get_tavolo()))
+            fontstd = QFont("DejaVu Sans Mono", 10)
+            fontstd.setFamily('Monospace')
+            fontstd.setFixedPitch(True)
+            item.setFont(fontstd)
+            item.setText("{0:<8} tavolo:{1} nome:{2:>10}".format(ordinazione.get_orario(),
+                                                                 ordinazione.get_tavolo(), ordinazione.get_nome()))
             item.setEditable(False)
-            font = item.font()
-            font.setPointSize(18)
-            item.setFont(font)
             self.listview_model.appendRow(item)
+
         self.list_view.setModel(self.listview_model)

@@ -7,30 +7,34 @@ from prodotto.model.ProdottoSingolo import ProdottoSingolo
 
 class ListaMenu:
 
-	def __init__(self):
-		super(ListaMenu, self).__init__()
-		self.lista_menu = []
-		if os.path.isfile('listamenu/data/lista_menu.pickle'):
-			with open('listamenu/data/lista_menu.pickle', 'rb') as f:
-				self.lista_menu = pickle.load(f)
-		else:
-			with open('listamenu/data/lista_menu_iniziale.json') as f:
-				lista_menu_iniziale = json.load(f)
-			for menu_iniziale in lista_menu_iniziale:
-				self.aggiungi_prodotto(ProdottoSingolo(menu_iniziale["prodotto"], menu_iniziale["prezzo"], menu_iniziale["ingredienti"]))
+    def __init__(self):
+        super(ListaMenu, self).__init__()
+        self.lista_menu = []
 
-	def aggiungi_prodotto(self, prodotto_singolo):
-		self.lista_menu.append(prodotto_singolo)
+        # inizializza il menu leggendo il file contenente i prodotti presenti in caso il file non esista prende un menù
+        # di default contenente solo un prodotto ('acqua')
+        if os.path.isfile('listamenu/data/lista_menu.pickle'):
+            with open('listamenu/data/lista_menu.pickle', 'rb') as f:
+                self.lista_menu = pickle.load(f)
+        else:
+            with open('listamenu/data/lista_menu_iniziale.json') as f:
+                lista_menu_iniziale = json.load(f)
+            for menu_iniziale in lista_menu_iniziale:
+                self.aggiungi_prodotto(ProdottoSingolo(menu_iniziale["prodotto"], menu_iniziale["prezzo"],
+                                                       menu_iniziale["ingredienti"]))
 
-	def elimina_prodotto(self, index):
-		self.lista_menu.remove(index)
+    def aggiungi_prodotto(self, prodotto_singolo):
+        self.lista_menu.append(prodotto_singolo)
 
-	def get_prodotto_by_index(self, index):
-		return self.lista_menu[index]
+    def elimina_prodotto(self, index):
+        self.lista_menu.remove(index)
 
-	def get_lista_menu(self):
-		return self.lista_menu
+    def get_prodotto_by_index(self, index):
+        return self.lista_menu[index]
 
-	def save_data(self):
-		with open('listamenu/data/lista_menu.pickle', 'wb') as handle:
-			pickle.dump(self.lista_menu, handle, pickle.HIGHEST_PROTOCOL)
+    def get_lista_menu(self):
+        return self.lista_menu
+
+    def save_data(self):
+        with open('listamenu/data/lista_menu.pickle', 'wb') as handle:
+            pickle.dump(self.lista_menu, handle, pickle.HIGHEST_PROTOCOL)

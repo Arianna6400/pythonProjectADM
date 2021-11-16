@@ -14,7 +14,7 @@ class VistaListaDipendenti(QWidget):
 
         h_layout = QHBoxLayout()
         self.list_view = QListView()
-        self.update_ui()
+        self.listview_model = QStandardItemModel(self.list_view)
         h_layout.addWidget(self.list_view)
 
         buttons_layout = QVBoxLayout()
@@ -28,22 +28,25 @@ class VistaListaDipendenti(QWidget):
         h_layout.addLayout(buttons_layout)
 
         self.setLayout(h_layout)
-        self.resize(600,300)
+        self.resize(600, 300)
         self.setWindowTitle('Lista Dipendenti')
 
-    def update_ui(self):
+    def update_ui(self):  # metodo per aggiornare la vista in caso venga effettuata una modifica
         self.listview_model = QStandardItemModel(self.list_view)
-        for dipendente in self.controller.get_lista_dipendenti():
+
+        for dipendente in self.controller.get_lista_dipendenti():  # ciclo per inserire tutti i dipendenti presenti
+            # nella lista dipendenti dentro la list view
             item = QStandardItem()
-            item.setText(dipendente.nome + " " + dipendente.cognome)
+            item.setText(dipendente.get_nome_dipendente() + " " + dipendente.get_cognome_dipendente())
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)
             item.setFont(font)
             self.listview_model.appendRow(item)
+
         self.list_view.setModel(self.listview_model)
 
-    def show_selected_info(self):
+    def show_selected_info(self):  # metodo che visualizza le informazioni riguardanti il dipendente selezionato
         if len(self.list_view.selectedIndexes()) > 0:
             selected = self.list_view.selectedIndexes()[0].row()
             dipendente_selezionato = self.controller.get_dipendente_by_index(selected)
@@ -54,5 +57,5 @@ class VistaListaDipendenti(QWidget):
         self.vista_inserisci_dipendente = VistaInserisciDipendente(self.controller, self.update_ui)
         self.vista_inserisci_dipendente.show()
 
-    def closeEvent(self, event):
+    def closeEvent(self, event):  # metodo che viene chiamato alla chiusura della vista
         self.controller.save_data()

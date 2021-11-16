@@ -6,6 +6,7 @@ from homeamministratore.views.VistaHomeAmministratore import VistaHomeAmministra
 class LoginAmministratore(QWidget):
 	def __init__(self):
 		super(LoginAmministratore, self).__init__()
+		self.home_amministratore = VistaHomeAmministratore()
 		self.setWindowTitle('Login Amministratore')
 		self.resize(500, 120)
 
@@ -33,17 +34,13 @@ class LoginAmministratore(QWidget):
 
 		self.setLayout(layout)
 
-	def check_password(self):
+	def check_password(self):  # solo quando i dati inseriti sono corretti viene avviato la vista amministratore
 		msg = QMessageBox()
 
-		if self.lineEdit_username.text() == 'a' and self.lineEdit_password.text() == '666':	# da rimettere l'username corretto
-			self.run_home_amministratore()
+		if self.lineEdit_username.text() == 'a' and self.lineEdit_password.text() == '666':
+			self.home_amministratore.show()
 			self.close()
 		else:
 			msg.setText('Password errata')
 			msg.setWindowTitle("Attenzione!")
 			msg.exec_()
-
-	def run_home_amministratore(self):
-		self.home_amministratore= VistaHomeAmministratore()
-		self.home_amministratore.show()

@@ -28,7 +28,7 @@ class ControlloreListaMenu:
 	def save_data(self):
 		self.model.save_data()
 
-	def update(self):
+	def update(self):  # metodo per aggiornare la disponibilità dei prodotti presenti nel menù
 		for prodotto in self.model.get_lista_menu():
 			if self.check_prodotto_disponibile(ControlloreProdotto(prodotto)):
 				self.change_disponibilita(prodotto, True)
@@ -36,7 +36,8 @@ class ControlloreListaMenu:
 				self.change_disponibilita(prodotto, False)
 
 	@staticmethod
-	def check_prodotto_disponibile(prodotto):
+	def check_prodotto_disponibile(prodotto):  # metodo per controllare la disponibilità di un prodotto in base agli
+		# ingredienti presenti in magazzino
 		magazzino = ControlloreMagazzino()
 		for ingrediente, qt in prodotto.get_ingredienti().items():
 			if magazzino.get_qt(ingrediente) <= float(qt):

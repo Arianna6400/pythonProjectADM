@@ -34,14 +34,17 @@ class ControlloreMagazzino:
         return self.model.magazzino[ingrediente]
 
     def sort(self):
+
         sorted_dict = {}
-        keys = sorted(self.model.magazzino.keys(), key=lambda x: x.lower())
+        keys = sorted(self.model.magazzino.keys(), key=lambda x: x.lower())  # sort in ordine alfabetico e prende
+        # tulle le keys con la lettera minuscola
 
         for i in keys:
             values = self.model.magazzino[i]
             sorted_dict[i] = float(values)
 
         self.model.magazzino = sorted_dict
+
 
     def save_data(self):
         with open('magazzino/data/magazzino.pickle', 'wb') as handle:

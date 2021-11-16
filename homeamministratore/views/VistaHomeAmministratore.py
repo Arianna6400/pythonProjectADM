@@ -9,47 +9,32 @@ from magazzino.views.VistaMagazzino import VistaMagazzino
 
 class VistaHomeAmministratore(QWidget):
 
-    def __init__(self):
+    def __init__(self):  # all'inzio viene generata una griglia con le possibili scelte dell'amministratore
 
         super(VistaHomeAmministratore, self).__init__()
+
+        self.vista_dipendenti = VistaListaDipendenti()
+        self.vista_magazzino = VistaMagazzino()
+        self.vista_ordinazione = VistaListaOrdinazione()
+        self.vista_menu = VistaListaMenuAmministratore()
+        self.vista_prenotazioni = VistaListaPrenotazioni()
+
         grid_layout = QGridLayout()
 
-        grid_layout.addWidget(self.get_generic_button("Lista Prenotazioni", self.go_vista_prenotazioni), 0, 0)
-        grid_layout.addWidget(self.get_generic_button("Menu", self.go_vista_menu), 0, 1)
-        grid_layout.addWidget(self.get_generic_button("Magazzino", self.go_vista_magazzino), 1, 0)
-        grid_layout.addWidget(self.get_generic_button("Lista Dipendenti", self.go_vista_dipendenti), 1, 1)
-        grid_layout.addWidget(self.get_generic_button("Lista Ordinazioni", self.go_vista_ordinazione), 2, 0)
-        grid_layout.addWidget(self.get_generic_button("Quit", self.go_close), 2, 1)
+        grid_layout.addWidget(self.get_generic_button("Lista Prenotazioni", lambda: self.vista_prenotazioni.show()), 0, 0)
+        grid_layout.addWidget(self.get_generic_button("Menu", lambda: self.vista_menu.show()), 0, 1)
+        grid_layout.addWidget(self.get_generic_button("Magazzino", lambda: self.vista_magazzino.show()), 1, 0)
+        grid_layout.addWidget(self.get_generic_button("Lista Dipendenti", lambda: self.vista_dipendenti.show()), 1, 1)
+        grid_layout.addWidget(self.get_generic_button("Lista Ordinazioni", lambda: self.vista_ordinazione.show()), 2, 0)
+        grid_layout.addWidget(self.get_generic_button("Quit", lambda: self.close()), 2, 1)
 
         self.setLayout(grid_layout)
         self.resize(400, 300)
         self.setWindowTitle("Vista Amministratore")
 
-    def get_generic_button(self, titolo, on_click):
+    @staticmethod
+    def get_generic_button(titolo, on_click):  # metodo per generare i bottoni che visualizzeranno le rispettive viste
         button = QPushButton(titolo)
         button.setSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
         button.clicked.connect(on_click)
         return button
-
-    def go_vista_prenotazioni(self):
-        self.vista_prenotazioni = VistaListaPrenotazioni()
-        self.vista_prenotazioni.show()
-
-    def go_vista_menu(self):
-        self.vista_menu = VistaListaMenuAmministratore()
-        self.vista_menu.show()
-
-    def go_vista_ordinazione(self):
-        self.vista_ordinazione = VistaListaOrdinazione()
-        self.vista_ordinazione.show()
-
-    def go_vista_magazzino(self):
-        self.vista_magazzino = VistaMagazzino()
-        self.vista_magazzino.show()
-
-    def go_vista_dipendenti(self):
-        self.vista_dipendenti = VistaListaDipendenti()
-        self.vista_dipendenti.show()
-
-    def go_close(self):
-        self.close()

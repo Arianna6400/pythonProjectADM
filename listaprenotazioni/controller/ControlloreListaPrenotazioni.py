@@ -1,6 +1,7 @@
 import os
 import pickle
 
+from datetime import datetime
 from listaprenotazioni.model.ListaPrenotazioni import ListaPrenotazioni
 
 
@@ -9,6 +10,7 @@ class ControlloreListaPrenotazioni:
     def __init__(self):
         super(ControlloreListaPrenotazioni, self).__init__()
         self.model = ListaPrenotazioni()
+
         if os.path.isfile('listaprenotazioni/data/listaprenotazioni.pickle'):
             with open('listaprenotazioni/data/listaprenotazioni.pickle', 'rb') as f:
                 self.model = pickle.load(f)
@@ -20,14 +22,16 @@ class ControlloreListaPrenotazioni:
         for i in range(len(self.model.lista_prenotazioni)):
             if i == len(self.model.lista_prenotazioni) + 1:
                 break
-            if prenotazione.telefono == self.model.lista_prenotazioni[i].telefono:
+
+            if prenotazione.get_telefono() == self.model.lista_prenotazioni[i].get_telefono():
                 del self.model.lista_prenotazioni[i]
+
         self.save_data()
 
     def get_prenotazioni_by_data(self, data):
         lista = []
         for i in range(len(self.model.lista_prenotazioni)):
-            if data.date() == self.model.lista_prenotazioni[i].data.date():
+            if data.date() == self.model.lista_prenotazioni[i].get_data().date():
                 lista.append(self.model.lista_prenotazioni[i])
         return lista
 
@@ -35,6 +39,12 @@ class ControlloreListaPrenotazioni:
         return self.model.lista_prenotazioni
 
     def save_data(self):
+        date = datetime.now()
+
+        for prenotazione in self.model.lista_prenotazioni:  # cancella in modo automatico le prenotazioni passate
+            if date > prenotazione.get_data():
+                self.model.lista_prenotazioni.remove(prenotazione)
+
         with open('listaprenotazioni/data/listaprenotazioni.pickle', 'wb') as handle:
             pickle.dump(self.model, handle, pickle.HIGHEST_PROTOCOL)
 

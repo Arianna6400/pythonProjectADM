@@ -50,7 +50,7 @@ class VistaMagazzino(QWidget):
         self.h_layout.addLayout(buttons_layout)
 
         self.setLayout(self.h_layout)
-        self.resize(1200, 400)
+        self.resize(1500, 700)
         self.setWindowTitle("Magazzino")
 
     def closeEvent(self, event):
@@ -58,12 +58,12 @@ class VistaMagazzino(QWidget):
         event.accept()
 
     def add_ingrediente(self):
-        if not self.ingrediente.text() == "" or self.quantita.text() == "":
+        if not self.ingrediente.text() == "" or not self.quantita.text() == "":
             self.controller.add_ingrediente(self.ingrediente.text(), float(self.quantita.text()))
             self.update_ui()
 
     def edit_ingrediente(self):
-        if not self.ingrediente.text() == "" or self.quantita.text() == "":
+        if not self.ingrediente.text() == "" or not self.quantita.text() == "":
             self.controller.edit_ingrediente(self.ingrediente.text(), float(self.quantita.text()))
             self.update_ui()
 
