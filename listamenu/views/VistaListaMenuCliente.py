@@ -209,7 +209,7 @@ class VistaListaMenuCliente(QWidget):
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
-            if not self.ordinazione.inserisci_ordinazione(ControlloreProdotto(prodotto_selezionato)):
+            if not self.ordinazione.inserisci_prodotto(ControlloreProdotto(prodotto_selezionato)):
                 msg = QMessageBox()
                 msg.setWindowTitle("Attenzione!")
                 msg.setText('Prodotto non disponibile!')

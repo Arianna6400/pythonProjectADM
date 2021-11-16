@@ -12,7 +12,7 @@ class VistaProdotto(QWidget):
         self.controller = ControlloreProdotto(prodotto)
 
         self.setWindowTitle('Vista Prodotto')
-        self.resize(600, 600)
+        self.resize(600, 700)
         self.setStyleSheet("background-color: rgb(235, 255, 219);")
 
         icon = QtGui.QIcon()
@@ -21,7 +21,7 @@ class VistaProdotto(QWidget):
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self)
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(10, 10, 581, 581))
+        self.verticalLayoutWidget.setGeometry(QRect(10, 10, 581, 681))
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
