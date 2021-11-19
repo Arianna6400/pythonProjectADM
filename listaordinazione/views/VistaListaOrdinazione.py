@@ -141,3 +141,6 @@ class VistaListaOrdinazione(QWidget):
             item.setFont(font)
             self.listview_model.appendRow(item)
         self.listView.setModel(self.listview_model)
+
+    def closeEvent(self, event):
+        self.controller.save_data()

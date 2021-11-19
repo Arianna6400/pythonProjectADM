@@ -167,3 +167,6 @@ class VistaListaPrenotazioni(QWidget):
             datetime(self.data_selezionata.year(), self.data_selezionata.month(), self.data_selezionata.day()))[
             selected]
         self.controller.elimina_prenotazione(prenotazione_da_eliminare)
+
+    def closeEvent(self, event):
+        self.controller.save_data()
