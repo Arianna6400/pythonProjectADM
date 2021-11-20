@@ -44,7 +44,7 @@ class VistaMagazzino(QWidget):
 
         self.listView = QListView(self.verticalLayoutWidget)
         self.listView.setObjectName("listView")
-        self.listView.setStyleSheet("background-color: rgb(235, 255, 219);")
+        self.listView.setStyleSheet("background-color: rgb(197, 255, 134);")
         self.update_ui()
         self.verticalLayout.addWidget(self.listView)
 
