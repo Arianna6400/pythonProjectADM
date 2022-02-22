@@ -28,8 +28,8 @@ class VistaInserisciDipendente(QWidget):
         self.add_info_text("nome", '<font face="Eras Demi ITC"> <font size="10"> Nome: </font>')
         self.add_info_text("cognome", '<font face="Eras Demi ITC"> <font size="10"> Cognome: </font>')
         self.add_info_text("cf", '<font face="Eras Demi ITC"> <font size="10"> Codice fiscale: </font>')
-        self.add_info_text("datan", '<font face="Eras Demi ITC"> <font size="10"> Data di nascita(dd/mm/yyyy): </font>')
-        self.add_info_text("luogon", '<font face="Eras Demi ITC"> <font size="10"> Luogo di nascita: </font>')
+        self.add_info_text("data", '<font face="Eras Demi ITC"> <font size="10"> Data di nascita(dd/mm/yyyy): </font>')
+        self.add_info_text("luogo", '<font face="Eras Demi ITC"> <font size="10"> Luogo di nascita: </font>')
         self.add_info_text("telefono", '<font face="Eras Demi ITC"> <font size="10"> Telefono: </font>')
         self.add_info_text("ruolo", '<font face="Eras Demi ITC"> <font size="10"> Ruolo: </font>')
 
@@ -82,11 +82,11 @@ class VistaInserisciDipendente(QWidget):
                 msg.exec_()
                 return
         self.controller.aggiungi_dipendente(Dipendente(
-            (self.qlines["nome"].text()+self.qlines["cognome"].text()).lower(),
+            (self.qlines["nome"].text() + self.qlines["cognome"].text()).lower(),
             self.qlines["nome"].text(),
             self.qlines["cognome"].text(),
-            self.qlines["datan"].text(),
-            self.qlines["luogon"].text(),
+            self.qlines["data"].text(),
+            self.qlines["luogo"].text(),
             self.qlines["cf"].text(),
             self.qlines["telefono"].text(),
             self.qlines["ruolo"].text())

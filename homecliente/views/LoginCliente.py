@@ -42,11 +42,10 @@ class LoginCliente(QWidget):
         self.setLayout(layout)
 
     def check(self):
-        if self.lineEdit_name.text() == "" or self.lineEdit_number.text() == "" :
+        if (self.lineEdit_name.text() == "" or self.lineEdit_name.text().isdigit()) or (self.lineEdit_number.text() == "" or self.lineEdit_number.text().isalpha()):
             msg = QMessageBox()
             msg.setWindowTitle("Attenzione!")
-            msg.setText(
-                "Non hai inserito nome e/o numero!")
+            msg.setText("Non hai inserito nome e/o numero correttamente!")
             icon = QtGui.QIcon()
             icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
             msg.setWindowIcon(icon)
@@ -59,6 +58,6 @@ class LoginCliente(QWidget):
             self.close()
 
     def run_home_cliente(self):
-        self.home_cliente= VistaHomeCliente(self.lineEdit_name.text(), self.lineEdit_number.text())
+        self.home_cliente = VistaHomeCliente(self.lineEdit_name.text(), self.lineEdit_number.text())
         self.home_cliente.showMaximized()
         self.close()
