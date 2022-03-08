@@ -143,8 +143,7 @@ class VistaListaPrenotazioni(QWidget):
         item.setFont(font)
         self.listview_model.appendRow(item)
 
-        for prenotazione in self.controller.get_prenotazioni_by_data(
-                datetime(qDate.year(), qDate.month(), qDate.day())):
+        for prenotazione in self.controller.get_prenotazioni_by_data(datetime(qDate.year(), qDate.month(), qDate.day())):
             item = QStandardItem()
             item.setFont(QFont('Eras Demi ITC'))
             item.setText(
