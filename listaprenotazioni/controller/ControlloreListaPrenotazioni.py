@@ -17,6 +17,7 @@ class ControlloreListaPrenotazioni:
 
     def aggiungi_prenotazione(self, prenotazione):
         self.model.lista_prenotazioni.append(prenotazione)
+        self.save_data()
 
     def elimina_prenotazione(self, prenotazione):
         for i in range(len(self.model.lista_prenotazioni)):
@@ -42,7 +43,7 @@ class ControlloreListaPrenotazioni:
         date = datetime.now()
 
         for prenotazione in self.model.lista_prenotazioni:  # cancella in modo automatico le prenotazioni passate
-            if date > prenotazione.get_data():
+            if date > prenotazione.data:
                 self.model.lista_prenotazioni.remove(prenotazione)
 
         with open('listaprenotazioni/data/listaprenotazioni.pickle', 'wb') as handle:

@@ -143,7 +143,7 @@ class VistaMagazzino(QWidget):
         self.label.setText(QCoreApplication.translate("VistaMagazzino",
                                                           "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Visualizza le scorte:</span></p></body></html>"))
 
-        self.label_ingrediente.setText(QCoreApplication.translate("VistaMagazzino","Ingrediente"))
+        self.label_ingrediente.setText(QCoreApplication.translate("VistaMagazzino", "Ingrediente"))
         self.label_quantita.setText(QCoreApplication.translate("VistaMagazzino", "Quantità"))
 
         self.pushButton_add.setText(QCoreApplication.translate("VistaMagazzino", "Aggiungi ingrediente"))
@@ -177,7 +177,7 @@ class VistaMagazzino(QWidget):
         for ingrediente, qt in self.controller.get_magazzino().items():
             item = QStandardItem()
             item.setFont(QFont('Eras Demi ITC'))
-            item.setText("Ingrediente:{0:<20}{1:>20} ".format(ingrediente, qt))
+            item.setText("Ingrediente:{0:<20}\t\t{1} ".format(ingrediente, qt))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(16)
