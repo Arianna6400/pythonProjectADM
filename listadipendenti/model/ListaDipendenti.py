@@ -2,7 +2,7 @@ import os
 import pickle
 
 
-class ListaDipendenti:
+class ListaDipendenti():
     def __init__(self):
         super(ListaDipendenti, self).__init__()
         self.lista_dipendenti = []
@@ -14,9 +14,9 @@ class ListaDipendenti:
     def aggiungi_dipendente(self, dipendente):  # metodo per aggiungere un dipendente alla lista
         self.lista_dipendenti.append(dipendente)
 
-    def rimuovi_dipendente_by_id(self, codice_identificativo):  # metodo per rimuovere un dipendente dato il suo id
+    def rimuovi_dipendente_by_id(self, id):  # metodo per rimuovere un dipendente dato il suo id
         def is_selected_dipendente(dipendente):
-            if dipendente.get_id_dipendente() == codice_identificativo:
+            if dipendente.id == id:
                 return True
             return False
         self.lista_dipendenti.remove(list(filter(is_selected_dipendente, self.lista_dipendenti))[0])

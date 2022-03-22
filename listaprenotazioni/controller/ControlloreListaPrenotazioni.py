@@ -24,7 +24,7 @@ class ControlloreListaPrenotazioni:
             if i == len(self.model.lista_prenotazioni) + 1:
                 break
 
-            if prenotazione.get_telefono() == self.model.lista_prenotazioni[i].get_telefono():
+            if prenotazione.telefono == self.model.lista_prenotazioni[i].telefono:
                 del self.model.lista_prenotazioni[i]
 
         self.save_data()

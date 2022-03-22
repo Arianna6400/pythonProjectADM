@@ -160,7 +160,7 @@ class VistaListaPrenotazioni(QWidget):
         self.vista_aggiungi_prenotazione.show()
 
     def elimina_prenotazione(self):
-        selected = self.listView.selectedIndexes()[0].row() - 1
+        selected = self.listView.selectedIndexes()[0].row() -1
         prenotazione_da_eliminare = self.controller.get_prenotazioni_by_data(
             datetime(self.data_selezionata.year(), self.data_selezionata.month(), self.data_selezionata.day()))[
             selected]
