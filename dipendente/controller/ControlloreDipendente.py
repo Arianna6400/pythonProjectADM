@@ -1,30 +1,27 @@
-from dipendente.model.Dipendente import Dipendente
-
-
-class ControlloreDipendente:
-    def __init__(self, codice_identificativo, nome, cognome, data_nascita, luogo_nascita, cf, telefono, ruolo):
-        self.model = Dipendente(codice_identificativo, nome, cognome, data_nascita, luogo_nascita, cf, telefono, ruolo)
+class ControlloreDipendente():
+    def __init__(self, dipendente):
+        self.model = dipendente
 
     def get_id_dipendente(self):
-        return self.model.get_id_dipendente()
+        return self.model.id
 
     def get_nome_dipendente(self):
-        return self.model.get_nome_dipendente()
+        return self.model.nome
 
     def get_cognome_dipendente(self):
-        return self.model.get_cognome_dipendente()
+        return self.model.cognome
 
     def get_cf_dipendente(self):
-        return self.model.get_cf_dipendente()
+        return self.model.cf
 
     def get_data_nascita_dipendente(self):
-        return self.model.get_data_nascita_dipendente()
+        return self.model.data_nascita
 
     def get_luogo_nascita_dipendente(self):
-        return self.model.get_luogo_nascita_dipendente()
+        return self.model.luogo_nascita
 
     def get_telefono_dipendente(self):
-        return self.model.get_telefono_dipendente()
+        return self.model.telefono
 
     def get_ruolo_dipendente(self):
-        return self.model.get_ruolo_dipendente()
+        return self.model.ruolo

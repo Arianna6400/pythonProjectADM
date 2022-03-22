@@ -31,7 +31,7 @@ class ControlloreListaPrenotazioni:
     def get_prenotazioni_by_data(self, data):
         lista = []
         for i in range(len(self.model.lista_prenotazioni)):
-            if data.date() == self.model.lista_prenotazioni[i].get_data().date():
+            if data.date() == self.model.lista_prenotazioni[i].data.date():
                 lista.append(self.model.lista_prenotazioni[i])
         return lista
 

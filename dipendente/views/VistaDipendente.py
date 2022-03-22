@@ -35,6 +35,8 @@ class VistaDipendente(QWidget):
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Minimum)
         self.verticalLayout.addItem(self.verticalSpacer)
 
+        self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Nome: {}</span></p></body></html>".format(self.controller.get_nome_dipendente())))
+        self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Cognome: {}</span></p></body></html>".format(self.controller.get_cognome_dipendente())))
         self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Codice Fiscale: {}</span></p></body></html>".format(self.controller.get_cf_dipendente())))
         self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Data Nascita: {}</span></p></body></html>".format(self.controller.get_data_nascita_dipendente())))
         self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:14pt; font-style:italic;\">Luogo Nascita: {}</span></p></body></html>".format(self.controller.get_luogo_nascita_dipendente())))
