@@ -12,6 +12,7 @@ class ControlloreListaMenu:
 		return self.model.get_lista_menu()
 
 	def get_prodotto_by_index(self, index):
+		self.update()
 		return self.model.get_prodotto_by_index(index)
 
 	def elimina_prodotto(self, index):
