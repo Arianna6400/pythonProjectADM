@@ -18,6 +18,7 @@ class VistaInserisciProdotto(QWidget):
         self.temp = ""
         self.key = []
         self.qlines = {}
+        self.alimenti = {}
 
         self.setWindowTitle('Aggiungi Nuovo Prodotto')
         self.resize(600, 700)

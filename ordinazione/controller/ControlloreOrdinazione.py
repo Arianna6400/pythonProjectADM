@@ -12,6 +12,7 @@ class ControlloreOrdinazione:
     def __init__(self, ordinazione, menu):
         self.model = ordinazione
         self.menu = menu
+        self.menu.update()
 
     def get_nome(self):
         return self.model.nome

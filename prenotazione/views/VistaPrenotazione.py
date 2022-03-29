@@ -109,7 +109,7 @@ class VistaPrenotazione(QWidget):
             msg.exec_()
             return
         data = datetime.strptime(self.qlines[3].text(), '%d/%m/%Y')
-        new_data = data + timedelta(hours=int(self.qlines[4].text()))
+        new_data = data + timedelta(hours=float(self.qlines[4].text()))
         self.controller.aggiungi_prenotazione(Prenotazione(self.qlines[0].text(), self.qlines[1].text(), self.qlines[2].text(), new_data))
         self.close()
 

@@ -19,6 +19,7 @@ class ListaDipendenti():
             if dipendente.id == id:
                 return True
             return False
+
         self.lista_dipendenti.remove(list(filter(is_selected_dipendente, self.lista_dipendenti))[0])
 
     def get_dipendente_by_index(self, index):  # metodo che ritorna un dipendente dato l'indice
