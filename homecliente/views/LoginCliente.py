@@ -42,7 +42,7 @@ class LoginCliente(QWidget):
         self.setLayout(layout)
 
     def check(self):
-        if (self.lineEdit_name.text() == "" or self.lineEdit_name.text().isdigit()) or (self.lineEdit_number.text() == "" or self.lineEdit_number.text().isalpha()) or (int(self.lineEdit_number.text()) > 30):
+        if (self.lineEdit_name.text() == "" or self.lineEdit_name.text().isdigit()) or (self.lineEdit_number.text() == "" or self.lineEdit_number.text().isalpha()) or (int(self.lineEdit_number.text()) > 30) or (int(self.lineEdit_number.text()) < 1):
             msg = QMessageBox()
             msg.setWindowTitle("Attenzione!")
             msg.setText("Potresti non avere inserito nome e/o numero correttamente!\n""Numero massimo di tavoli: 30")
