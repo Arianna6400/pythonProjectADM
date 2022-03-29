@@ -248,7 +248,7 @@ class VistaListaMenuCliente(QWidget):
             msg.exec_()
 
     def check_ordinazione(self):
-        if len(self.ordinazione.conferma_ordinazione()) == 0:
+        if len(self.ordinazione.get_ordinazione()) == 0:
             msg = QMessageBox()
             msg.setText('Ordine vuoto')
             msg.setWindowTitle("Attenzione!")
