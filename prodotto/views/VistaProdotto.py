@@ -1,6 +1,6 @@
 from PyQt5 import QtGui, QtWidgets, QtCore
-from PyQt5.QtCore import QRect, QCoreApplication
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy
+from PyQt5.QtCore import QCoreApplication, Qt, QSize, QRect
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QScrollBar
 
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 
@@ -25,6 +25,7 @@ class VistaProdotto(QWidget):
         self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
+        self.verticalLayout.setGeometry(QRect(10, 10, 581, 681))
         self.label_name = QLabel(self.verticalLayoutWidget)
         self.label_name.setObjectName("label_name")
         self.label_name.setStyleSheet("font: 24pt \"Eras Demi ITC\";")
@@ -41,6 +42,13 @@ class VistaProdotto(QWidget):
             self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-style:italic;\">{}</span></p></body></html>".format(a)+
                                                         "<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-style:italic;\">({})</span></p></body></html>".format(self.controller.get_ingredienti()[a])))
         self.verticalLayout.addWidget(self.get_info("<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-style:italic;\">\n{} </span></p></body></html>".format(self.controller.get_isDisponibile())))
+
+        self.scrollbar = QtWidgets.QScrollArea(self)
+        self.scrollbar.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        self.scrollbar.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.scrollbar.setGeometry(QRect(10, 10, 581, 681))
+        self.scrollbar.setWidgetResizable(True)
+        self.scrollbar.setWidget(self.verticalLayoutWidget)
 
         self.retranslateUi()
 
