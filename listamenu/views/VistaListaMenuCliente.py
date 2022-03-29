@@ -248,19 +248,31 @@ class VistaListaMenuCliente(QWidget):
             msg.exec_()
 
     def check_ordinazione(self):
-
-        self.ordinazione.conferma_ordinazione()
-        msg = QMessageBox()
-        msg.setText('Ordine confermato!')
-        msg.setWindowTitle("Avviso")
-        icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal,
-                       QtGui.QIcon.On)
-        msg.setWindowIcon(icon)
-        msg.setIcon(QMessageBox.Warning)
-        msg.setStandardButtons(QMessageBox.Ok)
-        msg.setDefaultButton(QMessageBox.Ok)
-        msg.exec_()
-        self.close()
+        if len(self.ordinazione.conferma_ordinazione()) == 0:
+            msg = QMessageBox()
+            msg.setText('Ordine vuoto')
+            msg.setWindowTitle("Attenzione!")
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal,
+                           QtGui.QIcon.On)
+            msg.setWindowIcon(icon)
+            msg.setIcon(QMessageBox.Warning)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setDefaultButton(QMessageBox.Ok)
+            msg.exec_()
+        else:
+            self.ordinazione.conferma_ordinazione()
+            msg = QMessageBox()
+            msg.setText('Ordine confermato!')
+            msg.setWindowTitle("Avviso")
+            icon = QtGui.QIcon()
+            icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal,
+                           QtGui.QIcon.On)
+            msg.setWindowIcon(icon)
+            msg.setIcon(QMessageBox.Warning)
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.setDefaultButton(QMessageBox.Ok)
+            msg.exec_()
+            self.close()
 
 

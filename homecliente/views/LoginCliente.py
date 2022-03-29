@@ -42,10 +42,10 @@ class LoginCliente(QWidget):
         self.setLayout(layout)
 
     def check(self):
-        if (self.lineEdit_name.text() == "" or self.lineEdit_name.text().isdigit()) or (self.lineEdit_number.text() == "" or self.lineEdit_number.text().isalpha()):
+        if (self.lineEdit_name.text() == "" or self.lineEdit_name.text().isdigit()) or (self.lineEdit_number.text() == "" or self.lineEdit_number.text().isalpha()) or (self.lineEdit_number.text() > "30"):
             msg = QMessageBox()
             msg.setWindowTitle("Attenzione!")
-            msg.setText("Non hai inserito nome e/o numero correttamente!")
+            msg.setText("Potresti non avere inserito nome e/o numero correttamente!\n""Numero massimo di tavoli: 30")
             icon = QtGui.QIcon()
             icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
             msg.setWindowIcon(icon)
