@@ -143,11 +143,13 @@ class VistaListaPrenotazioni(QWidget):
         item.setFont(font)
         self.listview_model.appendRow(item)
 
-        for prenotazione in self.controller.get_prenotazioni_by_data(datetime(qDate.year(), qDate.month(), qDate.day())):
+        for prenotazione in self.controller.get_prenotazioni_by_data(
+                datetime(qDate.year(), qDate.month(), qDate.day())):
             item = QStandardItem()
             item.setFont(QFont('Eras Demi ITC'))
             item.setText(
-                "{0:<15}\t{1:<14}\t{2:<12}\t{3}".format(prenotazione.nome, prenotazione.telefono, prenotazione.num_persone, prenotazione.data.hour))
+                "{0:<15}\t{1:<14}\t{2:<12}\t{3}".format(prenotazione.nome, prenotazione.telefono,
+                                                        prenotazione.num_persone, prenotazione.data.hour))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(16)
@@ -160,7 +162,7 @@ class VistaListaPrenotazioni(QWidget):
         self.vista_aggiungi_prenotazione.show()
 
     def elimina_prenotazione(self):
-        selected = self.listView.selectedIndexes()[0].row() -1
+        selected = self.listView.selectedIndexes()[0].row() - 1
         prenotazione_da_eliminare = self.controller.get_prenotazioni_by_data(
             datetime(self.data_selezionata.year(), self.data_selezionata.month(), self.data_selezionata.day()))[
             selected]

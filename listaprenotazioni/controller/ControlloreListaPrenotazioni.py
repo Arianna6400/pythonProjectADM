@@ -21,7 +21,7 @@ class ControlloreListaPrenotazioni:
 
     def elimina_prenotazione(self, prenotazione):
         for i in range(len(self.model.lista_prenotazioni)):
-            if i == len(self.model.lista_prenotazioni) + 1:
+            if i == len(self.model.lista_prenotazioni):
                 break
 
             if prenotazione.telefono == self.model.lista_prenotazioni[i].telefono:
