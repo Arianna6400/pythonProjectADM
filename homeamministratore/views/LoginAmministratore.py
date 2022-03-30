@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton
 
 from homeamministratore.views.VistaHomeAmministratore import VistaHomeAmministratore
 
+#Classe che definisce la schermata di Login per l'interfaccia dell'Amministratore
 
 class LoginAmministratore(QWidget):
     def __init__(self):
@@ -18,12 +19,16 @@ class LoginAmministratore(QWidget):
 
         layout = QGridLayout()
 
+        #Label che contiene la linea di scrittura per l'Username
+
         label_name = QLabel('<font size="5"> Username </font>')
         self.lineEdit_username = QLineEdit()
         self.lineEdit_username.setPlaceholderText('Please enter your username')
         self.lineEdit_username.returnPressed.connect(self.check_password)
         layout.addWidget(label_name, 0, 0)
         layout.addWidget(self.lineEdit_username, 0, 1)
+
+        # Label che contiene la linea di scrittura per la Password
 
         label_password = QLabel('<font size="5"> Password </font>')
         self.lineEdit_password = QLineEdit()
@@ -32,6 +37,8 @@ class LoginAmministratore(QWidget):
         self.lineEdit_password.returnPressed.connect(self.check_password)
         layout.addWidget(label_password, 1, 0)
         layout.addWidget(self.lineEdit_password, 1, 1)
+
+        #Pulsante che, una volta controllata la funzione di check della password, permette di accedere alla vista successiva
 
         self.button_login = QPushButton('Login')
         self.button_login.setStyleSheet("background-color: rgb(197, 255, 134);\n")
@@ -42,9 +49,9 @@ class LoginAmministratore(QWidget):
 
         self.setLayout(layout)
 
-    def check_password(self):
+    def check_password(self): #Funzione di controllo dell'inserimento delle credenziali corrette
 
-        if self.lineEdit_username.text() == 'Admin' and self.lineEdit_password.text() == '666':  # da rimettere l'username corretto
+        if self.lineEdit_username.text() == 'Admin' and self.lineEdit_password.text() == '666':
             self.run_home_amministratore()
             self.close()
         else:
@@ -60,6 +67,6 @@ class LoginAmministratore(QWidget):
             msg.setDefaultButton(QMessageBox.Ok)
             msg.exec_()
 
-    def run_home_amministratore(self):
+    def run_home_amministratore(self): #Funzione che permette di accedere alla Vista Amministratore una volta effettuato correttamente il Login
         self.home_amministratore = VistaHomeAmministratore()
         self.home_amministratore.showMaximized()

@@ -10,11 +10,13 @@ import time
 from homeamministratore.views.LoginAmministratore import LoginAmministratore
 from homecliente.views.LoginCliente import LoginCliente
 
-
+#Questa classe definisce la vista Home iniziale del software che compare all'accensione
 
 class VistaHome(QWidget):
     def __init__(self):
         super(VistaHome, self).__init__()
+
+        #Definizione della parte statica, che comprende il font e la dimensione della finestra
 
         font = QtGui.QFont()
         font.setPointSize(25)
@@ -23,10 +25,15 @@ class VistaHome(QWidget):
         self.width = self.screenRect.width()
         self.height = self.screenRect.height()
 
+        #Icona che parte all'accensione dell'applicazione
+
         avvio_icon = QSplashScreen()
         avvio_icon.setPixmap(QPixmap('listamenu/data/images/logo_donegal.png'))
         avvio_icon.show()
         time.sleep(2)
+
+        #Costruzione del Widget centrale con QtDesigner
+
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("Home")
         self.centralwidget.setGeometry(QRect(130,0, 1600, 1000))
@@ -34,15 +41,32 @@ class VistaHome(QWidget):
                                          "border-style: outset;\n"
                                          "border-width: 4px;\n"
                                          "border-color: black;\n")
+
+        #Inserimento dello sfondo in background della vista
+
+        self.image = QtWidgets.QLabel(self)
+        pixmap = QtGui.QPixmap('listamenu/data/images/pub.jpeg')
+        self.image.setPixmap(pixmap)
+        self.image.show()
+        self.image.setGeometry(QRect(130,0, 1600, 1000))
+
+        #Icona della finestra (uguale in ogni altra vista)
+
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.setWindowIcon(icon)
+
+        #Costruzione della griglia principale che contiene i pulsanti
+
         self.gridLayoutWidget = QtWidgets.QWidget(self)
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayoutWidget.setGeometry(QRect(300, 300, 1200, 800))
-        self.horizontalLayout = QHBoxLayout(self.gridLayoutWidget)
+        self.horizontalLayout = QHBoxLayout(self.gridLayoutWidget) #Definisce il layout della griglia
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+
+        #Costruzione dei pulsanti che avviano le schermate di login per le rispettive interfacce
+
         self.pushButton_amministratore = QPushButton(self.gridLayoutWidget)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -53,10 +77,13 @@ class VistaHome(QWidget):
         self.pushButton_amministratore.setMinimumHeight(self.height / 5)
         self.pushButton_amministratore.setMaximumHeight(self.height / 5)
         self.pushButton_amministratore.setObjectName("pushButton_amministratore")
-        self.pushButton_amministratore.setStyleSheet(" border-radius:22px;\n"
-                                                     " background-color: rgb(197, 255, 134);\n"
-                                                     " color:black;\n"
-                                                     " border-style: outset;\n"
+        self.pushButton_amministratore.setStyleSheet("border:2px solid;\n"
+                                                     "max-height:48px;\n"
+                                                     "border-top-right-radius:20px;\n"
+                                                     "border-bottom-left-radius:20px;\n"
+                                                     "background-color: rgb(242, 242, 242);\n"
+                                                     "color:black;\n"
+                                                     "border-style: outset;\n"
                                                      "border-width: 4px;\n"
                                                      "border-color: black;\n"
                                                      "font: 18pt \\\"Eras Demi ITC\\\";")
@@ -77,15 +104,19 @@ class VistaHome(QWidget):
         self.pushButton_cliente.setMinimumHeight(self.height / 5)
         self.pushButton_cliente.setMaximumHeight(self.height / 5)
         self.pushButton_cliente.setObjectName("pushButton_cliente")
-        self.pushButton_cliente.setStyleSheet(" border-radius:22px;\n"
-                                              " background-color: rgb(197, 255, 134);\n"
-                                              " color:black;\n"
-                                              " border-style: outset;\n"
-                                              "border-width: 4px;\n"
-                                              "border-color: black;\n"
-                                              "font: 18pt \\\"Eras Demi ITC\\\";")
-
+        self.pushButton_cliente.setStyleSheet("border:2px solid;\n"
+                                                     "max-height:48px;\n"
+                                                     "border-top-right-radius:20px;\n"
+                                                     "border-bottom-left-radius:20px;\n"
+                                                     "background-color: rgb(242, 242, 242);\n"
+                                                     "color:black;\n"
+                                                     "border-style: outset;\n"
+                                                     "border-width: 4px;\n"
+                                                     "border-color: black;\n"
+                                                     "font: 18pt \\\"Eras Demi ITC\\\";")
         self.horizontalLayout.addWidget(self.pushButton_cliente)
+
+        #Costruzione della griglia contenente il Label con scritta 'Welcome' e l'orologio
 
         self.gridLayoutWidget_2 = QtWidgets.QWidget(self)
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
@@ -105,23 +136,26 @@ class VistaHome(QWidget):
 
         self.horizontalLayout_2.addItem(self.horizontalSpacer_2)
 
-        font_clock = QFont('Open Sans', 38, QFont.Bold)
+        font_clock = QFont('Eras Demi ITC', 40, QFont.Bold)
         self.label_2 = QLabel(self.gridLayoutWidget_2)
         self.label_2.setFont(font_clock)
+        self.label_2.setStyleSheet("color: white")
         self.label_2.setObjectName("label_2")
 
         self.horizontalLayout_2.addWidget(self.label_2)
 
+        #Definizione dell'orologio
         timer = QTimer(self)
         timer.timeout.connect(self.mostra_ora)
         timer.start(1000)
         self.mostra_ora()
+
         self.setWindowTitle("Home")
         self.retranslateUi()
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self):
+    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
         font = QtGui.QFont()
@@ -131,16 +165,16 @@ class VistaHome(QWidget):
         self.pushButton_cliente.setText(QCoreApplication.translate("Home", "Cliente"))
         self.pushButton_cliente.clicked.connect(self.go_login_cliente)
 
-    def mostra_ora(self):
+    def mostra_ora(self): #Funzione che setta l'orologio a orario corrente
         currentTime = QTime.currentTime()
         display_text = currentTime.toString("hh:mm:ss")
         self.label_2.setText(display_text)
 
-    def go_login_amministratore(self):
+    def go_login_amministratore(self): #Funzione che connette il pulsante Amministratore alla sua schermata di login
         self.login_amministratore = LoginAmministratore()
         self.login_amministratore.show()
 
-    def go_login_cliente(self):
+    def go_login_cliente(self): #Funzione che connette il pulsante Cliente alla sua schermata di login
         self.login_cliente = LoginCliente()
         self.login_cliente.show()
 
