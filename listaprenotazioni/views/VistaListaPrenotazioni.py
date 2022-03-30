@@ -148,8 +148,7 @@ class VistaListaPrenotazioni(QWidget):
             item = QStandardItem()
             item.setFont(QFont('Eras Demi ITC'))
             item.setText(
-                "{0:<15}\t{1:<14}\t{2:<12}\t{3}".format(prenotazione.nome, prenotazione.telefono,
-                                                        prenotazione.num_persone, prenotazione.data.hour))
+                "{0:<15}\t{1:<14}\t{2:<12}\t{3}:{4}".format(prenotazione.nome, prenotazione.telefono, prenotazione.num_persone, prenotazione.data.hour, prenotazione.data.minute))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(16)

@@ -32,7 +32,8 @@ class VistaPrenotazione(QWidget):
         self.add_info_text('<font face="Eras Demi ITC"> <font size="8"> Telefono: </font>', 1, 0)
         self.add_info_text('<font face="Eras Demi ITC"> <font size="8"> Numero persone: </font>', 2, 0)
         self.add_info_text('<font face="Eras Demi ITC"> <font size="8"> Data (dd/MM/yyyy): </font>', 3, 0)
-        self.add_info_text('<font face="Eras Demi ITC"> <font size="8"> Orario: </font>', 4, 0)
+        self.add_info_text('<font face="Eras Demi ITC"> <font size="8"> Ore: </font>', 4, 0)
+        self.add_info_text('<font face="Eras Demi ITC"> <font size="8"> Minuti: </font>', 5, 0)
 
         self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.gridLayout.addItem(self.verticalSpacer)
@@ -47,7 +48,7 @@ class VistaPrenotazione(QWidget):
                                          "border-color: black;\n"
                                          "font: 12pt \"Eras Demi ITC\";")
 
-        self.gridLayout.addWidget(self.pushButton_ok, 5, 0)
+        self.gridLayout.addWidget(self.pushButton_ok, 6, 0)
 
         self.retranslateUi()
 
@@ -109,7 +110,8 @@ class VistaPrenotazione(QWidget):
             msg.exec_()
             return
         data = datetime.strptime(self.qlines[3].text(), '%d/%m/%Y')
-        new_data = data + timedelta(hours=float(self.qlines[4].text()))
-        self.controller.aggiungi_prenotazione(Prenotazione(self.qlines[0].text(), self.qlines[1].text(), self.qlines[2].text(), new_data))
+        new_data1 = data + timedelta(hours=float(self.qlines[4].text()))
+        new_data2 = new_data1 + timedelta(minutes=float(self.qlines[5].text()))
+        print(new_data2)    # per controllare che la data finale sia corretta, da togliere alla consegna
+        self.controller.aggiungi_prenotazione(Prenotazione(self.qlines[0].text(), self.qlines[1].text(), self.qlines[2].text(), new_data2))
         self.close()
-
