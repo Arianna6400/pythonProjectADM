@@ -7,6 +7,7 @@ from dipendente.views.VistaDipendente import VistaDipendente
 from dipendente.views.VistaInserisciDipendente import VistaInserisciDipendente
 from listadipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
 
+#Questa classe definisce la Vista dei dipendenti nell'interfaccia Amministratore
 
 class VistaListaDipendente(QWidget):
 
@@ -15,12 +16,16 @@ class VistaListaDipendente(QWidget):
 
         self.controller = ControlloreListaDipendenti()
 
+        # Definizione della parte statica, che comprende il font e la dimensione della finestra
+
         font = QtGui.QFont()
         font.setPointSize(25)
         self.desktop = QApplication.desktop()
         self.screenRect = self.desktop.screenGeometry()
         self.width = self.screenRect.width()
         self.height = self.screenRect.height()
+
+        # Costruzione del Widget centrale con QtDesigner
 
         self.centralwidget = QtWidgets.QWidget(self)
         self.centralwidget.setObjectName("VistaListaDipendente")
@@ -29,9 +34,19 @@ class VistaListaDipendente(QWidget):
                                          "border-style: outset;\n"
                                          "border-width: 4px;\n"
                                          "border-color: black;\n")
+        # Inserimento dello sfondo in background della vista
+
+        self.image = QtWidgets.QLabel(self)
+        pixmap = QtGui.QPixmap('listamenu/data/images/dip.jpeg')
+        self.image.setPixmap(pixmap)
+        self.image.show()
+        self.image.setGeometry(QRect(130, 0, 1600, 1000))
+
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.setWindowIcon(icon)
+
+        # Costruzione della griglia principale con layout verticale che contiene la lista del menu
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self)
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -40,16 +55,22 @@ class VistaListaDipendente(QWidget):
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
 
+        # Label in cima alla lista contenente una scritta
+
         self.label = QLabel(self.verticalLayoutWidget)
         self.label.setObjectName("label")
-        self.label.setStyleSheet("font: 16pt \"Eras Demi ITC\";")
+        self.label.setStyleSheet("font: \"Eras Demi ITC\";")
         self.verticalLayout.addWidget(self.label)
+
+        # Definizione della lista
 
         self.listView = QListView(self.verticalLayoutWidget)
         self.listView.setObjectName("listView")
-        self.listView.setStyleSheet("background-color: rgb(197, 255, 134);")
+        self.listView.setStyleSheet("background-color: rgb(209, 207, 207);")
         self.update_ui()
         self.verticalLayout.addWidget(self.listView)
+
+        # Definizione della seconda griglia verticale che contiene i pulsanti di funzionamento
 
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self)
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
@@ -57,6 +78,8 @@ class VistaListaDipendente(QWidget):
         self.verticalLayout_2 = QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
+
+        # Definizione dei pulsanti a lato
 
         self.pushButton_open = QPushButton(self.verticalLayoutWidget)
         self.pushButton_open.setObjectName("pushButton_open")
@@ -68,13 +91,16 @@ class VistaListaDipendente(QWidget):
         self.pushButton_open.setMinimumSize(QtCore.QSize(8, 8))
         self.pushButton_open.setMinimumHeight(self.height / 10)
         self.pushButton_open.setMaximumHeight(self.height / 10)
-        self.pushButton_open.setStyleSheet("border-radius:22px;\n"
-                                           "background-color: rgb(197, 255, 134);\n"
-                                           "color:black;\n"
-                                           "border-style: outset;\n"
-                                           "border-width: 2px;\n"
-                                           "border-color: black;\n"
-                                           "font: 16pt \"Eras Demi ITC\";")
+        self.pushButton_open.setStyleSheet("border:2px solid;\n"
+                                            "max-height:48px;\n"
+                                            "border-top-right-radius:20px;\n"
+                                            "border-bottom-left-radius:20px;\n"
+                                            "background-color: rgb(242, 242, 242);\n"
+                                            " color:black;\n"
+                                            " border-style: outset;\n"
+                                            "border-width: 4px;\n"
+                                            "border-color: black;\n"
+                                            "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_open)
 
         self.pushButton_new = QPushButton(self.verticalLayoutWidget)
@@ -87,13 +113,16 @@ class VistaListaDipendente(QWidget):
         self.pushButton_new.setMinimumSize(QtCore.QSize(8, 8))
         self.pushButton_new.setMinimumHeight(self.height / 10)
         self.pushButton_new.setMaximumHeight(self.height / 10)
-        self.pushButton_new.setStyleSheet("border-radius:22px;\n"
-                                          "background-color: rgb(197, 255, 134);\n"
-                                           "color:black;\n"
-                                           "border-style: outset;\n"
-                                           "border-width: 2px;\n"
-                                           "border-color: black;\n"
-                                           "font: 16pt \"Eras Demi ITC\";")
+        self.pushButton_new.setStyleSheet("border:2px solid;\n"
+                                            "max-height:48px;\n"
+                                            "border-top-right-radius:20px;\n"
+                                            "border-bottom-left-radius:20px;\n"
+                                            "background-color: rgb(242, 242, 242);\n"
+                                            " color:black;\n"
+                                            " border-style: outset;\n"
+                                            "border-width: 4px;\n"
+                                            "border-color: black;\n"
+                                            "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_new)
 
         self.setWindowTitle("Lista Dipendenti")
@@ -101,10 +130,20 @@ class VistaListaDipendente(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self):
+    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
-        self.label.setText(QCoreApplication.translate("VistaListaDipendente","<html><head/><body><p align=\"center\"><span style=\" font-size:16pt; font-weight:600;\">Seleziona il dipendente:</span></p></body></html>"))
+        self.label.setText(QCoreApplication.translate("VistaListaDipendente",
+                                                      "<html>"
+                                                      "<head/>"
+                                                      "<body>"
+                                                      "<p align=\"center\">"
+                                                      "<span style=\" font-size:25pt; font-weight:600;\">"
+                                                      "Seleziona il dipendente:"
+                                                      "</span>"
+                                                      "</p>"
+                                                      "</body>"
+                                                      "</html>")) #Codice in formato HTML per la scritta del label
 
         self.pushButton_open.setText(QCoreApplication.translate("VistaListaDipendente", "Apri"))
         self.pushButton_open.clicked.connect(self.show_selected_info)
@@ -112,7 +151,7 @@ class VistaListaDipendente(QWidget):
         self.pushButton_new.setText(QCoreApplication.translate("VistaListaDipendente", "Nuovo"))
         self.pushButton_new.clicked.connect(self.show_new_dipendente)
 
-    def update_ui(self):
+    def update_ui(self): #Funzione che aggiorna la lista
         self.listview_model = QStandardItemModel(self.listView)
         for dipendente in self.controller.get_lista_dipendenti():
             item = QStandardItem()
@@ -125,14 +164,14 @@ class VistaListaDipendente(QWidget):
             self.listview_model.appendRow(item)
         self.listView.setModel(self.listview_model)
 
-    def show_selected_info(self):
+    def show_selected_info(self): #Funzione che permette di aprire un elemento selezionato
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             dipendente_selezionato = self.controller.get_dipendente_by_index(selected)
             self.vista_dipendente = VistaDipendente(dipendente_selezionato, self.controller, self.update_ui)
             self.vista_dipendente.show()
 
-    def show_new_dipendente(self):
+    def show_new_dipendente(self): #Funzione che permette di aprire la vista per l'inserimento di un dipendente nuovo
         self.vista_inserisci_dipendente = VistaInserisciDipendente(self.controller, self.update_ui)
         self.vista_inserisci_dipendente.show()
 

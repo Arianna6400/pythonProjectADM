@@ -40,7 +40,7 @@ class LoginCliente(QWidget):
         # Pulsante che, una volta controllata la funzione di check, permette di accedere alla vista successiva
 
         self.button_login = QPushButton('Login')
-        self.button_login.setStyleSheet(" background-color: rgb(197, 255, 134);\n")
+        self.button_login.setStyleSheet("background-color: rgb(209, 207, 207);\n")
         self.button_login.setGeometry(QRect(150, 230, 201, 28))
         self.button_login.clicked.connect(self.check)
         layout.addWidget(self.button_login, 2, 0, 1, 2)
