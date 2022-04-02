@@ -173,8 +173,8 @@ class VistaListaOrdinazione(QWidget):
         for ordinazione in self.controller.get_lista_ordinazione():
             item = QStandardItem()
             item.setFont(QFont('Eras Demi ITC'))
-            item.setText("Nome:{} ".format(ordinazione.get_nome()) +
-                         "Tavolo:{} ".format(ordinazione.get_tavolo()))
+            item.setText("Nome: {} ".format(ordinazione.get_nome()) +
+                         "   Tavolo: {} ".format(ordinazione.get_tavolo()))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(18)

@@ -64,6 +64,7 @@ class VistaHomeCliente(QWidget):
 
         self.label = QLabel(self.gridLayoutWidget)
         self.label.setObjectName("label")
+        self.label.setStyleSheet("color: white;\n")
         self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
 
         self.horizontalSpacer = QSpacerItem(100, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)

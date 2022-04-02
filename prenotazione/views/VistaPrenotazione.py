@@ -5,6 +5,7 @@ from PyQt5.QtWidgets import QWidget, QLabel, QLineEdit, QGridLayout, QSpacerItem
 
 from prenotazione.model.Prenotazione import Prenotazione
 
+#Questa vista permette l'inserimento delle informazioni di una prenotazione da inserire nella Lista Prenotazioni
 
 class VistaPrenotazione(QWidget):
     def __init__(self, controller):
@@ -14,13 +15,17 @@ class VistaPrenotazione(QWidget):
         self.controller = controller
         self.qlines = []
 
+        # Definizione della parte statica, che comprende la dimensione della finestra e il colore in background
+
         self.setWindowTitle('Nuova Prenotazione')
         self.resize(600, 700)
-        self.setStyleSheet("background-color: rgb(235, 255, 219);")
+        self.setStyleSheet("background-color: rgb(209, 207, 207);")
 
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.setWindowIcon(icon)
+
+        #Definizione della griglia all'interno della quale sono presenti le etichette per l'inserimento delle informazioni
 
         self.gridLayoutWidget = QtWidgets.QWidget(self)
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -38,15 +43,20 @@ class VistaPrenotazione(QWidget):
         self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.gridLayout.addItem(self.verticalSpacer)
 
+        #Pulsante che permette di cofermare l'inserimento della prenotazione
+
         self.pushButton_ok = QPushButton(self.gridLayoutWidget)
         self.pushButton_ok.setObjectName("pushButton_ok")
-        self.pushButton_ok.setStyleSheet("border-radius:22px;\n"
-                                         "background-color: rgb(197, 255, 134);\n"
-                                         "color:black;\n"
-                                         "border-style: outset;\n"
+        self.pushButton_ok.setStyleSheet("border:2px solid;\n"
+                                         "max-height:48px;\n"
+                                         "border-top-right-radius:20px;\n"
+                                         "border-bottom-left-radius:20px;\n"
+                                         "background-color: rgb(242, 242, 242);\n"
+                                         " color:black;\n"
+                                         " border-style: outset;\n"
                                          "border-width: 2px;\n"
                                          "border-color: black;\n"
-                                         "font: 12pt \"Eras Demi ITC\";")
+                                         "font: 15pt \\\"Eras Demi ITC\\\";")
 
         self.gridLayout.addWidget(self.pushButton_ok, 6, 0)
 
@@ -54,13 +64,13 @@ class VistaPrenotazione(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self):
+    def retranslateUi(self): #Funzione che connette il pulsante alla rispettiva funzione
         _translate = QtCore.QCoreApplication.translate
 
         self.pushButton_ok.setText(QCoreApplication.translate("InserisciProdotto", "Ok"))
         self.pushButton_ok.clicked.connect(self.add_prenotazione)
 
-    def add_info_text(self, label, gridX, gridY):
+    def add_info_text(self, label, gridX, gridY): #Funzione che definisce le linee di inserimento del testo e passa il testo alle varie etichette
         etichetta = QLabel(label)
         lineEdit = QLineEdit()
         lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -72,14 +82,14 @@ class VistaPrenotazione(QWidget):
         self.qlines.append(lineEdit)
 
     @staticmethod
-    def validate(date_text):
+    def validate(date_text): #Metodo statico che definisce il format della data da inserire e lancia un errore nel caso di inserimento errato
         try:
             datetime.strptime(date_text, '%d/%m/%Y')
             return True
         except ValueError:
             return False
 
-    def add_prenotazione(self):
+    def add_prenotazione(self): #Funzione che controlla le informazioni inserite e, se corrette, permette di inserire la prenotazione alla lista
         for value in self.qlines:
             if value.text() == "":
                 msg = QMessageBox()

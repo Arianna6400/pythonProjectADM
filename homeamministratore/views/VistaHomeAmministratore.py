@@ -221,6 +221,7 @@ class VistaHomeAmministratore(QWidget):
         self.gridLayout_2.addWidget(self.label_2, 0, 2, 1, 1)
 
         self.label = QLabel(self.gridLayoutWidget_2)
+        self.label.setStyleSheet("color: white;\n")
         self.label.setObjectName("label")
 
         self.gridLayout_2.addWidget(self.label, 0, 0, 1, 1)

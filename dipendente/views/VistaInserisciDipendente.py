@@ -3,6 +3,7 @@ from PyQt5.QtCore import QRect, QCoreApplication
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QLineEdit, QMessageBox
 from dipendente.model.Dipendente import Dipendente
 
+#Questa vista permette l'inserimento delle informazioni di un dipendente da inserire nella Lista Dipendenti
 
 class VistaInserisciDipendente(QWidget):
     def __init__(self, controller, callback):
@@ -11,13 +12,17 @@ class VistaInserisciDipendente(QWidget):
         self.callback = callback
         self.qlines = {}
 
+        # Definizione della parte statica, che comprende la dimensione della finestra e il colore in background
+
         self.setWindowTitle('Nuovo Dipendente')
         self.resize(600, 700)
-        self.setStyleSheet("background-color: rgb(235, 255, 219);")
+        self.setStyleSheet("background-color: rgb(209, 207, 207);")
 
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.setWindowIcon(icon)
+
+        # Definizione della griglia con layout verticale all'interno della quale sono presenti le etichette contenenti le varie informazioni da inserire
 
         self.verticalLayoutWidget = QtWidgets.QWidget(self)
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
@@ -37,15 +42,20 @@ class VistaInserisciDipendente(QWidget):
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
+        #Pulsante di conferma per l'inserimento del nuovo dipendente nella Lista Dipendente
+
         self.pushButton_ok = QPushButton(self.verticalLayoutWidget)
         self.pushButton_ok.setObjectName("pushButton_ok")
-        self.pushButton_ok.setStyleSheet("border-radius:22px;\n"
-                                         "background-color: rgb(197, 255, 134);\n"
-                                         "color:black;\n"
-                                         "border-style: outset;\n"
+        self.pushButton_ok.setStyleSheet("border:2px solid;\n"
+                                         "max-height:48px;\n"
+                                         "border-top-right-radius:20px;\n"
+                                         "border-bottom-left-radius:20px;\n"
+                                         "background-color: rgb(242, 242, 242);\n"
+                                         " color:black;\n"
+                                         " border-style: outset;\n"
                                          "border-width: 2px;\n"
                                          "border-color: black;\n"
-                                         "font: 12pt \"Eras Demi ITC\";")
+                                         "font: 15pt \\\"Eras Demi ITC\\\";")
 
         self.verticalLayout.addWidget(self.pushButton_ok)
 
@@ -53,19 +63,19 @@ class VistaInserisciDipendente(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self):
+    def retranslateUi(self): #Funzione che connette il pulsante alla rispettiva funzione
         _translate = QtCore.QCoreApplication.translate
         self.pushButton_ok.setText(QCoreApplication.translate("InserisciDipendente", "Ok"))
         self.pushButton_ok.clicked.connect(self.add_dipendente)
 
-    def add_info_text(self, nome, label):
+    def add_info_text(self, nome, label): #Funzione che definisce le linee di inserimento del testo e passa il testo alle varie etichette
         self.verticalLayout.addWidget(QLabel(label))
         current_text = QLineEdit(self)
         current_text.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.qlines[nome] = current_text
         self.verticalLayout.addWidget(current_text)
 
-    def add_dipendente(self):
+    def add_dipendente(self): #Funzione che controlla l'inserimento e la conferma delle informazioni riguardanti il nuovo dipendente
         for value in self.qlines.values():
             if value.text() == "":
                 msg = QMessageBox()
