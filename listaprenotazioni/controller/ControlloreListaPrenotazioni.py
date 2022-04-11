@@ -45,7 +45,7 @@ class ControlloreListaPrenotazioni:
         for prenotazione in self.model.lista_prenotazioni:  # cancella in modo automatico le prenotazioni passate
             if date > prenotazione.data:
                 self.model.lista_prenotazioni.remove(prenotazione)
-
+        os.makedirs(os.path.dirname("listaprenotazioni/data/listaprenotazioni.pickle"), exist_ok=True)
         with open('listaprenotazioni/data/listaprenotazioni.pickle', 'wb') as handle:
             pickle.dump(self.model, handle, pickle.HIGHEST_PROTOCOL)
 
