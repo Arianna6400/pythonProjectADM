@@ -9,11 +9,11 @@ from PyQt5.QtCore import QDate, QRect, QCoreApplication
 from listaprenotazioni.controller.ControlloreListaPrenotazioni import ControlloreListaPrenotazioni
 from prenotazione.views.VistaPrenotazione import VistaPrenotazione
 
-#Questa classe definisce la Vista delle prenotazioni dall'interfaccia Amministratore
+
+# Questa classe definisce la Vista delle prenotazioni dall'interfaccia Amministratore
 
 class VistaListaPrenotazioni(QWidget):
-
-    #Definizione delle variabili globali che settano il calendario con data corrente
+    # Definizione delle variabili globali che settano il calendario con data corrente
 
     global currentYear, currentMonth
 
@@ -112,15 +112,15 @@ class VistaListaPrenotazioni(QWidget):
         self.pushButton_add.setMinimumHeight(self.height / 10)
         self.pushButton_add.setMaximumHeight(self.height / 10)
         self.pushButton_add.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 15pt \\\"Eras Demi ITC\\\";")
+                                          "max-height:48px;\n"
+                                          "border-top-right-radius:20px;\n"
+                                          "border-bottom-left-radius:20px;\n"
+                                          "background-color: rgb(242, 242, 242);\n"
+                                          " color:black;\n"
+                                          " border-style: outset;\n"
+                                          "border-width: 4px;\n"
+                                          "border-color: black;\n"
+                                          "font: 15pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout.addWidget(self.pushButton_add)
 
         self.pushButton_delete = QPushButton(self.verticalLayoutWidget)
@@ -134,15 +134,15 @@ class VistaListaPrenotazioni(QWidget):
         self.pushButton_delete.setMinimumHeight(self.height / 10)
         self.pushButton_delete.setMaximumHeight(self.height / 10)
         self.pushButton_delete.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 15pt \\\"Eras Demi ITC\\\";")
+                                             "max-height:48px;\n"
+                                             "border-top-right-radius:20px;\n"
+                                             "border-bottom-left-radius:20px;\n"
+                                             "background-color: rgb(242, 242, 242);\n"
+                                             " color:black;\n"
+                                             " border-style: outset;\n"
+                                             "border-width: 4px;\n"
+                                             "border-color: black;\n"
+                                             "font: 15pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout.addWidget(self.pushButton_delete)
 
         self.setWindowTitle("Lista Prenotazioni")
@@ -150,7 +150,7 @@ class VistaListaPrenotazioni(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
+    def retranslateUi(self):  # Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
         self.label.setText(QCoreApplication.translate("VistaListaPrenotazioni",
@@ -163,7 +163,7 @@ class VistaListaPrenotazioni(QWidget):
                                                       "</span>"
                                                       "</p>"
                                                       "</body>"
-                                                      "</html>")) #Codice in formato HTML per la scritta del label
+                                                      "</html>"))  # Codice in formato HTML per la scritta della label
 
         self.pushButton_add.setText(QCoreApplication.translate("VistaListaPrenotazioni", "Aggiungi prenotazione"))
         self.pushButton_add.clicked.connect(self.aggiungi_prenotazione)
@@ -173,7 +173,7 @@ class VistaListaPrenotazioni(QWidget):
 
         self.calendarWidget.clicked.connect(self.printInfo)
 
-    def printInfo(self, qDate): #Funzione che stampa la prenotazine sulla lista
+    def printInfo(self, qDate):  # Funzione che stampa la prenotazione sulla lista
         self.data_selezionata = qDate
         self.listview_model = QStandardItemModel(self.listView)
         item = QStandardItem()
@@ -190,7 +190,9 @@ class VistaListaPrenotazioni(QWidget):
             item = QStandardItem()
             item.setFont(QFont('Eras Demi ITC'))
             item.setText(
-                "{0:<15}\t{1:<14}\t{2:<12}\t{3}:{4}".format(prenotazione.nome, prenotazione.telefono, prenotazione.num_persone, prenotazione.data.hour, prenotazione.data.minute))
+                "{0:<15}\t{1:<14}\t{2:<12}\t{3}:{4}".format(prenotazione.nome, prenotazione.telefono,
+                                                            prenotazione.num_persone, prenotazione.data.hour,
+                                                            prenotazione.data.minute))
             item.setEditable(False)
             font = item.font()
             font.setPointSize(16)
@@ -198,11 +200,11 @@ class VistaListaPrenotazioni(QWidget):
             self.listview_model.appendRow(item)
         self.listView.setModel(self.listview_model)
 
-    def aggiungi_prenotazione(self): #Funzione che permette di aggiungere una nuova prenotaione
+    def aggiungi_prenotazione(self):  # Funzione che permette di aggiungere una nuova prenotazione
         self.vista_aggiungi_prenotazione = VistaPrenotazione(self.controller)
         self.vista_aggiungi_prenotazione.show()
 
-    def elimina_prenotazione(self): #Funzione che permette di eliminare una prenotazione dalla lista
+    def elimina_prenotazione(self):  # Funzione che permette di eliminare una prenotazione dalla lista
         selected = self.listView.selectedIndexes()[0].row() - 1
         prenotazione_da_eliminare = self.controller.get_prenotazioni_by_data(
             datetime(self.data_selezionata.year(), self.data_selezionata.month(), self.data_selezionata.day()))[

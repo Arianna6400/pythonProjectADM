@@ -4,7 +4,8 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QMessageBox
 
 from homecliente.views.VistaHomeCliente import VistaHomeCliente
 
-#Classe che definisce la schermata di Login per l'interfaccia del Cliente
+
+# Classe che definisce la schermata di Login per l'interfaccia del Cliente
 
 class LoginCliente(QWidget):
     def __init__(self):
@@ -19,7 +20,7 @@ class LoginCliente(QWidget):
 
         layout = QGridLayout()
 
-        #Label che contiene la linea di scrittura del nome
+        # Label che contiene la linea di scrittura del nome
 
         self.label_name = QLabel('<font size="5"> Nome </font>')
         self.lineEdit_name = QLineEdit()
@@ -28,7 +29,7 @@ class LoginCliente(QWidget):
         layout.addWidget(self.label_name, 0, 0)
         layout.addWidget(self.lineEdit_name, 0, 1)
 
-        #Label che contiene la linea di scrittura del numero del tavolo
+        # Label che contiene la linea di scrittura del numero del tavolo
 
         self.label_number = QLabel('<font size="5"> Numero </font>')
         self.lineEdit_number = QLineEdit()
@@ -48,8 +49,10 @@ class LoginCliente(QWidget):
 
         self.setLayout(layout)
 
-    def check(self): #Funzione di controllo dell'inserimento delle credenziali corrette
-        if (self.lineEdit_name.text() == "" or self.lineEdit_name.text().isdigit()) or (self.lineEdit_number.text() == "" or self.lineEdit_number.text().isalpha()) or (int(self.lineEdit_number.text()) > 30) or (int(self.lineEdit_number.text()) < 1):
+    def check(self):  # Funzione di controllo dell'inserimento delle credenziali corrette
+        if (self.lineEdit_name.text() == "" or self.lineEdit_name.text().isdigit()) or (
+                self.lineEdit_number.text() == "" or self.lineEdit_number.text().isalpha()) or (
+                int(self.lineEdit_number.text()) > 30) or (int(self.lineEdit_number.text()) < 1):
             msg = QMessageBox()
             msg.setWindowTitle("Attenzione!")
             msg.setText("Potresti non avere inserito nome e/o numero correttamente!\n""Numero massimo di tavoli: 30")
@@ -64,7 +67,7 @@ class LoginCliente(QWidget):
             self.run_home_cliente()
             self.close()
 
-    def run_home_cliente(self): #Funzione che permette di accedere alla Vista Cliente una volta effettuato correttamente il Login
+    def run_home_cliente(self):  # Funzione che permette di accedere alla Vista Cliente una volta effettuato correttamente il Login
         self.home_cliente = VistaHomeCliente(self.lineEdit_name.text(), self.lineEdit_number.text())
         self.home_cliente.showMaximized()
         self.close()

@@ -6,7 +6,8 @@ from PyQt5.QtWidgets import QWidget, QApplication, QListView, QVBoxLayout, QPush
 from listaordinazione.controller.ControlloreListaOrdinazione import ControlloreListaOrdinazione
 from ordinazione.views.VistaOrdinazione import VistaOrdinazione
 
-#Questa classe definisce la Vista delle ordinazioni dall'interfaccia Amministratore
+
+# Questa classe definisce la Vista delle ordinazioni dall'interfaccia Amministratore
 
 class VistaListaOrdinazione(QWidget):
 
@@ -92,15 +93,15 @@ class VistaListaOrdinazione(QWidget):
         self.pushButton_open.setMinimumHeight(self.height / 10)
         self.pushButton_open.setMaximumHeight(self.height / 10)
         self.pushButton_open.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_open)
 
         self.pushButton_delete = QPushButton(self.verticalLayoutWidget)
@@ -114,15 +115,15 @@ class VistaListaOrdinazione(QWidget):
         self.pushButton_delete.setMinimumHeight(self.height / 10)
         self.pushButton_delete.setMaximumHeight(self.height / 10)
         self.pushButton_delete.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                             "max-height:48px;\n"
+                                             "border-top-right-radius:20px;\n"
+                                             "border-bottom-left-radius:20px;\n"
+                                             "background-color: rgb(242, 242, 242);\n"
+                                             " color:black;\n"
+                                             " border-style: outset;\n"
+                                             "border-width: 4px;\n"
+                                             "border-color: black;\n"
+                                             "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_delete)
 
         self.setWindowTitle("Lista Ordinazione")
@@ -130,7 +131,7 @@ class VistaListaOrdinazione(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
+    def retranslateUi(self):  # Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
         self.label.setText(QCoreApplication.translate("VistaListaOrdinazione",
@@ -143,7 +144,7 @@ class VistaListaOrdinazione(QWidget):
                                                       "</span>"
                                                       "</p>"
                                                       "</body>"
-                                                      "</html>")) #Codice in formato HTML per la scritta del label
+                                                      "</html>"))  # Codice in formato HTML per la scritta del label
 
         self.pushButton_open.setText(QCoreApplication.translate("VistaListaOrdinazione", "Apri"))
         self.pushButton_open.clicked.connect(self.show_selected_info)
@@ -151,14 +152,14 @@ class VistaListaOrdinazione(QWidget):
         self.pushButton_delete.setText(QCoreApplication.translate("VistaListaOrdinazione", "Elimina"))
         self.pushButton_delete.clicked.connect(self.delete_ordinazione)
 
-    def show_selected_info(self): #Funzione che permette di aprire un elemento selezionato
+    def show_selected_info(self):  # Funzione che permette di aprire un elemento selezionato
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             ordinazione = self.controller.get_ordinazione_by_index(selected)
             self.vista_ordinazione = VistaOrdinazione(ordinazione)
             self.vista_ordinazione.show()
 
-    def delete_ordinazione(self): #Funzione che permette di eliminare un elemento selezionato
+    def delete_ordinazione(self):  # Funzione che permette di eliminare un elemento selezionato
         reply = QMessageBox.question(self, 'Attenzione!',
                                      'Vuoi cancellare questo ordine?',
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
@@ -167,7 +168,7 @@ class VistaListaOrdinazione(QWidget):
             self.controller.elimina_ordinazione(selected)
         self.update_ui()
 
-    def update_ui(self): #Funzione che aggiorna la lista
+    def update_ui(self):  # Funzione che aggiorna la lista
         self.listview_model = QStandardItemModel(self.listView)
 
         for ordinazione in self.controller.get_lista_ordinazione():

@@ -1,9 +1,12 @@
+from datetime import datetime
+
 from PyQt5 import QtGui, QtWidgets, QtCore
 from PyQt5.QtCore import QRect, QCoreApplication
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QSpacerItem, QSizePolicy, QPushButton, QLineEdit, QMessageBox
 from dipendente.model.Dipendente import Dipendente
 
-#Questa vista permette l'inserimento delle informazioni di un dipendente da inserire nella Lista Dipendenti
+
+# Questa vista permette l'inserimento delle informazioni di un dipendente da inserire nella Lista Dipendenti
 
 class VistaInserisciDipendente(QWidget):
     def __init__(self, controller, callback):
@@ -42,7 +45,7 @@ class VistaInserisciDipendente(QWidget):
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
-        #Pulsante di conferma per l'inserimento del nuovo dipendente nella Lista Dipendente
+        # Pulsante di conferma per l'inserimento del nuovo dipendente nella Lista Dipendente
 
         self.pushButton_ok = QPushButton(self.verticalLayoutWidget)
         self.pushButton_ok.setObjectName("pushButton_ok")
@@ -63,25 +66,24 @@ class VistaInserisciDipendente(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette il pulsante alla rispettiva funzione
+    def retranslateUi(self):  # Funzione che connette il pulsante alla rispettiva funzione
         _translate = QtCore.QCoreApplication.translate
         self.pushButton_ok.setText(QCoreApplication.translate("InserisciDipendente", "Ok"))
         self.pushButton_ok.clicked.connect(self.add_dipendente)
 
-    def add_info_text(self, nome, label): #Funzione che definisce le linee di inserimento del testo e passa il testo alle varie etichette
+    def add_info_text(self, nome, label):  # Funzione che definisce le linee di inserimento del testo e passa il testo alle varie etichette
         self.verticalLayout.addWidget(QLabel(label))
         current_text = QLineEdit(self)
         current_text.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.qlines[nome] = current_text
         self.verticalLayout.addWidget(current_text)
 
-    def add_dipendente(self): #Funzione che controlla l'inserimento e la conferma delle informazioni riguardanti il nuovo dipendente
+    def add_dipendente(self):  # Funzione che controlla l'inserimento e la conferma delle informazioni riguardanti il nuovo dipendente
         for value in self.qlines.values():
             if value.text() == "":
                 msg = QMessageBox()
                 msg.setWindowTitle("Attenzione!")
-                msg.setText(
-                    "Per favore, inserisci tutte le informazioni richieste.")
+                msg.setText("Per favore, inserisci tutte le informazioni richieste.")
                 icon = QtGui.QIcon()
                 icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal,
                                QtGui.QIcon.On)
@@ -91,6 +93,34 @@ class VistaInserisciDipendente(QWidget):
                 msg.setDefaultButton(QMessageBox.Ok)
                 msg.exec_()
                 return
+        if self.qlines["nome"].text().isdigit():
+            self.msg_errore("il nome")
+            return
+        if self.qlines["cognome"].text().isdigit():
+            self.msg_errore("il cognome")
+            return
+        if not self.validate(self.qlines["data"].text()):
+            self.msg_errore("la data")
+            return
+        if datetime.strptime(self.qlines["data"].text(), '%d/%m/%Y') > datetime.now():
+            self.msg_errore("la data")
+            return
+        if self.qlines["luogo"].text().isdigit():
+            self.msg_errore("luogo di nascita")
+            return
+        if not len(self.qlines["cf"].text()) == 16:
+            self.msg_errore("il codice fiscale")
+            return
+        if not len(self.qlines["telefono"].text()) == 10:
+            self.msg_errore("il numero")
+            return
+        if not self.qlines["telefono"].text().isdigit():
+            self.msg_errore("il numero")
+            return
+        if self.qlines["ruolo"].text().isdigit():
+            self.msg_errore("il ruolo")
+            return
+
         self.controller.aggiungi_dipendente(Dipendente(
             (self.qlines["nome"].text() + self.qlines["cognome"].text()).lower(),
             self.qlines["nome"].text(),
@@ -103,3 +133,23 @@ class VistaInserisciDipendente(QWidget):
         )
         self.callback()
         self.close()
+
+    def msg_errore(self, messaggio):    # Metodo che personalizza l'errore ogni volta che cambia
+        msg = QMessageBox()
+        msg.setWindowTitle("Attenzione!")
+        msg.setText("Per favore, inserisci " + messaggio + " correttamente.")
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
+        msg.setWindowIcon(icon)
+        msg.setIcon(QMessageBox.Warning)
+        msg.setStandardButtons(QMessageBox.Ok)
+        msg.setDefaultButton(QMessageBox.Ok)
+        msg.exec_()
+
+    @staticmethod
+    def validate(date_text):  # Metodo statico che definisce il format della data da inserire e lancia un errore nel caso di inserimento errato
+        try:
+            datetime.strptime(date_text, '%d/%m/%Y')
+            return True
+        except ValueError:
+            return False

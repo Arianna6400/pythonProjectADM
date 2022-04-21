@@ -8,7 +8,8 @@ from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QPushButton, QGridLay
 
 from listamenu.views.VistaListaMenuCliente import VistaListaMenuCliente
 
-#Questa classe definisce la Vista Cliente, che compare una volta aver effettuato il login correttamente
+
+# Questa classe definisce la Vista Cliente, che compare una volta aver effettuato il login correttamente
 
 class VistaHomeCliente(QWidget):
     def __init__(self, nome, tavolo):
@@ -52,7 +53,7 @@ class VistaHomeCliente(QWidget):
         self.gridLayoutWidget = QtWidgets.QWidget(self)
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayoutWidget.setGeometry(QRect(400, 100, 1100, 450))
-        self.gridLayout = QGridLayout(self.gridLayoutWidget) #Definisce il layout della griglia
+        self.gridLayout = QGridLayout(self.gridLayoutWidget)  # Definisce il layout della griglia
         self.gridLayout.setObjectName("gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
 
@@ -78,13 +79,13 @@ class VistaHomeCliente(QWidget):
         self.gridLayout_2 = QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.gridLayout_2.setContentsMargins(0, 0, 0, 0)
-        self.pushButton_menu= QPushButton(self.gridLayoutWidget_2)
+        self.pushButton_menu = QPushButton(self.gridLayoutWidget_2)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.pushButton_menu.sizePolicy().hasHeightForWidth())
 
-        #Definizione del bottone
+        # Definizione del bottone
 
         self.pushButton_menu.setSizePolicy(sizePolicy)
         self.pushButton_menu.setMinimumSize(QtCore.QSize(100, 60))
@@ -92,15 +93,15 @@ class VistaHomeCliente(QWidget):
         self.pushButton_menu.setMaximumHeight(self.height / 5)
         self.pushButton_menu.setObjectName("pushButton_cliente")
         self.pushButton_menu.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 18pt \\\"Eras Demi ITC\\\";")
 
         self.gridLayout_2.addWidget(self.pushButton_menu, 0, 0, 1, 1)
         self.setWindowTitle("Home Cliente")
@@ -108,7 +109,7 @@ class VistaHomeCliente(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette il pulsante alla rispettiva funzione
+    def retranslateUi(self):  # Funzione che connette il pulsante alla rispettiva funzione
         _translate = QtCore.QCoreApplication.translate
         self.label.setText(QCoreApplication.translate("HomeCliente",
                                                       "<html>"
@@ -120,19 +121,17 @@ class VistaHomeCliente(QWidget):
                                                       "</span>"
                                                       "</p>"
                                                       "</body>"
-                                                      "</html>")) #Codice in formato HTML per la scritta del label
+                                                      "</html>"))  # Codice in formato HTML per la scritta della label
 
         self.pushButton_menu.setText(QCoreApplication.translate("HomeCliente", "Visualizza Menu"))
         self.pushButton_menu.clicked.connect(self.go_vista_menu)
 
-    def go_vista_menu(self): #Funzione che connette alla Vista Menu
+    def go_vista_menu(self):  # Funzione che connette alla Vista Menu
         self.vista_menu = VistaListaMenuCliente(self.nome, self.tavolo)
         self.vista_menu.showMaximized()
 
     def closeEvent(self, event):
-        reply = QMessageBox.question(self, 'Attenzione!',
-                                     'Vuoi chiudere il programma?',
-                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        reply = QMessageBox.question(self, 'Attenzione!', 'Vuoi chiudere il programma?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
             if not type(event) == bool:
@@ -142,4 +141,3 @@ class VistaHomeCliente(QWidget):
         else:
             if not type(event) == bool:
                 event.ignore()
-

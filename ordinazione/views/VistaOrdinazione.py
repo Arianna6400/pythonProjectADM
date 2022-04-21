@@ -3,7 +3,8 @@ from PyQt5.QtCore import QRect, QCoreApplication
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
 from PyQt5.QtWidgets import QWidget, QHBoxLayout, QListView
 
-#Questa vista permette di visualizzare l'ordinazione che viene effettuata
+
+# Questa vista permette di visualizzare l'ordinazione che viene effettuata
 
 class VistaOrdinazione(QWidget):
 
@@ -22,7 +23,7 @@ class VistaOrdinazione(QWidget):
         icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.setWindowIcon(icon)
 
-        #Definizione della griglia con layout orizzontale, nella quale è inserita la lista con l'ordine corrispondente
+        # Definizione della griglia con layout orizzontale, nella quale è inserita la lista con l'ordine corrispondente
 
         self.horizontalLayoutWidget = QtWidgets.QWidget(self)
         self.horizontalLayoutWidget.setObjectName("horizontalLayoutWidget")
@@ -43,7 +44,7 @@ class VistaOrdinazione(QWidget):
     def retranslateUi(self):
         _translate = QtCore.QCoreApplication.translate
 
-    def update_ui(self): #Funzione che aggiorna la lista
+    def update_ui(self):  # Funzione che aggiorna la lista
         self.listview_model = QStandardItemModel(self.listView)
 
         for Prodotto, qt in self.controller.get_ordinazione().items():

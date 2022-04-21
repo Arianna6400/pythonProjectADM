@@ -5,7 +5,8 @@ from PyQt5.QtWidgets import QWidget, QLabel, QSpacerItem, QSizePolicy, QPushButt
 
 from prodotto.model.ProdottoSingolo import ProdottoSingolo
 
-#Questa vista permette l'inserimento delle informazioni di un prodotto da inserire nel Menu
+
+# Questa vista permette l'inserimento delle informazioni di un prodotto da inserire nel Menu
 
 class VistaInserisciProdotto(QWidget):
 
@@ -31,7 +32,7 @@ class VistaInserisciProdotto(QWidget):
         icon.addPixmap(QtGui.QPixmap('listamenu/data/images/logo_donegal.png'), QtGui.QIcon.Normal, QtGui.QIcon.On)
         self.setWindowIcon(icon)
 
-        #Definizione della griglia all'interno della quale sono presenti le etichette contenenti le varie informazioni da inserire
+        # Definizione della griglia all'interno della quale sono presenti le etichette contenenti le varie informazioni da inserire
 
         self.gridLayoutWidget = QtWidgets.QWidget(self)
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -47,24 +48,24 @@ class VistaInserisciProdotto(QWidget):
         self.verticalSpacer = QSpacerItem(20, 20, QSizePolicy.Minimum, QSizePolicy.Fixed)
         self.gridLayout.addItem(self.verticalSpacer)
 
-        #Pulsante che permette di aggiungere una nuova linea se necessario per un ingrediente in più
+        # Pulsante che permette di aggiungere una nuova linea se necessario per un ingrediente in più
 
         self.pushButton_plus = QPushButton(self.gridLayoutWidget)
         self.pushButton_plus.setObjectName("pushButton_plus")
         self.pushButton_plus.setStyleSheet("border:2px solid;\n"
-                                         "max-height:48px;\n"
-                                         "border-top-right-radius:20px;\n"
-                                         "border-bottom-left-radius:20px;\n"
-                                         "background-color: rgb(242, 242, 242);\n"
-                                         " color:black;\n"
-                                         " border-style: outset;\n"
-                                         "border-width: 2px;\n"
-                                         "border-color: black;\n"
-                                         "font: 13pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 2px;\n"
+                                           "border-color: black;\n"
+                                           "font: 13pt \\\"Eras Demi ITC\\\";")
 
         self.gridLayout.addWidget(self.pushButton_plus, self.last, 0)
 
-        #Pulsante per la conferma dell'inserimento del nuovo prodotto
+        # Pulsante per la conferma dell'inserimento del nuovo prodotto
 
         self.pushButton_ok = QPushButton(self.gridLayoutWidget)
         self.pushButton_ok.setObjectName("pushButton_ok")
@@ -81,7 +82,7 @@ class VistaInserisciProdotto(QWidget):
 
         self.gridLayout.addWidget(self.pushButton_ok, self.last, 1)
 
-        # Definizone della barra di scorrimento laterale
+        # Definizione della barra di scorrimento laterale
 
         self.scrollbar = QtWidgets.QScrollArea(self)
         self.scrollbar.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
@@ -94,7 +95,7 @@ class VistaInserisciProdotto(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
+    def retranslateUi(self):  # Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
         self.pushButton_plus.setText(QCoreApplication.translate("InserisciProdotto", "+"))
         self.pushButton_plus.clicked.connect(self.add_line)
@@ -102,7 +103,7 @@ class VistaInserisciProdotto(QWidget):
         self.pushButton_ok.setText(QCoreApplication.translate("InserisciProdotto", "Ok"))
         self.pushButton_ok.clicked.connect(self.add_prodotto)
 
-    def add_info_text(self, nome, label, gridX, gridY): #Funzione che definisce le linee di inserimento del testo e passa il testo alle varie etichette
+    def add_info_text(self, nome, label, gridX, gridY):  # Funzione che definisce le linee d'inserimento del testo e passa il testo alle varie etichette
         etichetta = QLabel(label)
         lineEdit = QLineEdit()
         lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -113,7 +114,7 @@ class VistaInserisciProdotto(QWidget):
         self.gridLayout.addLayout(gridLayout2, gridX, gridY)
         self.qlines[nome] = lineEdit
 
-    def add_info_ingredienti(self, label, gridX, gridY, bul): #Funzione che definisce le linee di inserimento per l'ingrediente e passa il testo alle varie etichette
+    def add_info_ingredienti(self, label, gridX, gridY, bul):  # Funzione che definisce le linee d'inserimento per l'ingrediente e passa il testo alle varie etichette
         etichetta = QLabel(label)
         lineEdit = QLineEdit()
         lineEdit.setStyleSheet("background-color: rgb(255, 255, 255);")
@@ -128,7 +129,7 @@ class VistaInserisciProdotto(QWidget):
         else:
             self.ingredienti[self.temp] = lineEdit
 
-    def add_prodotto(self): #Funzione che controlla il corretto inserimento delle informazioni e conferma la'ggiunta del nuovo prodotto alla lista del Menu
+    def add_prodotto(self):  # Funzione che controlla il corretto inserimento delle informazioni e conferma l'aggiunta del nuovo prodotto alla lista del Menu
         for value in self.qlines.values():
             if value.text() == "":
                 msg = QMessageBox()
@@ -151,7 +152,7 @@ class VistaInserisciProdotto(QWidget):
         self.callback()
         self.close()
 
-    def add_line(self): #Funzione che permette di aggiungere una nuova linea di testo per l'ingrediente aggiuntivo
+    def add_line(self):  # Funzione che permette di aggiungere una nuova linea di testo per l'ingrediente aggiuntivo
         self.add_info_ingredienti('<font face="Eras Demi ITC"> <font size="10"> Ingredienti: </font>', self.last, 0, True)
         self.add_info_ingredienti('<font face="Eras Demi ITC"> <font size="10"> Quantità: </font>', self.last, 1, False)
         self.last += 1
@@ -159,4 +160,3 @@ class VistaInserisciProdotto(QWidget):
         self.gridLayout.removeWidget(self.pushButton_ok)
         self.gridLayout.addWidget(self.pushButton_plus, self.last, 0)
         self.gridLayout.addWidget(self.pushButton_ok, self.last, 1)
-

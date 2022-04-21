@@ -13,7 +13,8 @@ from listaordinazione.views.VistaListaOrdinazione import VistaListaOrdinazione
 from listaprenotazioni.views.VistaListaPrenotazioni import VistaListaPrenotazioni
 from magazzino.views.VistaMagazzino import VistaMagazzino
 
-#Questa classe definisce la Vista Amministratore, che compare una volta aver effettuato il login correttamente
+
+# Questa classe definisce la Vista Amministratore, che compare una volta aver effettuato il login correttamente
 
 class VistaHomeAmministratore(QWidget):
     def __init__(self):
@@ -55,7 +56,7 @@ class VistaHomeAmministratore(QWidget):
         self.gridLayoutWidget = QtWidgets.QWidget(self)
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
         self.gridLayoutWidget.setGeometry(QRect(350, 400, 1200, 600))
-        self.gridLayout = QGridLayout(self.gridLayoutWidget) #Definisce il layout della griglia
+        self.gridLayout = QGridLayout(self.gridLayoutWidget)  # Definisce il layout della griglia
         self.gridLayout.setObjectName("gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalSpacer_2 = QSpacerItem(40, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
@@ -66,7 +67,7 @@ class VistaHomeAmministratore(QWidget):
 
         self.gridLayout.addItem(self.horizontalSpacer, 0, 2, 1, 1)
 
-        #Costruzione dei pulsanti che avviano viste specifiche
+        # Costruzione dei pulsanti che avviano viste specifiche
 
         self.pushButton_prenotazioni = QPushButton(self.gridLayoutWidget)
         self.pushButton_prenotazioni.setObjectName("pushButton_prenotazioni")
@@ -79,18 +80,18 @@ class VistaHomeAmministratore(QWidget):
         self.pushButton_prenotazioni.setMinimumHeight(self.height / 10)
         self.pushButton_prenotazioni.setMaximumHeight(self.height / 10)
         self.pushButton_prenotazioni.setStyleSheet("border:2px solid;\n"
-                                                    "max-height:48px;\n"
-                                                    "border-top-right-radius:20px;\n"
-                                                    "border-bottom-left-radius:20px;\n"
-                                                    "background-color: rgb(242, 242, 242);\n"
-                                                    " color:black;\n"
-                                                    " border-style: outset;\n"
-                                                    "border-width: 4px;\n"
-                                                    "border-color: black;\n"
-                                                    "font: 18pt \\\"Eras Demi ITC\\\";")
+                                                   "max-height:48px;\n"
+                                                   "border-top-right-radius:20px;\n"
+                                                   "border-bottom-left-radius:20px;\n"
+                                                   "background-color: rgb(242, 242, 242);\n"
+                                                   " color:black;\n"
+                                                   " border-style: outset;\n"
+                                                   "border-width: 4px;\n"
+                                                   "border-color: black;\n"
+                                                   "font: 18pt \\\"Eras Demi ITC\\\";")
         self.gridLayout.addWidget(self.pushButton_prenotazioni, 0, 0, 1, 1)
 
-        self.pushButton_quit = QPushButton(self.gridLayoutWidget) #Permette di tornare alla schermata Home
+        self.pushButton_quit = QPushButton(self.gridLayoutWidget)  # Permette di tornare alla schermata Home
         self.pushButton_quit.setObjectName("pushButton_quit")
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         sizePolicy.setHorizontalStretch(0)
@@ -101,15 +102,15 @@ class VistaHomeAmministratore(QWidget):
         self.pushButton_quit.setMinimumHeight(self.height / 10)
         self.pushButton_quit.setMaximumHeight(self.height / 10)
         self.pushButton_quit.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 18pt \\\"Eras Demi ITC\\\";")
         self.gridLayout.addWidget(self.pushButton_quit, 4, 3, 1, 1)
 
         self.pushButton_menu = QPushButton(self.gridLayoutWidget)
@@ -123,15 +124,15 @@ class VistaHomeAmministratore(QWidget):
         self.pushButton_menu.setMinimumHeight(self.height / 10)
         self.pushButton_menu.setMaximumHeight(self.height / 10)
         self.pushButton_menu.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 18pt \\\"Eras Demi ITC\\\";")
         self.gridLayout.addWidget(self.pushButton_menu, 0, 3, 1, 1)
 
         self.pushButton_dipendenti = QPushButton(self.gridLayoutWidget)
@@ -145,15 +146,15 @@ class VistaHomeAmministratore(QWidget):
         self.pushButton_dipendenti.setMinimumHeight(self.height / 10)
         self.pushButton_dipendenti.setMaximumHeight(self.height / 10)
         self.pushButton_dipendenti.setStyleSheet("border:2px solid;\n"
-                                                "max-height:48px;\n"
-                                                "border-top-right-radius:20px;\n"
-                                                "border-bottom-left-radius:20px;\n"
-                                                "background-color: rgb(242, 242, 242);\n"
-                                                " color:black;\n"
-                                                " border-style: outset;\n"
-                                                "border-width: 4px;\n"
-                                                "border-color: black;\n"
-                                                "font: 18pt \\\"Eras Demi ITC\\\";")
+                                                 "max-height:48px;\n"
+                                                 "border-top-right-radius:20px;\n"
+                                                 "border-bottom-left-radius:20px;\n"
+                                                 "background-color: rgb(242, 242, 242);\n"
+                                                 " color:black;\n"
+                                                 " border-style: outset;\n"
+                                                 "border-width: 4px;\n"
+                                                 "border-color: black;\n"
+                                                 "font: 18pt \\\"Eras Demi ITC\\\";")
         self.gridLayout.addWidget(self.pushButton_dipendenti, 2, 3, 1, 1)
 
         self.horizontalSpacer_3 = QSpacerItem(40, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
@@ -193,18 +194,18 @@ class VistaHomeAmministratore(QWidget):
         self.pushButton_ordinazioni.setMinimumHeight(self.height / 10)
         self.pushButton_ordinazioni.setMaximumHeight(self.height / 10)
         self.pushButton_ordinazioni.setStyleSheet("border:2px solid;\n"
-                                                    "max-height:48px;\n"
-                                                    "border-top-right-radius:20px;\n"
-                                                    "border-bottom-left-radius:20px;\n"
-                                                    "background-color: rgb(242, 242, 242);\n"
-                                                    " color:black;\n"
-                                                    " border-style: outset;\n"
-                                                    "border-width: 4px;\n"
-                                                    "border-color: black;\n"
-                                                    "font: 18pt \\\"Eras Demi ITC\\\";")
+                                                  "max-height:48px;\n"
+                                                  "border-top-right-radius:20px;\n"
+                                                  "border-bottom-left-radius:20px;\n"
+                                                  "background-color: rgb(242, 242, 242);\n"
+                                                  " color:black;\n"
+                                                  " border-style: outset;\n"
+                                                  "border-width: 4px;\n"
+                                                  "border-color: black;\n"
+                                                  "font: 18pt \\\"Eras Demi ITC\\\";")
         self.gridLayout.addWidget(self.pushButton_ordinazioni, 4, 0, 1, 1)
 
-        #Costruzione della griglia che contiene un label con una scritta e uno con un logo
+        # Costruzione della griglia che contiene un label con una scritta e uno con un logo
 
         self.gridLayoutWidget_2 = QtWidgets.QWidget(self)
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
@@ -235,7 +236,7 @@ class VistaHomeAmministratore(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
+    def retranslateUi(self):  # Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
         self.pushButton_prenotazioni.setText(QCoreApplication.translate("HomeAmministratore", "Lista Prenotazioni"))
@@ -263,25 +264,25 @@ class VistaHomeAmministratore(QWidget):
                                                                             "<span style=\" font-size:25pt; font-weight:600;\">Gestione interna:</span>"
                                                                             "</p>"
                                                                             "</body>"
-                                                                            "</html>")) #Codice in formato HTML per la scritta del label
+                                                                            "</html>"))  # Codice in formato HTML per la scritta della label
 
-    def go_vista_prenotazioni(self): #Funzione che connette alla Vista Prenotazioni
+    def go_vista_prenotazioni(self):  # Funzione che connette alla Vista Prenotazioni
         self.vista_prenotazioni = VistaListaPrenotazioni()
         self.vista_prenotazioni.showMaximized()
 
-    def go_vista_menu(self): #Funzione che connette alla Vista Menu
+    def go_vista_menu(self):  # Funzione che connette alla Vista Menu
         self.vista_menu = VistaListaMenuAmministratore()
         self.vista_menu.showMaximized()
 
-    def go_vista_ordinazione(self): #Funzione che connette alla Vista Ordinazione
+    def go_vista_ordinazione(self):  # Funzione che connette alla Vista Ordinazione
         self.vista_ordinazione = VistaListaOrdinazione()
         self.vista_ordinazione.showMaximized()
 
-    def go_vista_magazzino(self): #Funzione che connette alla Vista Magazzino
+    def go_vista_magazzino(self):  # Funzione che connette alla Vista Magazzino
         self.vista_magazzino = VistaMagazzino()
         self.vista_magazzino.showMaximized()
 
-    def go_vista_dipendenti(self): #Funzione che connette alla Vista Dipendenti
+    def go_vista_dipendenti(self):  # Funzione che connette alla Vista Dipendenti
         self.vista_dipendenti = VistaListaDipendente()
         self.vista_dipendenti.showMaximized()
 
@@ -289,9 +290,7 @@ class VistaHomeAmministratore(QWidget):
         self.close()
 
     def closeEvent(self, event):
-        reply = QMessageBox.question(self, 'Attenzione!',
-                                     'Vuoi chiudere il programma?',
-                                     QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        reply = QMessageBox.question(self, 'Attenzione!', 'Vuoi chiudere il programma?', QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
 
         if reply == QMessageBox.Yes:
             if not type(event) == bool:

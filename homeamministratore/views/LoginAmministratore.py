@@ -4,7 +4,8 @@ from PyQt5.QtWidgets import QWidget, QGridLayout, QLabel, QLineEdit, QPushButton
 
 from homeamministratore.views.VistaHomeAmministratore import VistaHomeAmministratore
 
-#Classe che definisce la schermata di Login per l'interfaccia dell'Amministratore
+
+# Classe che definisce la schermata di Login per l'interfaccia dell'Amministratore
 
 class LoginAmministratore(QWidget):
     def __init__(self):
@@ -19,7 +20,7 @@ class LoginAmministratore(QWidget):
 
         layout = QGridLayout()
 
-        #Label che contiene la linea di scrittura per l'Username
+        # Label che contiene la linea di scrittura per l'Username
 
         label_name = QLabel('<font size="5"> Username </font>')
         self.lineEdit_username = QLineEdit()
@@ -38,7 +39,7 @@ class LoginAmministratore(QWidget):
         layout.addWidget(label_password, 1, 0)
         layout.addWidget(self.lineEdit_password, 1, 1)
 
-        #Pulsante che, una volta controllata la funzione di check della password, permette di accedere alla vista successiva
+        # Pulsante che, una volta controllata la funzione di check della password, permette di accedere alla vista successiva
 
         self.button_login = QPushButton('Login')
         self.button_login.setStyleSheet("background-color: rgb(209, 207, 207);\n")
@@ -49,7 +50,7 @@ class LoginAmministratore(QWidget):
 
         self.setLayout(layout)
 
-    def check_password(self): #Funzione di controllo dell'inserimento delle credenziali corrette
+    def check_password(self):  # Funzione di controllo dell'inserimento delle credenziali corrette
 
         if self.lineEdit_username.text() == 'Admin' and self.lineEdit_password.text() == '666':
             self.run_home_amministratore()
@@ -67,6 +68,6 @@ class LoginAmministratore(QWidget):
             msg.setDefaultButton(QMessageBox.Ok)
             msg.exec_()
 
-    def run_home_amministratore(self): #Funzione che permette di accedere alla Vista Amministratore una volta effettuato correttamente il Login
+    def run_home_amministratore(self):  # Funzione che permette di accedere alla Vista Amministratore una volta effettuato correttamente il Login
         self.home_amministratore = VistaHomeAmministratore()
         self.home_amministratore.showMaximized()

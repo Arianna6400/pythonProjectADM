@@ -10,7 +10,8 @@ from ordinazione.views.VistaOrdinazione import VistaOrdinazione
 from prodotto.controller.ControlloreProdotto import ControlloreProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
 
-#Questa classe definisce la Vista del Menu dall'interfaccia Cliente
+
+# Questa classe definisce la Vista del Menu dall'interfaccia Cliente
 
 class VistaListaMenuCliente(QWidget):
 
@@ -62,14 +63,14 @@ class VistaListaMenuCliente(QWidget):
         self.verticalLayout.setObjectName("verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
 
-        #Label in cima alla lista contenente una scritta
+        # Label in cima alla lista contenente una scritta
 
         self.label = QLabel(self.verticalLayoutWidget)
         self.label.setObjectName("label")
         self.label.setStyleSheet("font: \"Eras Demi ITC\";")
         self.verticalLayout.addWidget(self.label)
 
-        #Definizione della lista
+        # Definizione della lista
 
         self.listView = QListView(self.verticalLayoutWidget)
         self.listView.setObjectName("listView")
@@ -77,7 +78,7 @@ class VistaListaMenuCliente(QWidget):
         self.update_ui()
         self.verticalLayout.addWidget(self.listView)
 
-        #Definizione della seconda griglia verticale che contiene i pulsanti di funzionamento
+        # Definizione della seconda griglia verticale che contiene i pulsanti di funzionamento
 
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self)
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
@@ -86,7 +87,7 @@ class VistaListaMenuCliente(QWidget):
         self.verticalLayout_2.setObjectName("verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
 
-        #Definizione dei pulsanti a lato
+        # Definizione dei pulsanti a lato
 
         self.pushButton_open = QPushButton(self.verticalLayoutWidget)
         self.pushButton_open.setObjectName("pushButton_open")
@@ -99,15 +100,15 @@ class VistaListaMenuCliente(QWidget):
         self.pushButton_open.setMinimumHeight(self.height / 10)
         self.pushButton_open.setMaximumHeight(self.height / 10)
         self.pushButton_open.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_open)
 
         self.pushButton_order = QPushButton(self.verticalLayoutWidget)
@@ -143,15 +144,15 @@ class VistaListaMenuCliente(QWidget):
         self.pushButton_delete.setMinimumHeight(self.height / 10)
         self.pushButton_delete.setMaximumHeight(self.height / 10)
         self.pushButton_delete.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                             "max-height:48px;\n"
+                                             "border-top-right-radius:20px;\n"
+                                             "border-bottom-left-radius:20px;\n"
+                                             "background-color: rgb(242, 242, 242);\n"
+                                             " color:black;\n"
+                                             " border-style: outset;\n"
+                                             "border-width: 4px;\n"
+                                             "border-color: black;\n"
+                                             "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_delete)
 
         self.pushButton_view = QPushButton(self.verticalLayoutWidget)
@@ -165,15 +166,15 @@ class VistaListaMenuCliente(QWidget):
         self.pushButton_view.setMinimumHeight(self.height / 10)
         self.pushButton_view.setMaximumHeight(self.height / 10)
         self.pushButton_view.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_view)
 
         self.pushButton_check = QPushButton(self.verticalLayoutWidget)
@@ -203,7 +204,7 @@ class VistaListaMenuCliente(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
+    def retranslateUi(self):  # Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
         self.label.setText(QCoreApplication.translate("VistaListaMenuCliente",
@@ -216,7 +217,7 @@ class VistaListaMenuCliente(QWidget):
                                                       "</span>"
                                                       "</p>"
                                                       "</body>"
-                                                      "</html>")) #Codice in formato HTML per la scritta del label
+                                                      "</html>"))  # Codice in formato HTML per la scritta della label
 
         self.pushButton_open.setText(QCoreApplication.translate("VistaListaMenuCliente", "Apri"))
         self.pushButton_open.clicked.connect(self.show_selected_info)
@@ -233,14 +234,14 @@ class VistaListaMenuCliente(QWidget):
         self.pushButton_check.setText(QCoreApplication.translate("VistaListaMenuCliente", "Conferma Ordine"))
         self.pushButton_check.clicked.connect(self.check_ordinazione)
 
-    def show_selected_info(self): #Funzione che permette di aprire un elemento selezionato
+    def show_selected_info(self):  # Funzione che permette di aprire un elemento selezionato
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
             self.vista_prodotto = VistaProdotto(prodotto_selezionato)
             self.vista_prodotto.show()
 
-    def update_ui(self): #Funzione che aggiorna la lista
+    def update_ui(self):  # Funzione che aggiorna la lista
         self.listview_model = QStandardItemModel(self.listView)
         for ProdottoSingolo in self.controller.get_lista_menu():
             item = QStandardItem()
@@ -253,7 +254,7 @@ class VistaListaMenuCliente(QWidget):
             self.listview_model.appendRow(item)
         self.listView.setModel(self.listview_model)
 
-    def add_ordinazione(self): #Funzione che permette di aggiungere un elemento selezionato all'ordine
+    def add_ordinazione(self):  # Funzione che permette di aggiungere un elemento selezionato all'ordine
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
@@ -270,14 +271,14 @@ class VistaListaMenuCliente(QWidget):
                 msg.setDefaultButton(QMessageBox.Ok)
                 msg.exec_()
 
-    def delete_ordinazione(self): #Funzione che cancella l'intera lista dell'ordinazione effettuata
+    def delete_ordinazione(self):  # Funzione che cancella l'intera lista dell'ordinazione effettuata
         reply = QMessageBox.question(self, 'Attenzione!',
                                      'Vuoi cancellare questo ordine?',
                                      QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
         if reply == QMessageBox.Yes:
             self.ordinazione.elimina_ordinazione()
 
-    def view_ordinazione(self): #Funzione che permette di visualizzare la lista dell'ordinazione effettuata
+    def view_ordinazione(self):  # Funzione che permette di visualizzare la lista dell'ordinazione effettuata
 
         if self.ordinazione.get_ordinazione():
             self.vista_ordinazione = VistaOrdinazione(self.ordinazione)
@@ -295,7 +296,7 @@ class VistaListaMenuCliente(QWidget):
             msg.setDefaultButton(QMessageBox.Ok)
             msg.exec_()
 
-    def check_ordinazione(self): #Funzione che controlla se la lista è vuota o meno, permettendo ci confermare l'ordinazione
+    def check_ordinazione(self):  # Funzione che controlla se la lista è vuota o meno, permettendo ci confermare l'ordinazione
         if len(self.ordinazione.get_ordinazione()) == 0:
             msg = QMessageBox()
             msg.setText('Ordine vuoto')
@@ -322,5 +323,3 @@ class VistaListaMenuCliente(QWidget):
             msg.setDefaultButton(QMessageBox.Ok)
             msg.exec_()
             self.close()
-
-

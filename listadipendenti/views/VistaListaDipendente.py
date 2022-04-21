@@ -7,7 +7,8 @@ from dipendente.views.VistaDipendente import VistaDipendente
 from dipendente.views.VistaInserisciDipendente import VistaInserisciDipendente
 from listadipendenti.controller.ControlloreListaDipendenti import ControlloreListaDipendenti
 
-#Questa classe definisce la Vista dei dipendenti nell'interfaccia Amministratore
+
+# Questa classe definisce la Vista dei dipendenti nell'interfaccia Amministratore
 
 class VistaListaDipendente(QWidget):
 
@@ -92,15 +93,15 @@ class VistaListaDipendente(QWidget):
         self.pushButton_open.setMinimumHeight(self.height / 10)
         self.pushButton_open.setMaximumHeight(self.height / 10)
         self.pushButton_open.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_open)
 
         self.pushButton_new = QPushButton(self.verticalLayoutWidget)
@@ -114,15 +115,15 @@ class VistaListaDipendente(QWidget):
         self.pushButton_new.setMinimumHeight(self.height / 10)
         self.pushButton_new.setMaximumHeight(self.height / 10)
         self.pushButton_new.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                          "max-height:48px;\n"
+                                          "border-top-right-radius:20px;\n"
+                                          "border-bottom-left-radius:20px;\n"
+                                          "background-color: rgb(242, 242, 242);\n"
+                                          " color:black;\n"
+                                          " border-style: outset;\n"
+                                          "border-width: 4px;\n"
+                                          "border-color: black;\n"
+                                          "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_new)
 
         self.setWindowTitle("Lista Dipendenti")
@@ -130,7 +131,7 @@ class VistaListaDipendente(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
+    def retranslateUi(self):  # Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
         self.label.setText(QCoreApplication.translate("VistaListaDipendente",
@@ -143,7 +144,7 @@ class VistaListaDipendente(QWidget):
                                                       "</span>"
                                                       "</p>"
                                                       "</body>"
-                                                      "</html>")) #Codice in formato HTML per la scritta del label
+                                                      "</html>"))  # Codice in formato HTML per la scritta del label
 
         self.pushButton_open.setText(QCoreApplication.translate("VistaListaDipendente", "Apri"))
         self.pushButton_open.clicked.connect(self.show_selected_info)
@@ -151,7 +152,7 @@ class VistaListaDipendente(QWidget):
         self.pushButton_new.setText(QCoreApplication.translate("VistaListaDipendente", "Nuovo"))
         self.pushButton_new.clicked.connect(self.show_new_dipendente)
 
-    def update_ui(self): #Funzione che aggiorna la lista
+    def update_ui(self):  # Funzione che aggiorna la lista
         self.listview_model = QStandardItemModel(self.listView)
         for dipendente in self.controller.get_lista_dipendenti():
             item = QStandardItem()
@@ -164,14 +165,14 @@ class VistaListaDipendente(QWidget):
             self.listview_model.appendRow(item)
         self.listView.setModel(self.listview_model)
 
-    def show_selected_info(self): #Funzione che permette di aprire un elemento selezionato
+    def show_selected_info(self):  # Funzione che permette di aprire un elemento selezionato
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             dipendente_selezionato = self.controller.get_dipendente_by_index(selected)
             self.vista_dipendente = VistaDipendente(dipendente_selezionato, self.controller, self.update_ui)
             self.vista_dipendente.show()
 
-    def show_new_dipendente(self): #Funzione che permette di aprire la vista per l'inserimento di un dipendente nuovo
+    def show_new_dipendente(self):  # Funzione che permette di aprire la vista per l'inserimento di un dipendente nuovo
         self.vista_inserisci_dipendente = VistaInserisciDipendente(self.controller, self.update_ui)
         self.vista_inserisci_dipendente.show()
 

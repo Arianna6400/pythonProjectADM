@@ -5,7 +5,8 @@ from PyQt5.QtWidgets import QWidget, QApplication, QListView, QVBoxLayout, QPush
 
 from magazzino.controller.ControlloreMagazzino import ControlloreMagazzino
 
-#Questa classe definisce la Vista del magazzino dall'interfaccia Amministratore
+
+# Questa classe definisce la Vista del magazzino dall'interfaccia Amministratore
 
 class VistaMagazzino(QWidget):
 
@@ -78,19 +79,19 @@ class VistaMagazzino(QWidget):
         self.gridLayout.setObjectName("gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
 
-        #Label contenente la linea di scrittura del nome dell'ingrediente
+        # Label contenente la linea di scrittura del nome dell'ingrediente
 
         self.label_ingrediente = QLabel(self.gridLayoutWidget)
         self.label_ingrediente.setObjectName("label_ingrediente")
         self.label_ingrediente.setStyleSheet("font: 16pt \"Eras Demi ITC\";")
-        self.gridLayout.addWidget(self.label_ingrediente,  0, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_ingrediente, 0, 0, 1, 1)
 
         self.lineEdit_ingrediente = QLineEdit(self.gridLayoutWidget)
         self.lineEdit_ingrediente.setObjectName("lineEdit_ingrediente")
         self.lineEdit_ingrediente.setStyleSheet("background-color: white;")
         self.gridLayout.addWidget(self.lineEdit_ingrediente, 0, 1, 1, 1)
 
-        #Label contenente la linea di scrittura delle quantità
+        # Label contenente la linea di scrittura delle quantità
 
         self.label_quantita = QLabel(self.gridLayoutWidget)
         self.label_quantita.setObjectName("label_quantita")
@@ -102,7 +103,7 @@ class VistaMagazzino(QWidget):
         self.lineEdit_quantita.setStyleSheet("background-color: white;")
         self.gridLayout.addWidget(self.lineEdit_quantita, 1, 1, 1, 1)
 
-        #Definizione dei pulsanti a lato
+        # Definizione dei pulsanti a lato
 
         self.pushButton_add = QPushButton(self.gridLayoutWidget)
         self.pushButton_add.setObjectName("pushButton_add")
@@ -115,15 +116,15 @@ class VistaMagazzino(QWidget):
         self.pushButton_add.setMinimumHeight(self.height / 10)
         self.pushButton_add.setMaximumHeight(self.height / 10)
         self.pushButton_add.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 15pt \\\"Eras Demi ITC\\\";")
+                                          "max-height:48px;\n"
+                                          "border-top-right-radius:20px;\n"
+                                          "border-bottom-left-radius:20px;\n"
+                                          "background-color: rgb(242, 242, 242);\n"
+                                          " color:black;\n"
+                                          " border-style: outset;\n"
+                                          "border-width: 4px;\n"
+                                          "border-color: black;\n"
+                                          "font: 15pt \\\"Eras Demi ITC\\\";")
         self.gridLayout.addWidget(self.pushButton_add, 2, 1, 1, 1)
 
         self.pushButton_edit = QPushButton(self.gridLayoutWidget)
@@ -137,15 +138,15 @@ class VistaMagazzino(QWidget):
         self.pushButton_edit.setMinimumHeight(self.height / 10)
         self.pushButton_edit.setMaximumHeight(self.height / 10)
         self.pushButton_edit.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 15pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 15pt \\\"Eras Demi ITC\\\";")
         self.gridLayout.addWidget(self.pushButton_edit, 3, 1, 1, 1)
 
         self.pushButton_delete = QPushButton(self.gridLayoutWidget)
@@ -159,15 +160,15 @@ class VistaMagazzino(QWidget):
         self.pushButton_delete.setMinimumHeight(self.height / 10)
         self.pushButton_delete.setMaximumHeight(self.height / 10)
         self.pushButton_delete.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 15pt \\\"Eras Demi ITC\\\";")
+                                             "max-height:48px;\n"
+                                             "border-top-right-radius:20px;\n"
+                                             "border-bottom-left-radius:20px;\n"
+                                             "background-color: rgb(242, 242, 242);\n"
+                                             " color:black;\n"
+                                             " border-style: outset;\n"
+                                             "border-width: 4px;\n"
+                                             "border-color: black;\n"
+                                             "font: 15pt \\\"Eras Demi ITC\\\";")
         self.gridLayout.addWidget(self.pushButton_delete, 4, 1, 1, 1)
 
         self.setWindowTitle("Magazzino")
@@ -175,20 +176,20 @@ class VistaMagazzino(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
+    def retranslateUi(self):  # Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
         self.label.setText(QCoreApplication.translate("VistaMagazzino",
-                                                          "<html>"
-                                                          "<head/>"
-                                                          "<body>"
-                                                          "<p align=\"center\">"
-                                                          "<span style=\" font-size:25pt; font-weight:600;\">"
-                                                          "Visualizza le scorte:"
-                                                          "</span>"
-                                                          "</p>"
-                                                          "</body>"
-                                                          "</html>")) #Codice in formato HTML per la scritta del label
+                                                      "<html>"
+                                                      "<head/>"
+                                                      "<body>"
+                                                      "<p align=\"center\">"
+                                                      "<span style=\" font-size:25pt; font-weight:600;\">"
+                                                      "Visualizza le scorte:"
+                                                      "</span>"
+                                                      "</p>"
+                                                      "</body>"
+                                                      "</html>"))  # Codice in formato HTML per la scritta della label
 
         self.label_ingrediente.setText(QCoreApplication.translate("VistaMagazzino", "Ingrediente"))
         self.label_quantita.setText(QCoreApplication.translate("VistaMagazzino", "Quantità"))
@@ -202,25 +203,25 @@ class VistaMagazzino(QWidget):
         self.pushButton_delete.setText(QCoreApplication.translate("VistaMagazzino", "Elimina ingrediente"))
         self.pushButton_delete.clicked.connect(self.delete_ingrediente)
 
-    def add_ingrediente(self): #Funzine che permette di inserire un nuovo ingrediente dopo aver compilato nome e quantità nelle
-                               #linee di scrittura
+    def add_ingrediente(self):  # Funzione che permette d'inserire un nuovo ingrediente dopo aver compilato nome e quantità nelle
+        # linee di scrittura
         if not self.lineEdit_ingrediente.text() == "" or self.lineEdit_quantita.text() == "":
             self.controller.add_ingrediente(self.lineEdit_ingrediente.text(), float(self.lineEdit_quantita.text()))
             self.update_ui()
 
-    def edit_ingrediente(self): #Funzione che permette di modificare un ingrediente dopo aver compilato nome e quantità nelle
-                                #linee di scrittura
+    def edit_ingrediente(self):  # Funzione che permette di modificare un ingrediente dopo aver compilato nome e quantità nelle
+        # linee di scrittura
         if not self.lineEdit_ingrediente.text() == "" or self.lineEdit_quantita.text() == "":
             self.controller.edit_ingrediente(self.lineEdit_ingrediente.text(), float(self.lineEdit_quantita.text()))
             self.update_ui()
 
-    def delete_ingrediente(self): #Funzione che permette di cancellare un ingrediente dalla lista dopo averlo selezionato
+    def delete_ingrediente(self):  # Funzione che permette di cancellare un ingrediente dalla lista dopo averlo selezionato
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             self.controller.delete_ingrediente(selected)
         self.update_ui()
 
-    def update_ui(self): #Funzione che aggiorna la lista
+    def update_ui(self):  # Funzione che aggiorna la lista
         self.controller.sort()
         self.listview_model = QStandardItemModel(self.listView)
         for ingrediente, qt in self.controller.get_magazzino().items():
@@ -236,5 +237,3 @@ class VistaMagazzino(QWidget):
 
     def closeEvent(self, event):
         self.controller.save_data()
-
-

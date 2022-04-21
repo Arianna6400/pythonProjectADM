@@ -7,7 +7,8 @@ from listamenu.controller.ControlloreListaMenu import ControlloreListaMenu
 from prodotto.views.VistaInserisciProdotto import VistaInserisciProdotto
 from prodotto.views.VistaProdotto import VistaProdotto
 
-#Questa classe definisce la Vista del Menu dall'interfaccia Amministratore
+
+# Questa classe definisce la Vista del Menu dall'interfaccia Amministratore
 
 class VistaListaMenuAmministratore(QWidget):
 
@@ -93,15 +94,15 @@ class VistaListaMenuAmministratore(QWidget):
         self.pushButton_open.setMinimumHeight(self.height / 10)
         self.pushButton_open.setMaximumHeight(self.height / 10)
         self.pushButton_open.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                           "max-height:48px;\n"
+                                           "border-top-right-radius:20px;\n"
+                                           "border-bottom-left-radius:20px;\n"
+                                           "background-color: rgb(242, 242, 242);\n"
+                                           " color:black;\n"
+                                           " border-style: outset;\n"
+                                           "border-width: 4px;\n"
+                                           "border-color: black;\n"
+                                           "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_open)
 
         self.pushButton_new = QPushButton(self.verticalLayoutWidget)
@@ -115,15 +116,15 @@ class VistaListaMenuAmministratore(QWidget):
         self.pushButton_new.setMinimumHeight(self.height / 10)
         self.pushButton_new.setMaximumHeight(self.height / 10)
         self.pushButton_new.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                          "max-height:48px;\n"
+                                          "border-top-right-radius:20px;\n"
+                                          "border-bottom-left-radius:20px;\n"
+                                          "background-color: rgb(242, 242, 242);\n"
+                                          " color:black;\n"
+                                          " border-style: outset;\n"
+                                          "border-width: 4px;\n"
+                                          "border-color: black;\n"
+                                          "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_new)
 
         self.pushButton_delete = QPushButton(self.verticalLayoutWidget)
@@ -137,15 +138,15 @@ class VistaListaMenuAmministratore(QWidget):
         self.pushButton_delete.setMinimumHeight(self.height / 10)
         self.pushButton_delete.setMaximumHeight(self.height / 10)
         self.pushButton_delete.setStyleSheet("border:2px solid;\n"
-                                            "max-height:48px;\n"
-                                            "border-top-right-radius:20px;\n"
-                                            "border-bottom-left-radius:20px;\n"
-                                            "background-color: rgb(242, 242, 242);\n"
-                                            " color:black;\n"
-                                            " border-style: outset;\n"
-                                            "border-width: 4px;\n"
-                                            "border-color: black;\n"
-                                            "font: 18pt \\\"Eras Demi ITC\\\";")
+                                             "max-height:48px;\n"
+                                             "border-top-right-radius:20px;\n"
+                                             "border-bottom-left-radius:20px;\n"
+                                             "background-color: rgb(242, 242, 242);\n"
+                                             " color:black;\n"
+                                             " border-style: outset;\n"
+                                             "border-width: 4px;\n"
+                                             "border-color: black;\n"
+                                             "font: 18pt \\\"Eras Demi ITC\\\";")
         self.verticalLayout_2.addWidget(self.pushButton_delete)
 
         self.setWindowTitle("Menù Amministratore")
@@ -153,20 +154,20 @@ class VistaListaMenuAmministratore(QWidget):
 
         QtCore.QMetaObject.connectSlotsByName(self)
 
-    def retranslateUi(self): #Funzione che connette i pulsanti alle rispettive funzioni
+    def retranslateUi(self):  # Funzione che connette i pulsanti alle rispettive funzioni
         _translate = QtCore.QCoreApplication.translate
 
         self.label.setText(QCoreApplication.translate("VistaListaMenuAmministratore",
-                                                          "<html>"
-                                                          "<head/>"
-                                                          "<body>"
-                                                          "<p align=\"center\">"
-                                                          "<span style=\" font-size:25pt; font-weight:600;\">"
-                                                          "Seleziona il prodotto:"
-                                                          "</span>"
-                                                          "</p>"
-                                                          "</body>"
-                                                          "</html>")) #Codice in formato HTML per la scritta del label
+                                                      "<html>"
+                                                      "<head/>"
+                                                      "<body>"
+                                                      "<p align=\"center\">"
+                                                      "<span style=\" font-size:25pt; font-weight:600;\">"
+                                                      "Seleziona il prodotto:"
+                                                      "</span>"
+                                                      "</p>"
+                                                      "</body>"
+                                                      "</html>"))  # Codice in formato HTML per la scritta della label
 
         self.pushButton_open.setText(QCoreApplication.translate("VistaListaMenuAmministratore", "Apri"))
         self.pushButton_open.clicked.connect(self.show_selected_info)
@@ -177,14 +178,14 @@ class VistaListaMenuAmministratore(QWidget):
         self.pushButton_delete.setText(QCoreApplication.translate("VistaListaMenuAmministratore", "Elimina"))
         self.pushButton_delete.clicked.connect(self.delete_selected_info)
 
-    def show_selected_info(self): #Funzione che permette di aprire un elemento selezionato
+    def show_selected_info(self):  # Funzione che permette di aprire un elemento selezionato
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
             self.vista_prodotto = VistaProdotto(prodotto_selezionato)
             self.vista_prodotto.show()
 
-    def delete_selected_info(self): #Funzione che permette di eliminare un elemento selezionato
+    def delete_selected_info(self):  # Funzione che permette di eliminare un elemento selezionato
         if len(self.listView.selectedIndexes()) > 0:
             selected = self.listView.selectedIndexes()[0].row()
             prodotto_selezionato = self.controller.get_prodotto_by_index(selected)
@@ -192,11 +193,11 @@ class VistaListaMenuAmministratore(QWidget):
             self.update_ui()
             self.verticalLayout.replaceWidget(self.listView, self.listView)
 
-    def add_info(self): #Funzione che permette di aggiungere un elemento alla lista
+    def add_info(self):  # Funzione che permette di aggiungere un elemento alla lista
         self.vista_inserisci_prodotto = VistaInserisciProdotto(self.controller, self.update_ui)
         self.vista_inserisci_prodotto.show()
 
-    def update_ui(self): #Funzione che aggiorna la lista
+    def update_ui(self):  # Funzione che aggiorna la lista
         self.listview_model = QStandardItemModel(self.listView)
         for prodotto in self.controller.get_lista_menu():
             item = QStandardItem()
