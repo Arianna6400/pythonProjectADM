@@ -13,6 +13,8 @@ Il sistema consente di gestire vari aspetti della gestione del pub, tra cui:
 * 👥 Gestione dei dipendenti
 * 📝 Gestione delle ordinazioni
 
+La documentazione relativa alla fase di progettazione è visualizzabile qui: [Documentazione progetto](https://github.com/Arianna6400/pythonProjectADM/blob/master/Documentazione%20progetto.pdf)
+
 ## ⚙️ Funzionalità
 
 ### 🔐 Login
